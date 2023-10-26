@@ -75,7 +75,7 @@
                         $id = Auth::user()->id;
                     @endphp
 
-                    <a href="" class="nav-item nav-link">My Dashboard</a>
+                    <a href="{{ url('/users/dashboard/' . $id) }}" class="nav-item nav-link">My Dashboard</a>
 
                     <a class="gallary_btn" href="{{ url('/logout') }}"><button type="button" class="btn btn-danger">Logout</button></a>
 

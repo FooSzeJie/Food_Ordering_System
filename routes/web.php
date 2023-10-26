@@ -30,6 +30,9 @@ Route::get('/registerpage', [UserController::class, 'registerpage']);
 //Register Function
 Route::post('/registeraccount', [UserController::class, 'userregister'])->name('userregister');
 
+//Display User Dashboard Page
+Route::get('/users/dashboard/{id}',[UserController::class,'userdashboard']);
+
 //Logout
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -46,7 +49,6 @@ Route::post('/admin/login', [AdminController::class, 'loginAdmin'])->name('login
 Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //Display Admin Dashboard Page
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
-
 
 });
 
