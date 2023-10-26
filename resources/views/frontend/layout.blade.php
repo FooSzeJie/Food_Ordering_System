@@ -1,171 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUC Food Website</title>
-    {{-- Home Page CSS --}}
-    <link rel="stylesheet" href="{{ asset('home/home.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{-- Toastr CSS --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    {{-- Bootstrap CSS --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    {{-- Toastr CSS --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Bootstrap Restaurant Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{{ asset ('home/img/favicon.ico') }}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ asset ('home/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset ('home/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset ('home/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ asset ('home/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ asset ('home/css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-    {{-- Navbar --}}
-    <section id="Home">
-        <nav>
-            <div class="logo">
-                <img src="{{ asset('home/image/logo.png') }}">
+
+    <div class="container-xxl bg-white p-0">
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
+        </div>
+        <!-- Spinner End -->
 
-            <ul>
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="{{ url('/about') }}">About</a></li>
-                <li><a href="{{ url('/food')}}">Menu</a></li>
-                {{-- <li><a href="{{ url('/')}}">Gallary</a></li> --}}
-                {{-- <li><a href="{{ url('/')}}">Review</a></li> --}}
-                {{-- <li><a href="{{ url('/')}}">Order</a></li> --}}
 
-                @auth
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <a href="menu.html" class="nav-item nav-link">Menu</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="booking.html" class="dropdown-item">Booking</a>
+                                <a href="team.html" class="dropdown-item">Our Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                    @auth
                     @php
                         $id = Auth::user()->id;
                     @endphp
 
+                    <a href="" class="nav-item nav-link">My Dashboard</a>
+
                     <a class="gallary_btn" href="{{ url('/logout') }}"><button type="button" class="btn btn-danger">Logout</button></a>
 
-                @endauth
+                    @endauth
 
-                @guest
-                    <a class="btn" href="{{ url('/loginpage') }}"><button type="button" class="btn btn-success">Login</button></a>
-                @endguest
+                    @guest
+                        <a class="btn" href="{{ url('/loginpage') }}"><button type="button" class="btn btn-success">Login</button></a>
+                    @endguest
 
-            </ul>
+                    {{-- <a href="" class="btn btn-primary py-2 px-4">Book A Table</a> --}}
+                </div>
+            </nav>
 
-            <div class="icon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <i class="fa-solid fa-heart"></i>
-                <i class="fa-solid fa-cart-shopping"></i>
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container my-5 py-5">
+                    <div class="row align-items-center g-5">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
+                            <p class="text-white animated slideInLeft mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                            <a href="" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book A Table</a>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                            <img class="img-fluid" src="{{ asset ('home/img/hero.png') }}" alt="">
+                        </div>
+                    </div>
+                </div>
             </div>
-
-        </nav>
-
-        {{-- <div class="main">
-
-            <div class="men_text">
-                <h1>Get Fresh<span>Food</span><br>in a Easy Way</h1>
-            </div>
-
-            <div class="main_image">
-                <img src="{{ asset('home/image/main_img.png') }}">
-            </div>
-
         </div>
+        <!-- Navbar & Hero End -->
 
-        <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse reiciendis quaerat nobis
-            deleniti amet non inventore. Reprehenderit recusandae voluptatibus minus tenetur itaque numquam
-            cum quos dolorem maxime. Quas, quaerat nisi. Lorem ipsum dolor sit, amet consectetur adipisicing
-            elit. Cumque facilis, quaerat cupiditate nulla quibusdam quo sunt esse tempore inventore vel
-            voluptate, amet laudantium adipisci veniam nihil quam molestiae omnis mollitia.
-        </p>
+        @yield('frontend-section')
 
-        <div class="main_btn">
-            <a href="#">Order Now</a>
-            <i class="fa-solid fa-angle-right"></i>
-        </div> --}}
-
-    </section>
-
-    @yield('frontend-section')
-
-    <!--Footer-->
-    <footer>
-        <div class="footer_main">
-
-            <div class="footer_tag">
-                <h2>Location</h2>
-                <p>Sri Lanka</p>
-                <p>USA</p>
-                <p>India</p>
-                <p>Japan</p>
-                <p>Italy</p>
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
+                        <a class="btn btn-link" href="">About Us</a>
+                        <a class="btn btn-link" href="">Contact Us</a>
+                        <a class="btn btn-link" href="">Reservation</a>
+                        <a class="btn btn-link" href="">Privacy Policy</a>
+                        <a class="btn btn-link" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
+                        <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                        <p>09AM - 09PM</p>
+                        <h5 class="text-light fw-normal">Sunday</h5>
+                        <p>10AM - 08PM</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
 
-            <div class="footer_tag">
-                <h2>Quick Link</h2>
-                <p>Home</p>
-                <p>About</p>
-                <p>Menu</p>
-                <p>Gallary</p>
-                <p>Order</p>
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="footer_tag">
-                <h2>Contact</h2>
-                <p>+94 12 3456 789</p>
-                <p>+94 25 5568456</p>
-                <p>johndeo123@gmail.com</p>
-                <p>foodshop123@gmail.com</p>
-            </div>
-
-            <div class="footer_tag">
-                <h2>Our Service</h2>
-                <p>Fast Delivery</p>
-                <p>Easy Payments</p>
-                <p>24 x 7 Service</p>
-            </div>
-
-            <div class="footer_tag">
-                <h2>Follows</h2>
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-twitter"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-linkedin-in"></i>
-            </div>
-
         </div>
+        <!-- Footer End -->
 
-        <p class="end">Design by<span><i class="fa-solid fa-face-grin"></i> WT Master Code</span></p>
 
-    </footer>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-    {{-- Toastr JS --}}
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    </div>
 
-    <script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset ('home/lib/wow/wow.min.js') }}"></script>
+    <script src="{{ asset ('home/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset ('home/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset ('home/lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ asset ('home/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset ('home/lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ asset ('home/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ asset ('home/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
-        @if(Session::has('success'))
-            Toastify({ text: "{{ Session::get('success') }}", duration: 10000,
-                style: { background: "linear-gradient(to right, #00b09b, #96c93d)" }
-            }).showToast();
-
-        @elseif (Session::has('fail'))
-            Toastify({ text: "{{ Session::get('fail') }}", duration: 10000,
-                    style: { background: "linear-gradient(to right, #b90000, #c99396)" }
-            }).showToast();
-        @endif
-
-        @if(Session::has('error'))
-            Toastify({ text: "{{ Session::get('error') }}", duration: 10000,
-                style: { background: "linear-gradient(to right, #b90000, #c99396)" }
-            }).showToast();
-        @endif
-
-        @if($errors->any())
-            @foreach ($errors->all() as $error)
-                Toastify({ text: "{{ $error }}", duration: 10000,
-                    style: { background: "linear-gradient(to right, #b90000, #c99396)" }
-                }).showToast();
-            @endforeach
-        @endif
-
-    </script>
+    <!-- Template Javascript -->
+    <script src="{{ asset ('home/js/main.js') }}"></script>
 
 </body>
-</html>
