@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,10 +44,16 @@ Route::get('/admin/login', [AdminController::class, 'login'])->middleware('alrea
 //Login Admin Function
 Route::post('/admin/login', [AdminController::class, 'loginAdmin'])->name('login-user');
 
+// Set the middleware in admin panel
 Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
-    //Display Admin Dashboard Page
+    // Display Admin Dashboard Page
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
+    // Create Category Page
+    Route::get('/admin/Category', [CategoryController::class, 'createCategory']);
+
+    // Store Category
+    Route::get('/admin/Category/create', [CategoryController::class, 'storeCategory']);
 
 });
 
