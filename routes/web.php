@@ -31,6 +31,9 @@ Route::get('/registerpage', [UserController::class, 'registerpage']);
 //Register Function
 Route::post('/registeraccount', [UserController::class, 'userregister'])->name('userregister');
 
+//Display User Dashboard Page
+Route::get('/users/dashboard/{id}',[UserController::class,'userdashboard']);
+
 //Logout
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -49,12 +52,15 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Display Admin Dashboard Page
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
+<<<<<<< HEAD
     // Create Category Page
     Route::get('/admin/Category', [CategoryController::class, 'createCategory']);
 
     // Store Category
     Route::get('/admin/Category/create', [CategoryController::class, 'storeCategory']);
 
+=======
+>>>>>>> fecb5e01da07401ae55ba3cbee967d943a96f179
 });
 
 //Logout Admin Function
