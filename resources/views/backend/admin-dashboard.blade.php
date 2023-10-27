@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('backend.admin-layout')
 @section('backend-section')
 
 {{-- <style>
