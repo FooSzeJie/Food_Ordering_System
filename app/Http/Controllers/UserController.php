@@ -125,13 +125,18 @@ class UserController extends Controller
         return view('frontend.about');
     }
 
+    public function service(){
+
+        return view('frontend.service');
+    }
+
     public function food(){
 
         return view('frontend.food');
     }
 
     public function userdashboard(){
-        
+
         return view('frontend.user-dashboard');
     }
 }

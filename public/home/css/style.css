@@ -87,7 +87,8 @@
     margin-left: 25px;
     padding: 35px 0;
     font-size: 15px;
-    color: var(--light) !important;
+    /* color: var(--light) !important; */
+    color: rgb(255, 166, 0);
     text-transform: uppercase;
     font-weight: 500;
     outline: none;
@@ -96,11 +97,13 @@
 
 .sticky-top.navbar-dark .navbar-nav .nav-link {
     padding: 20px 0;
+    /* color: #000000; */
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link.active {
     color: var(--primary) !important;
+    /* color: #000000; */
 }
 
 .navbar-dark .navbar-brand img {
@@ -142,7 +145,7 @@
         z-index: 999;
         background: transparent !important;
     }
-    
+
     .sticky-top.navbar-dark {
         position: fixed;
         background: var(--dark) !important;
@@ -162,10 +165,10 @@
     animation: imgRotate 50s linear infinite;
 }
 
-@keyframes imgRotate { 
-    100% { 
-        transform: rotate(360deg); 
-    } 
+@keyframes imgRotate {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .breadcrumb-item + .breadcrumb-item::before {

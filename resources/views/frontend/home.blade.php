@@ -1,13 +1,32 @@
 @extends('frontend.layout')
 @section('frontend-section')
+
     {{-- Toastr CSS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <br><br><br><br>
+
+    {{-- IMG --}}
+    <div class="container-xxl py-5 bg-dark hero-header mb-5">
+        <div class="container my-5 py-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
+                    <p class="text-white animated slideInLeft mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                    <a href="{{ url('/food') }}" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">View Menu</a>
+                </div>
+                <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                    <img class="img-fluid" src="{{ asset ('home/img/hero.png') }}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- <h1>Home</h1>
     <a href="{{ url('/logout')}}">Logout</a> --}}
 
     <!-- Service Start -->
-    <div class="container-xxl py-5">
+    {{-- <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -48,12 +67,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Service End -->
 
 
     <!-- About Start -->
-    <div class="container-xxl py-5">
+    {{-- <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
@@ -104,7 +123,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- About End -->
 
 

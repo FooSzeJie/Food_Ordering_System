@@ -52,15 +52,13 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Display Admin Dashboard Page
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
-<<<<<<< HEAD
     // Create Category Page
     Route::get('/admin/Category', [CategoryController::class, 'createCategory']);
 
     // Store Category
     Route::get('/admin/Category/create', [CategoryController::class, 'storeCategory']);
 
-=======
->>>>>>> fecb5e01da07401ae55ba3cbee967d943a96f179
+//  fecb5e01da07401ae55ba3cbee967d943a96f179
 });
 
 //Logout Admin Function
@@ -72,6 +70,9 @@ Route::get('/change-status/{id}', [AdminController::class, 'changeStatus']);
 //------------------------------------------------------Frontend Control Area------------------------------------------------------//
 // About Page
 Route::get('/about', [UserController::class, 'about'])->name('about');
+
+// About Page
+Route::get('/service', [UserController::class, 'service'])->name('service');
 
 // Menu Page
 Route::get('/food', [UserController::class, 'food'])->name('food');
