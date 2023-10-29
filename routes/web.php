@@ -53,12 +53,15 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
     // Create Category Page
-    Route::get('/admin/Category', [CategoryController::class, 'createCategory']);
+    Route::get('/admin/Category/AddCategory', [CategoryController::class, 'createCategory']);
 
     // Store Category
     Route::get('/admin/Category/create', [CategoryController::class, 'storeCategory']);
 
 //  fecb5e01da07401ae55ba3cbee967d943a96f179
+
+    Route::get('/admin/Category/AddCategory/create', [CategoryController::class, 'storeCategory']);
+// aa34afd1de8fe64c6db41517618beb816c5ead6a
 });
 
 //Logout Admin Function
