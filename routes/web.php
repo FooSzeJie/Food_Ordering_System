@@ -74,8 +74,12 @@ Route::get('/change-status/{id}', [AdminController::class, 'changeStatus']);
 // About Page
 Route::get('/about', [UserController::class, 'about'])->name('about');
 
-// About Page
+//------------------------------------------------------Frontend Service Area------------------------------------------------------//
+// Service Page
 Route::get('/service', [UserController::class, 'service'])->name('service');
 
+//------------------------------------------------------Frontend Food Control Area-------------------------------------------------//
 // Menu Page
 Route::get('/food', [UserController::class, 'food'])->name('food');
+// Menu Page Food Detail
+Route::get('/food-detail', [UserController::class, 'FoodDetail'])->name('food-detail');

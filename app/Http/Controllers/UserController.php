@@ -139,4 +139,9 @@ class UserController extends Controller
 
         return view('frontend.user-dashboard');
     }
+
+    public function FoodDetail(){
+
+        return view('frontend.food-detail');
+    }
 }

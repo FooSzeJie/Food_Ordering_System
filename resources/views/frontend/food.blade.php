@@ -12,6 +12,7 @@
         color: red;
     }
 </style>
+
 <!--Menu-->
 <div class="menu" id="Menu">
     <h1>Our<span>Menu</span></h1>
