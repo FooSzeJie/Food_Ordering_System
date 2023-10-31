@@ -72,8 +72,10 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     Route::post('/mutlipledeletecategory/delete', [CategoryController::class, 'AdmindeleteMultipleCategory'])->name('mutlipledeletecategory');
 
     //-------------------------------------------------Admin Change Status Area------------------------------------------------------//
-    //Change Hotel Status Function
+    //Change Category Status Function
     Route::get('/changecategory-status/{id}',[CategoryController::class,'changecategoryStatus']);
+    //Change Product Status Function
+    Route::get('/changeproduct-status/{id}',[ProductController::class,'changeproductStatus']);
 
     // Category Page
     // Route::get('/admin/Category', [CategoryController::class,'index']);

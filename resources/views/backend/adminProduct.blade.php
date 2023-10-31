@@ -71,17 +71,17 @@
                                                 <td>{{ $product->categoryID }}</td>
                                                 <td>
                                                     @if ($product->status == 0)
-                                                        <a href="{{ url('changecategory-status/' . $product->id) }}" class="btn btn-sm btn-success"
+                                                        <a href="{{ url('changeproduct-status/' . $product->id) }}" class="btn btn-sm btn-success"
                                                             onclick="return confirm('Are you sure you want to change this status to close?')">Open</a>
                                                     @else
-                                                        <a href="{{ url('changecategory-status/' . $product->id) }}" class="btn btn-sm btn-danger"
+                                                        <a href="{{ url('changeproduct-status/' . $product->id) }}" class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Are you sure you want to change this status to open?')">Close</a>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     {{-- <a href="{{ url('viewCategory/' . $category->id) . '/view' }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a> --}}
                                                     {{-- <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#categoryeditModal{{ $category->id }}"><i class="fa fa-edit"></i></a> --}}
-                                                    <a onclick="return confirm('Are you sure to delete this data?')" href="{{ url('admin/deleteCategory/'.$product->id).'/delete' }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                    <a onclick="return confirm('Are you sure to delete this data?')" href="{{ url('admin/deleteProduct/'.$product->id).'/delete' }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -96,11 +96,46 @@
                     </form>
 
                     <!-- Pagination links -->
-                    {{-- {{ $products->links() }} --}}
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- New Delete Selected All Table --}}
+    <script>
+        // Function to check/uncheck all checkboxes
+        function checkAll(checkbox) {
+            const checkboxes = document.getElementsByClassName('checkbox_ids');
+            for (const cb of checkboxes) {
+                cb.checked = checkbox.checked;
+            }
+        }
+
+        document.getElementById('deleteAllSelectedRecord').addEventListener('click', function() {
+            const checkboxes = document.getElementsByClassName('checkbox_ids');
+            const selectedIds = [];
+
+            for (const checkbox of checkboxes) {
+                if (checkbox.checked) {
+                    selectedIds.push(parseInt(checkbox.value));
+                }
+            }
+
+            if (selectedIds.length === 0) {
+                alert('Please select at least one restaurant to delete.');
+            } else {
+                const form = document.getElementById('deleteMultipleForm');
+                const idsInput = document.createElement('input');
+                idsInput.type = 'hidden';
+                idsInput.name = 'ids';
+                idsInput.value = JSON.stringify(selectedIds);
+                form.appendChild(idsInput);
+
+                form.submit();
+            }
+        });
+    </script>
 
     <!-- Include jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

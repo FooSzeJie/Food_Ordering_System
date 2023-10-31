@@ -33,4 +33,21 @@ class ProductController extends Controller
         return view('backend.adminProduct');
 
     }
+
+    public function changeproductStatus($id)
+    {
+        $getstatus = Product::select('status')->where('id', $id)->first();
+
+        if ($getstatus->status == 0) {
+            $status = 1;
+        } else {
+            $status = 0;
+        }
+
+        // event(new HotelStatus());
+
+        Product::where('id', $id)->update(['status' => $status]);
+
+        return back()->with(compact('status'));
+    }
 }
