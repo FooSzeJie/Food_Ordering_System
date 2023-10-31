@@ -1,5 +1,8 @@
 @extends('backend.admin-layout')
 @section('backend-section')
+
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+
     {{-- Category Area --}}
     {{-- add new Category --}}
     <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -71,36 +74,7 @@
         </div>
     @endforeach
 
-
-    <!-- Import and Export Modal -->
-    {{-- <div class="modal fade" id="hotelexcelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Import Hotel Data</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form action="{{ route ('import-hotel') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                    <div class="modal-body">
-                        <label>Select File</label>
-                        <input type="file" name="file" class="form-control" />
-                        <span class="text-danger">@error('file') {{$message}} @enderror</span>
-                        <div class="mt-5">
-                            <button type="submit" class="btn btn-info">Submit</button>
-                            <!-- <button onclick="readExcelFile()">Read File</button> -->
-                            <!-- <a href="" class="btn btn-primary float-right">Export Excel</a> -->
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- show all hotels --}}
+    {{-- show all Category --}}
     <div class="container">
 
         {{-- <div id="map" style="height: 400px;"></div><br> --}}
@@ -108,35 +82,21 @@
         <div class="row">
             <div class="col-12">
 
+                <h3>Category</h3>
+
                 {{-- Search Resort Function --}}
                 {{-- <form action="{{ route('HotelSearch') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-                    <input type="text" class="form-control bg-white small m-2" name="name" placeholder="Search for Name" aria-label="Search" aria-describedby="basic-addon2">
-                    <input type="text" class="form-control bg-white small m-2" name="country" placeholder="Search for Country" aria-label="Search" aria-describedby="basic-addon2">
-                    <input type="text" class="form-control bg-white small m-2" name="state" placeholder="Search for State" aria-label="Search" aria-describedby="basic-addon2">
-                    <input type="text" class="form-control bg-white small m-2" name="address" placeholder="Search for Address" aria-label="Search" aria-describedby="basic-addon2">
-                    <input type="text" class="form-control bg-white small m-2" name="type" placeholder="Search for Type" aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary pb-2"><i class="fas fa-search fa-sm"></i></button>
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-white small m-2" name="name" placeholder="Search for Name" aria-label="Search" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control bg-white small m-2" name="country" placeholder="Search for Country" aria-label="Search" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control bg-white small m-2" name="state" placeholder="Search for State" aria-label="Search" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control bg-white small m-2" name="address" placeholder="Search for Address" aria-label="Search" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control bg-white small m-2" name="type" placeholder="Search for Type" aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary pb-2"><i class="fas fa-search fa-sm"></i></button>
+                        </div>
                     </div>
-                </div>
-            </form> --}}
-
-                {{-- @if (!$results->isEmpty())
-                <h2>Search Results</h2>
-                <ul>
-                    @foreach ($results as $result)
-                        <li>{{ $result->name }} - {{ $result->country }} - {{ $result->state }} - {{ $result->address }} - {{ $result->price }}</li>
-                    @endforeach
-                </ul>
-            @else
-                <p>No results found.</p>
-            @endif --}}
-
-
-                {{-- {{ dd($results) }} --}}
-
-                <br>
+                </form> --}}
 
                 <div class="data_table">
 
@@ -149,53 +109,53 @@
                     @endif
 
                     <!-- Button to delete all selected items -->
-                    <form action="{{ url('/mutlipledeletecategory/delete') }}" method="post" id="deleteMultipleForm">
+                    <form action="{{ route('mutlipledeletecategory') }}" method="post" id="deleteMultipleForm">
                         @csrf
                         <!-- Your table code here -->
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered">
                                 {{-- Button to delete all selected items --}}
-                                <button type="submit" class="btn btn-danger m-1" id="deleteAllSelectedRecord">Delete All Selected Hotels</button>
+                                <button type="submit" class="btn btn-danger m-1" id="deleteAllSelectedRecord">Delete All Selected Category</button>
                                 {{-- Add Resort --}}
-                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">Open Modal</button> --}}
-                                <button type="button" class="btn btn-info m-1" data-toggle="modal"
-                                    data-target="#categoryModal">Add Category</button>
+                                <button type="button" class="btn btn-info m-1" data-toggle="modal" data-target="#hotelModal">Add Category</button>
                                 <!-- Import Hotel Model -->
-                                <button type="button" class="btn btn-primary m-1" data-toggle="modal"
-                                    data-target="#hotelexcelModal">Import Category</button>
+                                <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#hotelexcelModal">Import Category</button>
                                 {{-- Export Resort --}}
-                                {{-- <a href="{{ url('export-hotel') }}"><button type="button" class="btn btn-primary m-1">Export Hotel</button></a> --}}
+                                <a href=""><button type="button" class="btn btn-primary m-1">Export Category</button></a>
                                 {{-- Hotel Excel Template --}}
                                 <a href=""><button type="button" class="btn btn-dark m-1">Category Excel Template</button></a>
 
                                 <thead class="table-dark">
                                     <tr>
                                         <th><input type="checkbox" name="" id="select_all_ids" onclick="checkAll(this)"></th>
-                                        <th>Category Name</th>
-                                        <th>Category Status</th>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($categorys !== 0 && count($categorys) > 0)
-                                        @foreach ($categorys as $category)
+                                    @if($categorys !== 0 && count($categorys) > 0)
+                                        @foreach($categorys as $category)
                                             <tr>
-                                                <td><input type="checkbox" name="ids" class="checkbox_ids"
-                                                        id="" value="{{ $category->id }}"></td>
+                                                <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $category->id }}"></td>
+                                                <td>{{ $category->id }}</td>
                                                 <td>{{ $category->name }}</td>
                                                 <td>
                                                     @if ($category->status == 0)
-                                                        <a href="{{ url('changecategory-status/' . $category->id) }}" class="btn btn-sm btn-success"
+                                                        <a href="{{ url('changecategory-status/' . $category->id) }}"
+                                                            class="btn btn-sm btn-success"
                                                             onclick="return confirm('Are you sure you want to change this status to close?')">Open</a>
                                                     @else
-                                                        <a href="{{ url('changecategory-status/' . $category->id) }}" class="btn btn-sm btn-danger"
+                                                        <a href="{{ url('changecategory-status/' . $category->id) }}"
+                                                            class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Are you sure you want to change this status to open?')">Close</a>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{-- <a href="{{ url('viewCategory/' . $category->id) . '/view' }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a> --}}
+                                                    {{-- <a href="{{ url('viewHotel/' . $hotel->id) . '/view' }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a> --}}
                                                     <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#categoryeditModal{{ $category->id }}"><i class="fa fa-edit"></i></a>
-                                                    <a onclick="return confirm('Are you sure to delete this data?')" href="{{ url('admin/deleteCategory/'.$category->id).'/delete' }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                    <a onclick="return confirm('Are you sure to delete this data?')" href="{{ url('deleteCategory/'.$category->id).'/delete' }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -208,7 +168,6 @@
                             </table>
                         </div>
                     </form>
-
                     <!-- Pagination links -->
                     {{ $categorys->links() }}
                 </div>

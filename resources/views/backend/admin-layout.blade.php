@@ -11,7 +11,7 @@
 
     <title>Admin Backend</title>
 
-    @yield('adminCss')
+    {{-- @yield('adminCss') --}}
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admindashboard/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"type="text/css">
     <link
@@ -28,9 +28,9 @@
     <!-- ========================================================= -->
 
     {{-- Table CSS --}}
-    {{-- <link rel="stylesheet" href="{{ asset('table/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('table/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('table/assets/css/datatables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('table/assets/css/style.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('table/assets/css/style.css') }}">
 
     {{-- Icon CSS --}}
     {{-- <link href="https://cdn.jsdelivr.net/npm/line-awesome@1.3.0/dist/css/line-awesome.min.css" rel="stylesheet"> --}}
@@ -43,9 +43,10 @@
 
     {{-- Paginate CSS --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> --}}
 
     {{-- Ajax JS --}}
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -167,16 +168,16 @@
                 <div id="MyPlace" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"><i class="fas fa-cube"></i></i>&nbsp;Item</h6>
-                        <a class="collapse-item" href=""><i class="fas fa-utensils"></i></i>&nbsp;Food</a>
+                        <a class="collapse-item" href="{{ url('/admin/Product') }}"><i class="fas fa-utensils"></i></i>&nbsp;Food</a>
                         <a class="collapse-item" href="{{ url('/admin/Category/show') }}"><i class="fas fa-folder"></i>&nbsp;Category</a>
                         <a class="collapse-item" href=""><i class="fas fa-plus-circle"></i></i>&nbsp;Add On</a>
-                        <a class="collapse-item" href=""><i class="fas fa-cubes"></i></i>&nbsp;Variables</a>
+                        <a class="collapse-item" href=""><i class="fas fa-cubes"></i></i>&nbsp;Variant</a>
                     </div>
                 </div>
-                <a class="nav-link" href="{{ url('/admin/Category')}}">
+                {{-- <a class="nav-link" href="{{ url('/admin/Category')}}">
                     <i class="fas fa-table"></i>
                     <span>Category</span>
-                </a>
+                </a> --}}
             </li>
 
             <!-- Nav Item - Pages Collapse My Place Menu -->
@@ -442,6 +443,7 @@
                 <!-- End of Topbar -->
 
                 @yield('backend-section')
+                <br>
 
             </div>
             <!-- End of Main Content -->
@@ -498,42 +500,17 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('admindashboard/js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Bootstrap JavaScript -->
-    <!-- Add Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <!-- Laravel default JavaScript setup -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Modal JavaScript -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-    {{-- Open and Down Navbar --}}
-    {{-- <script>
-        // 获取要控制的元素
-        var userDropdown = document.querySelector('#userDropdown');
-        var userDropdownMenu = document.querySelector('.dropdown-menu');
-
-        // 添加点击事件监听器
-        userDropdown.addEventListener('click', function (event) {
-            event.preventDefault(); // 防止链接的默认行为
-
-            // 检查下拉菜单的状态
-            if (userDropdownMenu.classList.contains('show')) {
-                // 如果下拉菜单已展开，则关闭它
-                userDropdownMenu.classList.remove('show');
-            } else {
-                // 如果下拉菜单已关闭，则展开它
-                userDropdownMenu.classList.add('show');
-            }
-        });
-
-        // 为了在其他地方点击时关闭下拉菜单，添加全局点击事件监听器
-        document.addEventListener('click', function (event) {
-            if (!userDropdown.contains(event.target)) {
-                // 如果点击事件不在用户下拉菜单内部，关闭下拉菜单
-                userDropdownMenu.classList.remove('show');
-            }
-        });
-
-    </script> --}}
+    <!-- Bootstrap JavaScript -->
+    <!-- Add Bootstrap JavaScript -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script> --}}
+    <!-- Laravel default JavaScript setup -->
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> --}}
 
     <!-- JS Table Files -->
     <!-- Add the necessary JavaScript files here -->
@@ -543,23 +520,6 @@
     <script src="{{ asset('table/assets/js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('table/assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('table/assets/js/custom.js') }}"></script> --}}
-
-    <script>
-        // =============  Data Table - (Start) ================= //
-        // $(document).ready(function() {
-        //     var table = $('#example').DataTable();
-
-        //     // Destroy the existing DataTable instance
-        //     table.destroy();
-
-        //     // Now, you can reinitialize the DataTable with new settings or data
-        //     $('#example').DataTable({
-        //         buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-        //     });
-        // });
-
-        // =============  Data Table - (End) ================= //
-    </script>
 
 </body>
 
