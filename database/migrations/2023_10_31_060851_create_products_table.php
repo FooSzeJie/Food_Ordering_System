@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->double('price', 8,2) -> default(0);
+            $table->double('price', 8,2)->default(0);
             $table->json('variant')->nullable();
             $table->json('addOns')->nullable();
             $table->string('image')->nullable();

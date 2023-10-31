@@ -42,7 +42,7 @@ class CategoryController extends Controller
 
     public function AdminViewCategory($id)
     {
-        $category = Category::find($id);
+        $categorys = Category::find($id);
 
         return view("backend.categoryPage", compact('categorys'));
     }
