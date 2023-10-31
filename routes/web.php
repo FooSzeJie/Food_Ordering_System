@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,15 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Store Category
     Route::get('/admin/Category/store', [CategoryController::class, 'storeCategory'])->name('storeCategory');
 >>>>>>> 9e9747ac5c4b3cb2d1127b79fa478b4d92a02fbf
+
+    // Product Page
+    Route::get('/admin/Product', [ProductController::class, 'index']);
+
+    // Create Product Page
+    Route::get('/admin/Product/Create', [ProductController::class, 'createProduct']);
+
+    // Store Product to the DB
+    Route::post('/admin/Product/Store', [ProductController::class,'storeProduct'])->name('storeProduct');
 
 });
 
