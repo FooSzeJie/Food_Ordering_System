@@ -117,7 +117,7 @@
                                 {{-- Button to delete all selected items --}}
                                 <button type="submit" class="btn btn-danger m-1" id="deleteAllSelectedRecord">Delete All Selected Category</button>
                                 {{-- Add Resort --}}
-                                <button type="button" class="btn btn-info m-1" data-toggle="modal" data-target="#hotelModal">Add Category</button>
+                                <button type="button" class="btn btn-info m-1" data-toggle="modal" data-target="#categoryModal">Add Category</button>
                                 <!-- Import Hotel Model -->
                                 <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#hotelexcelModal">Import Category</button>
                                 {{-- Export Resort --}}

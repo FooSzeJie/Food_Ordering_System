@@ -11,7 +11,7 @@
 
     <title>Admin Backend</title>
 
-    {{-- @yield('adminCss') --}}
+    @yield('adminCss')
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admindashboard/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"type="text/css">
     <link
@@ -169,7 +169,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"><i class="fas fa-cube"></i></i>&nbsp;Item</h6>
                         <a class="collapse-item" href="{{ url('/admin/Product') }}"><i class="fas fa-utensils"></i></i>&nbsp;Food</a>
-                        <a class="collapse-item" href="{{ url('/admin/Category/show') }}"><i class="fas fa-folder"></i>&nbsp;Category</a>
+                        <a class="collapse-item" href="{{ url('/admin/Category') }}"><i class="fas fa-folder"></i>&nbsp;Category</a>
                         <a class="collapse-item" href=""><i class="fas fa-plus-circle"></i></i>&nbsp;Add On</a>
                         <a class="collapse-item" href=""><i class="fas fa-cubes"></i></i>&nbsp;Variant</a>
                     </div>

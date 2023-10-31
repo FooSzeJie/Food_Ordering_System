@@ -57,16 +57,22 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // ------------------------------------------Admin Category Area --------------------------------------------------------------//
     //Admin Store Category
     Route::post('/admin/Category/create', [CategoryController::class, 'AdminstoreCategory']);
+
     //Admin Show All Category
-    Route::get('/admin/Category/show', [CategoryController::class, 'AdminshowCategory']);
+    Route::get('/admin/Category', [CategoryController::class, 'AdminshowCategory']);
+
     //Admin Edit Category Function
     Route::get('admin/editCategory/{id}/edit', [CategoryController::class, 'AdminEditCategory'])->name('admin-editCategory');
+
     //Admin Update Category Function
     Route::put('admin/updateCategory/{id}', [CategoryController::class, 'AdminUpdateCategory'])->name('admin-updateCategory');
+
     //Admin Delete Category Function
     Route::get('admin/deleteCategory/{id}/delete', [CategoryController::class, 'AdminDeleteCategory'])->name('admin-deleteCategory');
+
     //Admin View Resort Follow ID Function
     Route::get('/admin/viewCategory/{id}/view',[CategoryController::class,'AdminViewCategory'])->name('admin-viewCategory');
+
     //MutlipleDelete Category Function
     Route::post('/mutlipledeletecategory/delete', [CategoryController::class, 'AdmindeleteMultipleCategory'])->name('mutlipledeletecategory');
 
