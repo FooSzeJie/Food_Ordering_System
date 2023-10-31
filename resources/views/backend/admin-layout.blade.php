@@ -170,9 +170,9 @@
                 </a>
                 <div id="MyHasBooked" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;Products</a>
-                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;Variant</a>
-                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;Add Ons</a>
+                        <a class="collapse-item" href="{{ url('/admin/Product') }}"><i class="fas fa-check-circle"></i>&nbsp;Products</a>
+                        <a class="collapse-item" href="{{ url('/admin/Variant') }}"><i class="fas fa-check-circle"></i>&nbsp;Variant</a>
+                        <a class="collapse-item" href="{{ url('/admin/AddOn') }}"><i class="fas fa-check-circle"></i>&nbsp;Add Ons</a>
                     </div>
                 </div>
             </li>
