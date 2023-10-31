@@ -54,12 +54,7 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // --------------------------------------------Admin Dashboard Area -----------------------------------------------------------//
     // Display Admin Dashboard Page
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
-
-<<<<<<< HEAD
-    // ------------------------------------------Admin Category Area ----------------------------------------------------------//
-=======
     // ------------------------------------------Admin Category Area --------------------------------------------------------------//
->>>>>>> 3f3014203c6958274538f42ab92f3de994562abb
     //Admin Store Category
     Route::post('/admin/Category/create', [CategoryController::class, 'AdminstoreCategory']);
     //Admin Show All Category
@@ -78,12 +73,10 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //-------------------------------------------------Admin Change Status Area------------------------------------------------------//
     //Change Category Status Function
     Route::get('/changecategory-status/{id}',[CategoryController::class,'changecategoryStatus']);
-<<<<<<< HEAD
-=======
+
     //Change Product Status Function
     Route::get('/changeproduct-status/{id}',[ProductController::class,'changeproductStatus']);
 
->>>>>>> 3f3014203c6958274538f42ab92f3de994562abb
     // Category Page
     // Route::get('/admin/Category', [CategoryController::class,'index']);
 
@@ -91,13 +84,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Route::get('/admin/Category/create', [CategoryController::class, 'createCategory']);
 
     // Store Category
-<<<<<<< HEAD
     Route::get('/admin/Category/store', [CategoryController::class, 'storeCategory'])->name('storeCategory');
-=======
     // Route::get('/admin/Category/store', [CategoryController::class, 'storeCategory'])->name('storeCategory');
->>>>>>> 3f3014203c6958274538f42ab92f3de994562abb
 
-    //------------------------------------------------Admin Change Status Area---------------------------------------------------//
     // Product Page
     Route::get('/admin/Product', [ProductController::class, 'index']);
 
