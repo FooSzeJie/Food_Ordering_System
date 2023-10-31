@@ -103,6 +103,7 @@
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link.active {
     color: var(--primary) !important;
+    /* color: #BDBDBD; */
     /* color: #000000; */
 }
 

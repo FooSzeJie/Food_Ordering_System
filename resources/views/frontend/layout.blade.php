@@ -59,7 +59,7 @@
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
                         <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
-                        <a href="{{ url('/service') }}" class="nav-item nav-link">Service</a>
+                        {{-- <a href="{{ url('/service') }}" class="nav-item nav-link">Service</a> --}}
                         <a href="{{ url('/food')}}" class="nav-item nav-link">Menu</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -69,6 +69,7 @@
                                 <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                             </div>
                         </div>
+                        <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     @auth

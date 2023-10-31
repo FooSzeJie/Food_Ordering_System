@@ -81,7 +81,7 @@
         <div class="col inner">
             <tr>
                 <td><input type="checkbox" id="yourCheckboxId" name="yourCheckboxName"></td>
-                <td>Variables</td>
+                <td>Varian</td>
             </tr>
             <br>
             <tr>

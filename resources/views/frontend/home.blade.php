@@ -26,7 +26,7 @@
     <a href="{{ url('/logout')}}">Logout</a> --}}
 
     <!-- Service Start -->
-    {{-- <div class="container-xxl py-5">
+    <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- Service End -->
 
 
@@ -590,10 +590,10 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center rounded overflow-hidden">
                         <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset ('home/img/team-1.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset ('home/img/derick.jpg') }}" alt="">
                         </div>
-                        <h5 class="mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="mb-0">Derick Tan Zheng Yang</h5>
+                        <small>Chef 1</small>
                         <div class="d-flex justify-content-center mt-3">
                             <a class="btn btn-square btn-primary mx-1" href=""><i
                                     class="fab fa-facebook-f"></i></a>
@@ -606,10 +606,10 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item text-center rounded overflow-hidden">
                         <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset ('home/img/team-2.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset ('home/img/sj.jpg') }}" alt="">
                         </div>
-                        <h5 class="mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="mb-0">Foo Sze Jie</h5>
+                        <small>Chef 2</small>
                         <div class="d-flex justify-content-center mt-3">
                             <a class="btn btn-square btn-primary mx-1" href=""><i
                                     class="fab fa-facebook-f"></i></a>
@@ -624,8 +624,8 @@
                         <div class="rounded-circle overflow-hidden m-4">
                             <img class="img-fluid" src="{{ asset ('home/img/team-3.jpg') }}" alt="">
                         </div>
-                        <h5 class="mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="mb-0">Derick Tan Zheng Yang</h5>
+                        <small>Chef 3</small>
                         <div class="d-flex justify-content-center mt-3">
                             <a class="btn btn-square btn-primary mx-1" href=""><i
                                     class="fab fa-facebook-f"></i></a>
@@ -640,8 +640,8 @@
                         <div class="rounded-circle overflow-hidden m-4">
                             <img class="img-fluid" src="{{ asset ('home/img/team-4.jpg') }}" alt="">
                         </div>
-                        <h5 class="mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="mb-0">Derick Tan Zheng Yang</h5>
+                        <small>Chef 4</small>
                         <div class="d-flex justify-content-center mt-3">
                             <a class="btn btn-square btn-primary mx-1" href=""><i
                                     class="fab fa-facebook-f"></i></a>
