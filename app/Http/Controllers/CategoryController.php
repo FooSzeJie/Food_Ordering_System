@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
+    public function index(){
+        return view("backend.adminCategory");
+    }
+
     // Create the Category
     public function createCategory(){
 

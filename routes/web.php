@@ -54,6 +54,7 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Display Admin Dashboard Page
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
+<<<<<<< HEAD
     // ------------------------------------------Admin Category Area ----------------------------------------------------------//
     //Admin Store Category
     Route::post('/admin/Category/create', [CategoryController::class, 'AdminstoreCategory']);
@@ -73,6 +74,16 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //------------------------------------------------------Admin Change Status Area------------------------------------------------------//
     //Change Hotel Status Function
     Route::get('/changecategory-status/{id}',[CategoryController::class,'changecategoryStatus']);
+=======
+    // Category Page
+    Route::get('/admin/Category', [CategoryController::class,'index']);
+
+    // Create Category Page
+    Route::get('/admin/Category/create', [CategoryController::class, 'createCategory']);
+
+    // Store Category
+    Route::get('/admin/Category/store', [CategoryController::class, 'storeCategory'])->name('storeCategory');
+>>>>>>> 9e9747ac5c4b3cb2d1127b79fa478b4d92a02fbf
 
 });
 

@@ -16,7 +16,11 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+<<<<<<< HEAD
             $table->boolean('status')->default(false);
+=======
+            $table->integer('status')->default(0);
+>>>>>>> 9e9747ac5c4b3cb2d1127b79fa478b4d92a02fbf
             $table->timestamps();
         });
     }
