@@ -68,6 +68,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Create Product Page
     Route::get('/admin/Product/Create', [ProductController::class, 'createProduct']);
 
+    // Store Product to the DB
+    Route::post('/admin/Product/Store', [ProductController::class,'storeProduct'])->name('storeProduct');
+
 });
 
 //Logout Admin Function

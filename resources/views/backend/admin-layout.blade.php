@@ -11,6 +11,7 @@
 
     <title>Admin Backend</title>
 
+    @yield('adminCss')
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admindashboard/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"type="text/css">
     <link

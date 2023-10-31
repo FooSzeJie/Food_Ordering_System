@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Peoduct;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -15,5 +15,13 @@ class ProductController extends Controller
 
     public function createProduct() {
         return view('backend.adminCreateProduct');
+    }
+
+    public function storeProduct(Request $request) {
+        $input = $request->all();
+        Product::create($input);
+
+        return view('backend.adminProduct');
+
     }
 }

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->double('price', 8,2) -> default(0);
-            $table->string('variant');
-            $table->json('addOns');
-            $table->string('image');
+            $table->json('variant')->nullable();
+            $table->json('addOns')->nullable();
+            $table->string('image')->nullable();
             $table->integer('status')->default(0);
             $table->integer('categoryID');
             $table->timestamps();

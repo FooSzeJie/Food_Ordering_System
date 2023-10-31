@@ -1,4 +1,9 @@
 @extends('backend.admin-layout')
+
+@section('adminCss')
+    <link rel="stylesheet" href="{{ asset('admin/css/ProductSelectBar.css') }}">
+@endsection
+
 @section('backend-section')
     <div class="container-fluid">
 
@@ -8,19 +13,48 @@
         </div>
 
         <div>
-            <form>
+            <form action="{{ route('storeProduct') }}" method="post">
+                @csrf
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <label for="productName" class="form-label">Product Name: </label>
+                    <input type="text" class="form-control" id="productName" name="name">
+                    {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
                 </div>
 
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="productPrice" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="productPrice" name="price">
                 </div>
 
-                
+                <div class="mb-3">
+                    <label for="productImage" class="form-label">Select the file Image: </label>
+                    <input class="form-control" type="file" id="productImage" name="image">
+                </div>
+
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label">Product Description: </label>
+                    <input type="text" class="form-control" id="productDescription" name="description">
+                    {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+                </div>
+
+                <div class="mb-3">
+                    <label for="ProductStatus" class="form-label">Product Status: </label>
+
+                    <select class="form-select form-select-font-weight-5" id="select-menu" name="status">
+                        <option value="0">Inactive</option>
+                        <option value="1" selected>Active</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="CategoryID" class="form-label">Category: </label>
+
+                    <select class="form-select form-select-font-weight-5" id="select-menu" name="categoryID">
+                        <option value="0">Inactive</option>
+                        <option value="1" selected>Active</option>
+                    </select>
+                </div>
+
 
                 <button type="submit" class="btn btn-primary">Add Product</button>
             </form>
