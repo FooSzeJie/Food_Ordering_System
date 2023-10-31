@@ -123,7 +123,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{ url('/users/dashboard/{id}') }}">
+                href="{{ url('/admin/dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -142,7 +142,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/users/dashboard/{id}') }}">
+                <a class="nav-link" href="{{ url('/admin/dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -155,19 +155,10 @@
 
             <!-- Nav Item - Pages Collapse My Place Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyPlace"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>My Place</span>
+                <a class="nav-link" href="{{ url('/admin/Category')}}">
+                    <i class="fas fa-table"></i>
+                    <span>Category</span>
                 </a>
-                <div id="MyPlace" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"><i class="fas fa-map-marker-alt"></i>&nbsp;Item</h6>
-                        <a class="collapse-item" href=""><i class="fas fa-map-marker-alt"></i>&nbsp;Food</a>
-                        <a class="collapse-item" href=""><i class="fas fa-map-marker-alt"></i>&nbsp;Add On</a>
-                        <a class="collapse-item" href=""><i class="fas fa-map-marker-alt"></i>&nbsp;Variables</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - Pages Collapse My Place Menu -->
@@ -175,16 +166,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyHasBooked"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-check-circle"></i>
-                    <span>My Has Booked</span>
+                    <span>Product</span>
                 </a>
                 <div id="MyHasBooked" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"><i class="fas fa-check-circle"></i>&nbsp;Order Item</h6>
-                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;Booked
-                            Resort</a>
-                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;BookedHotel</a>
-                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;Booked
-                            Restaurant</a>
+                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;Products</a>
+                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;Variant</a>
+                        <a class="collapse-item" href=""><i class="fas fa-check-circle"></i>&nbsp;Add Ons</a>
                     </div>
                 </div>
             </li>
@@ -227,9 +215,9 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/') }}">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Back</span></a>
+                <a class="nav-link" href="{{ url('/admin/logout') }}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span></a>
             </li>
 
             <!-- Divider -->
