@@ -43,6 +43,9 @@
     {{-- Paginate CSS --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
     {{-- Ajax JS --}}
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -142,7 +145,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/users/dashboard/{id}') }}">
+                <a class="nav-link" href="{{ url('/admin/dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -157,21 +160,22 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyPlace"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>My Place</span>
+                    <i class="fas fa-file"></i>
+                    <span>My Item</span>
                 </a>
                 <div id="MyPlace" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"><i class="fas fa-map-marker-alt"></i>&nbsp;Item</h6>
-                        <a class="collapse-item" href=""><i class="fas fa-map-marker-alt"></i>&nbsp;Food</a>
-                        <a class="collapse-item" href=""><i class="fas fa-map-marker-alt"></i>&nbsp;Add On</a>
-                        <a class="collapse-item" href=""><i class="fas fa-map-marker-alt"></i>&nbsp;Variables</a>
+                        <h6 class="collapse-header"><i class="fas fa-cube"></i></i>&nbsp;Item</h6>
+                        <a class="collapse-item" href=""><i class="fas fa-utensils"></i></i>&nbsp;Food</a>
+                        <a class="collapse-item" href="{{ url('/admin/Category/show') }}"><i class="fas fa-folder"></i>&nbsp;Category</a>
+                        <a class="collapse-item" href=""><i class="fas fa-plus-circle"></i></i>&nbsp;Add On</a>
+                        <a class="collapse-item" href=""><i class="fas fa-cubes"></i></i>&nbsp;Variables</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Pages Collapse My Place Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyHasBooked"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-check-circle"></i>
@@ -187,10 +191,10 @@
                             Restaurant</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             <!-- Nav Item Table and Room-->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="">
                     <i class="fas fa-table"></i>
                     <span>Table</span>
@@ -202,28 +206,28 @@
                     <i class="fas fa-bed"></i>
                     <span>Room</span>
                 </a>
-            </li>
+            </li> --}}
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="">
                     <i class="fas fa-address-book"></i>
                     <span>Contact</span></a>
-            </li>
+            </li> --}}
 
             <!-- Nav Item - User Deposit -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="">
                     <i class="fas fa-user-circle"></i>
                     <span>User Deposit</span></a>
-            </li>
+            </li> --}}
 
             <!-- Nav Item - REfund Deposit -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="">
                     <i class="fas fa-money-check"></i>
                     <span>Refund Deposit</span></a>
-            </li>
+            </li> --}}
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -492,16 +496,12 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('admindashboard/js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Modal JavaScript -->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script> -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+    <!-- Bootstrap JavaScript -->
+    <!-- Add Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Laravel default JavaScript setup -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     {{-- Open and Down Navbar --}}
     {{-- <script>

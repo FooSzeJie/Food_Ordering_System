@@ -49,19 +49,31 @@ Route::post('/admin/login', [AdminController::class, 'loginAdmin'])->name('login
 
 // Set the middleware in admin panel
 Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
+
+    // -----------------------------------------Admin Dashboard Area ----------------------------------------------------------//
     // Display Admin Dashboard Page
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
-    // Create Category Page
-    Route::get('/admin/Category/AddCategory', [CategoryController::class, 'createCategory']);
+    // ------------------------------------------Admin Category Area ----------------------------------------------------------//
+    //Admin Store Category
+    Route::post('/admin/Category/create', [CategoryController::class, 'AdminstoreCategory']);
+    //Admin Show All Category
+    Route::get('/admin/Category/show', [CategoryController::class, 'AdminshowCategory']);
+    //Admin Edit Category Function
+    Route::get('admin/editCategory/{id}/edit', [CategoryController::class, 'AdminEditCategory'])->name('admin-editCategory');
+    //Admin Update Category Function
+    Route::put('admin/updateCategory/{id}', [CategoryController::class, 'AdminUpdateCategory'])->name('admin-updateCategory');
+    //Admin Delete Category Function
+    Route::get('admin/deleteCategory/{id}/delete', [CategoryController::class, 'AdminDeleteCategory'])->name('admin-deleteCategory');
+    //Admin View Resort Follow ID Function
+    Route::get('/admin/viewCategory/{id}/view',[CategoryController::class,'AdminViewCategory'])->name('admin-viewCategory');
+    //MutlipleDelete Category Function
+    Route::post('/mutlipledeletecategory/delete', [CategoryController::class, 'AdmindeleteMultipleCategory'])->name('mutlipledeletecategory');
 
-    // Store Category
-    Route::get('/admin/Category/create', [CategoryController::class, 'storeCategory']);
+    //------------------------------------------------------Admin Change Status Area------------------------------------------------------//
+    //Change Hotel Status Function
+    Route::get('/changecategory-status/{id}',[CategoryController::class,'changecategoryStatus']);
 
-//  fecb5e01da07401ae55ba3cbee967d943a96f179
-
-    Route::get('/admin/Category/AddCategory/create', [CategoryController::class, 'storeCategory']);
-// aa34afd1de8fe64c6db41517618beb816c5ead6a
 });
 
 //Logout Admin Function
