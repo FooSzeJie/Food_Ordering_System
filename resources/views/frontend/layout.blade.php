@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{{ url('/contact') }}" class="nav-item nav-link">Contact</a>
                     </div>
                     @auth
                     @php

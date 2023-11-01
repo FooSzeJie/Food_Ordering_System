@@ -135,6 +135,21 @@ class UserController extends Controller
         return view('frontend.food');
     }
 
+    public function contact(){
+
+        if(Auth::check()){
+
+            return view('frontend.contact');
+
+        }else{
+
+            return redirect('/loginpage')->with('fail', "You Need To Login First!");
+
+        }
+
+
+    }
+
     public function userdashboard(){
 
         return view('frontend.user-dashboard');

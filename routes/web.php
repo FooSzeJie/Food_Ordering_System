@@ -123,3 +123,7 @@ Route::get('/service', [UserController::class, 'service'])->name('service');
 Route::get('/food', [UserController::class, 'food'])->name('food');
 // Menu Page Food Detail
 Route::get('/food-detail', [UserController::class, 'FoodDetail'])->name('food-detail');
+
+//------------------------------------------------------Frontend Contact Control Area-------------------------------------------------//
+// Contact Page
+Route::get('/contact', [UserController::class, 'contact'])->name('contact');

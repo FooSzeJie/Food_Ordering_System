@@ -80,22 +80,29 @@
     <div class="row" id="abc">
         <div class="col inner">
             <tr>
-                <td><input type="checkbox" id="yourCheckboxId" name="yourCheckboxName"></td>
+                <td><input type="radio" id="yourRadioId" name="yourRadioName"></td>
                 <td>Varian</td>
             </tr>
             <br>
             <tr>
-                <td><input type="checkbox" id="yourCheckboxId" name="yourCheckboxName"></td>
+                <td><input type="radio" id="yourRadioId" name="yourRadioName"></td>
                 <td>Variables</td>
             </tr>
         </div>
         <div class="col inner">
             <tr>
                 <td>
-                    <div class="btn-group" role="group" aria-label="Quantity">
-                        <button type="button" class="btn btn-secondary decrement-button custom-margin-right">-</button>
-                        <span id="quantity" class="btn btn-info rounded-0">0</span>
-                        <button type="button" class="btn btn-secondary increment-button custom-margin-left">+</button>
+                    <div class="row" style="ml-50px">
+                        <div class="col">
+                            <label for="quantity" style="font-size: 25px">Quantity</label>
+                        </div>
+                        <div class="col" style="mr-50px">
+                            <div class="input-group text-center" style="width:130px">
+                                <button class="input-group-text decrement-btn">-</button>
+                                <input type="text" id="quantity" name="quantity" class="form-control qty-input text-center p-2" value="1">
+                                <button class="input-group-text increment-btn">+</button>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -120,7 +127,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     // JavaScript代码用于处理增加和减少按钮的功能
     let quantity = 0;
     const quantityElement = document.getElementById("quantity");
@@ -135,6 +142,46 @@
     document.querySelector(".increment-button").addEventListener("click", () => {
         quantity++;
         quantityElement.textContent = quantity;
+    });
+</script> --}}
+
+{{-- JQuery --}}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+{{-- Incremnet and Decrement Ajax --}}
+<script>
+    $(document).ready(function() {
+        $('.increment-btn').click(function (e) {
+            e.preventDefault();
+
+            var inc_value = $('.qty-input').val();
+            var value = parseInt(inc_value, 10);
+            value = isNaN(value) ? 0 : value;
+
+            // console.log(inc_value);
+            // console.log(value);
+            // console.log('aa',value);
+
+            if(value < 10){
+
+                value++;
+                $('.qty-input').val(value);
+            }
+        });
+
+        $('.decrement-btn').click(function (e) {
+            e.preventDefault();
+
+            var dec_value = $('.qty-input').val();
+            var value = parseInt(dec_value, 10);
+            value = isNaN(value) ? 0 : value;
+
+            if(value > 1){
+
+                value--;
+                $('.qty-input').val(value);
+            }
+        });
+
     });
 </script>
 
