@@ -40,7 +40,7 @@
     </div>
 
     {{-- edit new categorys --}}
-    @foreach ($categorys as $category)
+    @foreach ($categories as $category)
         <!-- Modal content for each Resort -->
         <div class="modal fade" id="categoryeditModal{{ $category->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -135,8 +135,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($categorys !== 0 && count($categorys) > 0)
-                                        @foreach($categorys as $category)
+                                    @if($categories !== 0 && count($categories) > 0)
+                                        @foreach($categories as $category)
                                             <tr>
                                                 <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $category->id }}"></td>
                                                 <td>{{ $category->id }}</td>
@@ -169,7 +169,7 @@
                         </div>
                     </form>
                     <!-- Pagination links -->
-                    {{ $categorys->links() }}
+                    {{ $categories->links() }}
                 </div>
             </div>
         </div>

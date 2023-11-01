@@ -158,6 +158,12 @@
             <!-- Heading -->
             <div class="sidebar-heading">Interface</div>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/Category') }}">
+                    <i class="fas fa-folder"></i>
+                    <span>Category</span></a>
+            </li>
+
             <!-- Nav Item - Pages Collapse My Place Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyPlace"
@@ -165,11 +171,11 @@
                     <i class="fas fa-file"></i>
                     <span>My Item</span>
                 </a>
+
                 <div id="MyPlace" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"><i class="fas fa-cube"></i></i>&nbsp;Item</h6>
                         <a class="collapse-item" href="{{ url('/admin/Product') }}"><i class="fas fa-utensils"></i></i>&nbsp;Food</a>
-                        <a class="collapse-item" href="{{ url('/admin/Category') }}"><i class="fas fa-folder"></i>&nbsp;Category</a>
                         <a class="collapse-item" href=""><i class="fas fa-plus-circle"></i></i>&nbsp;Add On</a>
                         <a class="collapse-item" href=""><i class="fas fa-cubes"></i></i>&nbsp;Variant</a>
                     </div>
