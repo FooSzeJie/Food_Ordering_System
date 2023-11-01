@@ -10,11 +10,11 @@ class ProductController extends Controller
 {
     public function index() {
 
-        // $products = Product::all();
+        $products = Product::all();
         // $productss = Product::paginate(10);
-        $products = Product::paginate(10);
+        $productsPaginate = Product::paginate(10);
 
-        return view("backend.adminProduct",compact('products','products'));
+        return view("backend.adminProduct",compact('products','productsPaginate'));
     }
 
     public function createProduct() {
