@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VariantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //Change Product Status Function
     Route::get('/changeproduct-status/{id}',[ProductController::class,'changeproductStatus']);
 
+    //Change Variant Status Function
+    Route::get('/changevariant-status/{id}',[VariantController::class,'changevariantStatus']);
+
     // Category Page
     // Route::get('/admin/Category', [CategoryController::class,'index']);
 
@@ -94,7 +98,7 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Route::get('/admin/Category/store', [CategoryController::class, 'storeCategory'])->name('storeCategory');
 
     // Product Page
-    Route::get('/admin/Product', [ProductController::class, 'index']);
+    Route::get('/admin/Product', [ProductController::class, 'index'])->name('product.index');
 
     // Create Product Page
     Route::get('/admin/Product/Create', [ProductController::class, 'createProduct']);
@@ -102,6 +106,36 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Store Product to the DB
     Route::post('/admin/Product/Store', [ProductController::class,'storeProduct'])->name('storeProduct');
 
+    //Admin Edit Product Function
+    Route::get('admin/editProduct/{id}/edit', [ProductController::class, 'EditProduct'])->name('editProduct');
+
+    //Admin Update Product Function
+    Route::put('admin/updateProduct/{id}', [ProductController::class, 'UpdateProduct'])->name('updateProduct');
+
+    // view Product to the DB
+    Route::post('/admin/Product/{id}/View', [ProductController::class,'viewProduct'])->name('viewProduct');
+
+    // Delete Product Function
+    Route::get('admin/deleteProduct/{id}/delete', [ProductController::class, 'DeleteProduct'])->name('deleteProduct');
+
+    // ------------------------------------------Admin Variant Area --------------------------------------------------------------//
+    //Admin Store Variant
+    Route::post('/admin/Variant/create', [VariantController::class, 'storeVariant']);
+
+    //Admin Show All Variant
+    Route::get('/admin/Variant', [VariantController::class, 'showVariant']);
+
+    //Admin Edit Variant Function
+    Route::get('admin/editVariant/{id}/edit', [VariantController::class, 'EditVariant'])->name('editVariant');
+
+    //Admin Update Variant Function
+    Route::put('admin/updateVariant/{id}', [VariantController::class, 'UpdateVariant'])->name('updateVariant');
+
+    //Admin Delete Variant Function
+    Route::get('admin/deleteVariant/{id}/delete', [VariantController::class, 'DeleteVariant'])->name('deleteVariant');
+
+    //MutlipleDelete Variant Function
+    Route::post('/mutlipledeletevariant/delete', [VariantController::class, 'deleteMultipleVariant'])->name('mutlipledeletevariant');
 });
 
 //Logout Admin Function

@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    public function index(){
-        return view("backend.adminCategory");
-    }
+    // public function index(){
+    //     return view("backend.adminCategory");
+    // }
 
     // Create the Category
-    public function createCategory(){
+    // public function createCategory(){
 
-        return view("backend.categoryPage");
-    }
+    //     return view("backend.categoryPage");
+    // }
 
     public function AdminstoreCategory(Request $request){
         // Store the data to the database

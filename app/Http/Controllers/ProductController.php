@@ -16,7 +16,7 @@ class ProductController extends Controller
         // $productsPaginate = DB::table('products')->orderBy('id')->paginate(10);
 
 
-        return view("backend.adminProduct",compact('products'));
+        return view("backend.product.admin-Product",compact('products'));
     }
 
     public function createProduct() {
@@ -24,7 +24,7 @@ class ProductController extends Controller
         $categorys = Category::all();
         // dd($categorys);
 
-        return view('backend.adminCreateProduct',compact('categorys'));
+        return view('backend.product.admin-Create-Product',compact('categorys'));
     }
 
     public function storeProduct(Request $request) {
@@ -32,8 +32,44 @@ class ProductController extends Controller
         $input = $request->all();
         Product::create($input);
 
-        return redirect('/admin/Product')->with('success','');
+        return redirect('/admin/Product')->with('success','You Product has been Add Successfully!');
 
+    }
+
+    public function editProduct($id) {
+        // 通过产品ID查找产品记录
+        $productss = Product::find($id);
+
+        if (!$productss) {
+
+            return redirect()->route('product.index')->with('error', 'Product not found');
+        }
+
+        return view('backend.product.admin-edit-Product',compact('productss'));
+    }
+
+    public function updateProduct(Request $request, $id) {
+
+        $input = $request->all();
+
+        // 通过传入的 $id 查找要更新的产品记录
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect('/admin/Product')->with('error', 'Product not found.');
+        }
+
+        // 使用更新后的数据更新产品记录
+        $product->update($input);
+
+        return redirect('/admin/Product')->with('success', 'Product has been updated successfully!');
+    }
+
+    public function DeleteProduct($id){
+
+        Product::where('id',$id)->delete();
+
+        return back()->with('success','This Product has been delete.');
     }
 
     public function changeproductStatus($id)
