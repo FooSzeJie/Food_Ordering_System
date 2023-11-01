@@ -39,14 +39,14 @@
                     {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
                 </div>
 
-                {{-- <div class="mb-3">
+                <div class="mb-3">
                     <label for="ProductStatus" class="form-label">Product Status: </label>
 
                     <select class="form-select form-select-font-weight-5" id="select-menu" name="status">
                         <option value="0">Inactive</option>
                         <option value="1" selected>Active</option>
                     </select>
-                </div> --}}
+                </div>
 
                 @if ($categorys->count() > 0)
                     <div class="mb-3">
