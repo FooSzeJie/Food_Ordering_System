@@ -3,21 +3,13 @@
 
     {{-- show all Products --}}
     <div class="container">
-
         <div class="row">
             <div class="col-12">
-
                 <h3>Products</h3>
-
                 <div class="data_table">
 
-                    @if (\Session::has('error'))
-                        <div class="alert alert-danger">{{ Session::get('error') }}</div>
-                    @endif
-
-                    @if (\Session::has('success'))
-                        <div class="alert alert-success">{{ Session::get('success') }}</div>
-                    @endif
+                    {{-- Session --}}
+                    @include('backend.component.session')
 
                     <!-- Button to delete all selected items -->
                     <form action="{{ url('') }}" method="post" id="deleteMultipleForm">
@@ -107,7 +99,8 @@
                     </form>
 
                     <!-- Pagination links -->
-                    {{ $productsPaginate->links() }}
+                    <div class="row">{{ $products->links() }}</div>
+
                 </div>
             </div>
         </div>

@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use DB;
 
 class ProductController extends Controller
 {
     public function index() {
 
-        $products = Product::all();
+        $products = Product::paginate(10);
         // $productss = Product::paginate(10);
-        $productsPaginate = Product::paginate(10);
+        // $productsPaginate = DB::table('products')->orderBy('id')->paginate(10);
 
-        return view("backend.adminProduct",compact('products','productsPaginate'));
+
+        return view("backend.adminProduct",compact('products'));
     }
 
     public function createProduct() {
