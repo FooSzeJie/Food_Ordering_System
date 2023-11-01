@@ -30,7 +30,7 @@ class ProductController extends Controller
         $input = $request->all();
         Product::create($input);
 
-        return view('backend.adminProduct');
+        return redirect('/admin/Product')->with('success','');
 
     }
 
