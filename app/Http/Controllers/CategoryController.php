@@ -37,21 +37,21 @@ class CategoryController extends Controller
 
         $categories = Category::paginate(10);
 
-        return view("backend.categoryPage", compact('categories'));
+        return view("backend.category.categoryPage", compact('categories'));
     }
 
     public function AdminViewCategory($id)
     {
         $categorys = Category::find($id);
 
-        return view("backend.categoryPage", compact('categorys'));
+        return view("backend.category.categoryPage", compact('categorys'));
     }
 
     public function AdminEditCategory($id){
 
         $categorys = Category::find($id);
 
-        return view("backend.categoryPage", compact('categorys'));
+        return view("backend.category.categoryPage", compact('categorys'));
     }
 
     public function AdminUpdateCategory(Request $request, $id){
