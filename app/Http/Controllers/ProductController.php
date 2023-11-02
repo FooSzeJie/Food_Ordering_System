@@ -11,16 +11,18 @@ use DB;
 
 class ProductController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         $products = Product::paginate(10);
         // $productss = Product::paginate(10);
         // $productsPaginate = DB::table('products')->orderBy('id')->paginate(10);
 
-        return view("backend.product.admin-Product",compact('products'));
+        return view("backend.product.admin-Product", compact('products'));
     }
 
-    public function createProduct() {
+    public function createProduct()
+    {
 
         $categorys = Category::all();
         $addons = AddOn::all();
@@ -28,15 +30,15 @@ class ProductController extends Controller
 
         // dd($categorys);
 
-        return view('backend.product.admin-Create-Product',compact('categorys','addons','variants'));
+        return view('backend.product.admin-Create-Product', compact('categorys', 'addons', 'variants'));
     }
 
-    public function storeProduct(Request $request){
+    public function storeProduct(Request $request)
+    {
 
         // |image|mimes:jpeg,png,jpg,gif|max:2048
         $request->validate([
             'name' => 'required',
-            'image' => 'required',
             'price' => 'required',
             'description' => 'required',
             'categoryID' => 'required'
@@ -49,8 +51,13 @@ class ProductController extends Controller
 
         // Handle image upload
         $image = $request->file('image');
-        $image->move('images', $image->getClientOriginalName());
-        $imageName = $image->getClientOriginalName();
+        $imageName = "";
+        if ($image == null) {
+            $image = null;
+        } else {
+            $image->move('images', $image->getClientOriginalName());
+            $imageName = $image->getClientOriginalName();
+        }
 
         $product = new Product();
         $product->name = $request->name;
@@ -63,7 +70,8 @@ class ProductController extends Controller
         return redirect('/admin/Product')->with('success', 'You have added a new Product successfully');
     }
 
-    public function editProduct($id) {
+    public function editProduct($id)
+    {
         // Find the product by ID
         $product = Product::find($id);
 
@@ -77,7 +85,8 @@ class ProductController extends Controller
         return view('backend.product.admin-edit-Product', compact('product', 'categories'));
     }
 
-    public function updateProduct(Request $request, $id) {
+    public function updateProduct(Request $request, $id)
+    {
         // Find the product by ID
         $product = Product::find($id);
 
@@ -120,12 +129,12 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('success', 'Product updated successfully');
     }
 
+    public function DeleteProduct($id)
+    {
 
-    public function DeleteProduct($id){
+        Product::where('id', $id)->delete();
 
-        Product::where('id',$id)->delete();
-
-        return back()->with('success','This Product has been delete.');
+        return back()->with('success', 'This Product has been delete.');
     }
 
     public function changeproductStatus($id)

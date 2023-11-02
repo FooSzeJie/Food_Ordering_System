@@ -25,7 +25,7 @@
 
                     <div class="mb-3">
                         <label for="productImage" class="form-label">Select the file Image: </label>
-                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
                     </div>
 
                     <div class="mb-3">
