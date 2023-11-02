@@ -26,28 +26,12 @@
                     <div class="mb-3">
                         <label for="productImage" class="form-label">Select the file Image: </label>
                         <input type="file" class="form-control" id="image" name="image" accept="image/*" >
-                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
                     </div>
 
                     <div class="mb-3">
                         <label for="productPrice" class="form-label">Price</label>
                         <input type="number" class="form-control" id="productPrice" name="price">
                     </div>
-
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Product Description: </label>
-                        <input type="text" class="form-control" id="productDescription" name="description">
-                        {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
-                    </div>
-
-                    {{-- <div class="mb-3">
-                        <label for="ProductStatus" class="form-label">Product Status: </label>
-
-                        <select class="form-select form-select-font-weight-5" id="select-menu" name="status">
-                            <option value="0">Inactive</option>
-                            <option value="1" selected>Active</option>
-                        </select>
-                    </div> --}}
 
                     @if ($addons->count() > 0)
                         <div class="mb-3">
@@ -59,8 +43,23 @@
                             </select>
                         </div>
                     @else
-                        <p>Haven't added any add ons yet.</p>
+                        <p>Haven't added any add on yet.</p>
                     @endif
+
+                    <div class="mb-3">
+                        <label for="productDescription" class="form-label">Product Description: </label>
+                        <input type="text" class="form-control" id="productDescription" name="description">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="ProductStatus" class="form-label">Product Status: </label>
+
+                        <select class="form-select form-select-font-weight-5" id="select-menu" name="status">
+                            <option value="0">Inactive</option>
+                            <option value="1" selected>Active</option>
+                        </select>
+                    </div>
 
                     @if ($variants->count() > 0)
                         <div class="mb-3">
