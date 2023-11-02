@@ -95,7 +95,7 @@
                                                         data-target="#categoryeditModal{{ $category->id }}"><i
                                                             class="fa fa-edit"></i></a>
                                                     <a onclick="return confirm('Are you sure to delete this data?')"
-                                                        href="{{ url('deleteCategory/' . $category->id) . '/delete' }}"
+                                                        href="{{ url('admin/deleteCategory/' . $category->id) . '/delete' }}"
                                                         class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\AddOn;
+use App\Models\Variant;
 use DB;
 
 class ProductController extends Controller
@@ -15,17 +17,18 @@ class ProductController extends Controller
         // $productss = Product::paginate(10);
         // $productsPaginate = DB::table('products')->orderBy('id')->paginate(10);
 
-
-
         return view("backend.product.admin-Product",compact('products'));
     }
 
     public function createProduct() {
 
         $categorys = Category::all();
+        $addons = AddOn::all();
+        $variants = Variant::all();
+
         // dd($categorys);
 
-        return view('backend.product.admin-Create-Product',compact('categorys'));
+        return view('backend.product.admin-Create-Product',compact('categorys','addons','variants'));
     }
 
     public function storeProduct(Request $request){
@@ -85,11 +88,14 @@ class ProductController extends Controller
         // Validate the form data
         $request->validate([
             'name' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required',
             'description' => 'required',
             'categoryID' => 'required',
         ]);
+
+        // Initialize $imageName to null
+        $imageName = null;
 
         // Handle image upload if a new image is provided
         if ($request->hasFile('image')) {
@@ -98,9 +104,13 @@ class ProductController extends Controller
             $image->move(public_path('images'), $imageName);
         }
 
-        // Update product details
+        // Only update the image attribute if a new image was provided
+        if ($imageName !== null) {
+            $product->image = $imageName;
+        }
+
+        // Update other product details
         $product->name = $request->input('name');
-        $product->image = $imageName;
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         $product->categoryID = $request->input('categoryID');
@@ -109,6 +119,7 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');
     }
+
 
     public function DeleteProduct($id){
 

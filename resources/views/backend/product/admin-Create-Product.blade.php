@@ -48,6 +48,32 @@
                         </select>
                     </div> --}}
 
+                    @if ($addons->count() > 0)
+                        <div class="mb-3">
+                            <label for="CategoryID" class="form-label">Add On: </label>
+                            <select class="form-select form-select-font-weight-5" id="select-menu" name="categoryID">
+                                @foreach ($addons as $addon)
+                                    <option value="{{ $addon->id }}">{{ $addon->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @else
+                        <p>Haven't added any add ons yet.</p>
+                    @endif
+
+                    @if ($variants->count() > 0)
+                        <div class="mb-3">
+                            <label for="CategoryID" class="form-label">Variant: </label>
+                            <select class="form-select form-select-font-weight-5" id="select-menu" name="categoryID">
+                                @foreach ($variants as $variant)
+                                    <option value="{{ $variant->id }}">{{ $variant->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @else
+                        <p>Haven't added any variants yet.</p>
+                    @endif
+
                     @if ($categorys->count() > 0)
                         <div class="mb-3">
                             <label for="CategoryID" class="form-label">Category: </label>

@@ -56,8 +56,8 @@
                                         <th>Image</th>
                                         <th>Price</th>
                                         <th>Description</th>
-                                        <th>Variant</th>
-                                        <th>Add Ons</th>
+                                        {{-- <th>Variant</th>
+                                        <th>Add Ons</th> --}}
                                         <th>Category</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -75,9 +75,9 @@
                                                         alt="Image" /></td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->description }}</td>
-                                                <td>{{ $product->variant }}</td>
-                                                <td>{{ $product->addOns }}</td>
-                                                <td>{{ $product->category->name }}</td>
+                                                {{-- <td>{{ $product->variant }}</td>
+                                                <td>{{ $product->addOns }}</td> --}}
+                                                <td>{{ $product->category->name ?? 'No Category' }}</td>
                                                 <td>
                                                     @if ($product->status == 1)
                                                         <a href="{{ url('changeproduct-status/' . $product->id) }}"
