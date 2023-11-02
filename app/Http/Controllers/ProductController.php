@@ -16,6 +16,7 @@ class ProductController extends Controller
         // $productsPaginate = DB::table('products')->orderBy('id')->paginate(10);
 
 
+
         return view("backend.product.admin-Product",compact('products'));
     }
 
