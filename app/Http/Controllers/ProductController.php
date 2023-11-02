@@ -49,7 +49,9 @@ class ProductController extends Controller
 
         // Check Image whether null
         if ($image == null) {
+
             $image = null;
+
         } else {
 
             // Handle image upload
@@ -59,10 +61,10 @@ class ProductController extends Controller
 
         $product = new Product();
         $product->name = $request->name;
-        $product->image = $imageName; // Corrected line
+        $product->image = $imageName;
         $product->price = $request->price;
-        $product->description = $request->description; // Corrected line
-        $product->categoryID = $request->categoryID; // Corrected line
+        $product->description = $request->description;
+        $product->categoryID = $request->categoryID;
         $product->save();
 
         return redirect('/admin/Product')->with('success', 'You have added a new Product successfully');
