@@ -69,7 +69,7 @@
                                                 <td>{{ $product->addOns }}</td> --}}
                                                 <td>{{ $product->category->name ?? 'No Category' }}</td>
                                                 <td>
-                                                    @if ($product->status == 1)
+                                                    @if ($product->status == 0)
                                                         <a href="{{ url('changeproduct-status/' . $product->id) }}"
                                                             class="btn btn-sm btn-success"
                                                             onclick="return confirm('Are you sure you want to change this status to Inactive?')">Acitve</a>

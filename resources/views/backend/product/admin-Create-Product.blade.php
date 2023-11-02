@@ -37,6 +37,19 @@
 
                     </div>
 
+                    @if ($categorys->count() > 0)
+                        <div class="mb-3">
+                            <label for="CategoryID" class="form-label">Category: </label>
+                            <select class="form-select form-select-font-weight-5" id="select-menu" name="categoryID">
+                                @foreach ($categorys as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @else
+                        <p>Haven't added any categories yet.</p>
+                    @endif
+
                     <div class="mb-3">
                         <label for="ProductStatus" class="form-label">Product Status: </label>
 
@@ -59,19 +72,6 @@
                         <p>Haven't added any add on yet.</p>
                     @endif
 
-                    {{-- @if ($addons->count() > 0)
-                        <div class="mb-3">
-                            <label for="CategoryID" class="form-label">Add Ons: </label>
-                            <select class="form-select form-select-font-weight-5" id="select-menu" name="addOns[]" multiple>
-                                @foreach ($addons as $addon)
-                                    <option value="{{ $addon->id }}">{{ $addon->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @else
-                        <p>Haven't added any add on yet.</p>
-                    @endif --}}
-
                     @if ($variants->count() > 0)
                         <div class="mb-3">
                             <label for="CategoryID" class="form-label">Variant: </label>
@@ -85,18 +85,6 @@
                         <p>Haven't added any variant yet.</p>
                     @endif
 
-                    @if ($categorys->count() > 0)
-                        <div class="mb-3">
-                            <label for="CategoryID" class="form-label">Category: </label>
-                            <select class="form-select form-select-font-weight-5" id="select-menu" name="categoryID">
-                                @foreach ($categorys as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @else
-                        <p>Haven't added any categories yet.</p>
-                    @endif
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add Product</button>

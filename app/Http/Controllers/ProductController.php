@@ -150,8 +150,6 @@ class ProductController extends Controller
             $status = 0;
         }
 
-        // event(new HotelStatus());
-
         Product::where('id', $id)->update(['status' => $status]);
 
         return back()->with(compact('status'));
