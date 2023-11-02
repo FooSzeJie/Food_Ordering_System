@@ -27,42 +27,86 @@ class ProductController extends Controller
         return view('backend.product.admin-Create-Product',compact('categorys'));
     }
 
-    public function storeProduct(Request $request) {
+    public function storeProduct(Request $request){
 
-        $input = $request->all();
-        Product::create($input);
+        // |image|mimes:jpeg,png,jpg,gif|max:2048
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'categoryID' => 'required'
+        ]);
 
-        return redirect('/admin/Product')->with('success','You Product has been Add Successfully!');
+        // Handle image upload
+        // $image = $request->file('image');
+        // $imageName = time() . '.' . $image->getClientOriginalExtension();
+        // $image->move(public_path('images'), $imageName);
 
+        // Handle image upload
+        $image = $request->file('image');
+        $image->move('images', $image->getClientOriginalName());
+        $imageName = $image->getClientOriginalName();
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->image = $imageName; // Corrected line
+        $product->price = $request->price;
+        $product->description = $request->description; // Corrected line
+        $product->categoryID = $request->categoryID; // Corrected line
+        $product->save();
+
+        return redirect('/admin/Product')->with('success', 'You have added a new Product successfully');
     }
 
     public function editProduct($id) {
-        // 通过产品ID查找产品记录
-        $productss = Product::find($id);
-
-        if (!$productss) {
-
-            return redirect()->route('product.index')->with('error', 'Product not found');
-        }
-
-        return view('backend.product.admin-edit-Product',compact('productss'));
-    }
-
-    public function updateProduct(Request $request, $id) {
-
-        $input = $request->all();
-
-        // 通过传入的 $id 查找要更新的产品记录
+        // Find the product by ID
         $product = Product::find($id);
 
         if (!$product) {
-            return redirect('/admin/Product')->with('error', 'Product not found.');
+            return redirect()->route('product.index')->with('error', 'Product not found');
         }
 
-        // 使用更新后的数据更新产品记录
-        $product->update($input);
+        // Fetch categories for the dropdown
+        $categories = Category::all();
 
-        return redirect('/admin/Product')->with('success', 'Product has been updated successfully!');
+        return view('backend.product.admin-edit-Product', compact('product', 'categories'));
+    }
+
+    public function updateProduct(Request $request, $id) {
+        // Find the product by ID
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect()->route('product.index')->with('error', 'Product not found');
+        }
+
+        // Validate the form data
+        $request->validate([
+            'name' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required',
+            'description' => 'required',
+            'categoryID' => 'required',
+        ]);
+
+        // Handle image upload if a new image is provided
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+        }
+
+        // Update product details
+        $product->name = $request->input('name');
+        $product->image = $imageName;
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+        $product->categoryID = $request->input('categoryID');
+
+        $product->save();
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully');
     }
 
     public function DeleteProduct($id){
@@ -87,5 +131,23 @@ class ProductController extends Controller
         Product::where('id', $id)->update(['status' => $status]);
 
         return back()->with(compact('status'));
+    }
+
+    public function deleteMultipleProduct(Request $request)
+    {
+        $ids = json_decode($request->input('ids'));
+
+        // dd($ids);
+
+        if (is_array($ids) && count($ids) > 0) {
+
+            Product::whereIn('id', $ids)->delete();
+
+            return back()->with('success', 'Selected Products have been deleted successfully!');
+
+        } else {
+
+            return back()->with('error', 'Invalid input. No Products were deleted.');
+        }
     }
 }

@@ -22,7 +22,7 @@
                     @include('backend.component.session')
 
                     <!-- Button to delete all selected items -->
-                    <form action="{{ url('') }}" method="post" id="deleteMultipleForm">
+                    <form action="{{ url('mutlipledeleteproduct/delete') }}" method="post" id="deleteMultipleForm">
                         @csrf
                         <!-- Your table code here -->
                         <div class="table-responsive">
@@ -77,7 +77,7 @@
                                                 <td>{{ $product->description }}</td>
                                                 <td>{{ $product->variant }}</td>
                                                 <td>{{ $product->addOns }}</td>
-                                                <td>{{ $product->categoryID }}</td>
+                                                <td>{{ $product->category->name }}</td>
                                                 <td>
                                                     @if ($product->status == 1)
                                                         <a href="{{ url('changeproduct-status/' . $product->id) }}"

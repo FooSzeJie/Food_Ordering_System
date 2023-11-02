@@ -22,8 +22,7 @@ class VariantController extends Controller
         ]);
 
         $variant = new Variant();
-        $variant->variant_name = $request->name;
-        $variant->product_id = $request->product_id;
+        $variant->name = $request->name;
         $variant->save();
 
         return back()->with("success","The Variant was successfully added to the database");
@@ -32,9 +31,9 @@ class VariantController extends Controller
     public function showVariant(){
 
         $variants = Variant::paginate(10);
-        $products = Product::all();
+        // $products = Product::all();
 
-        return view("backend.variant.admin-variant", compact('variants','products'));
+        return view("backend.variant.admin-variant", compact('variants'));
     }
 
     public function EditVariant($id){
@@ -48,8 +47,7 @@ class VariantController extends Controller
 
         $variants = Variant::find($id);
 
-        $variants->variant_name = $request->name;
-        $variants->product_id = $request->product_id;
+        $variants->name = $request->name;
         $variants->save();
 
         return back()->with('success','This Variant has been updated successfully.');

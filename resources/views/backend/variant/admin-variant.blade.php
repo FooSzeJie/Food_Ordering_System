@@ -29,14 +29,6 @@
                     @csrf
                     <div class="modal-body">
 
-                        <label for="product">Select Product</label>
-                        <select class="form-control" name="product_id">
-                            <option value="">-------</option>
-                            @foreach ($products as $product)
-                                <option value="{{ $product->id }}">{{ $product->name }}</option>
-                            @endforeach
-                        </select>
-
                         <div class="form-group">
                             <label for="name">Variant Name</label>
                             <input type="text" class="form-control" name="name" id="name"
@@ -81,14 +73,6 @@
                                 <input type="text" class="form-control" name="name" id="name" value="{{ $variant->name }}">
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                             </div>
-
-                            <label for="product">Select Product</label>
-                            <select class="form-control" name="product_id">
-                                <option value="">-------</option>
-                                @foreach ($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
                         </div>
 
                         <div class="modal-footer">
@@ -157,7 +141,6 @@
                                         <th><input type="checkbox" name="" id="select_all_ids" onclick="checkAll(this)"></th>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Product Name</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -168,22 +151,21 @@
                                             <tr>
                                                 <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $variant->id }}"></td>
                                                 <td>{{ $variant->id }}</td>
-                                                <td>{{ $variant->product->name }}</td>
                                                 <td>{{ $variant->name }}</td>
                                                 <td>
                                                     @if ($variant->status == 0)
                                                         <a href="{{ url('changevariant-status/' . $variant->id) }}"
-                                                            class="btn btn-sm btn-success"
-                                                            onclick="return confirm('Are you sure you want to change this status to close?')">Open</a>
+                                                            class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Are you sure you want to change this status to close?')">Close</a>
                                                     @else
                                                         <a href="{{ url('changevariant-status/' . $variant->id) }}"
-                                                            class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Close</a>
+                                                            class="btn btn-sm btn-success"
+                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Open</a>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#varianteditModal{{ $variant->id }}"><i class="fa fa-edit"></i></a>
-                                                    <a onclick="return confirm('Are you sure to delete this data?')" href="{{ url('deleteVariant/'.$variant->id).'/delete' }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                    <a onclick="return confirm('Are you sure to delete this data?')" href="{{ url('admin/deleteVariant/'.$variant->id).'/delete' }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -203,103 +185,103 @@
         </div>
     </div>
 
-{{-- New Delete Selected All Table --}}
-<script>
-    // Function to check/uncheck all checkboxes
-    function checkAll(checkbox) {
-        const checkboxes = document.getElementsByClassName('checkbox_ids');
-        for (const cb of checkboxes) {
-            cb.checked = checkbox.checked;
-        }
-    }
-
-    document.getElementById('deleteAllSelectedRecord').addEventListener('click', function() {
-        const checkboxes = document.getElementsByClassName('checkbox_ids');
-        const selectedIds = [];
-
-        for (const checkbox of checkboxes) {
-            if (checkbox.checked) {
-                selectedIds.push(parseInt(checkbox.value));
+    {{-- New Delete Selected All Table --}}
+    <script>
+        // Function to check/uncheck all checkboxes
+        function checkAll(checkbox) {
+            const checkboxes = document.getElementsByClassName('checkbox_ids');
+            for (const cb of checkboxes) {
+                cb.checked = checkbox.checked;
             }
         }
 
-        if (selectedIds.length === 0) {
-            alert('Please select at least one restaurant to delete.');
-        } else {
-            const form = document.getElementById('deleteMultipleForm');
-            const idsInput = document.createElement('input');
-            idsInput.type = 'hidden';
-            idsInput.name = 'ids';
-            idsInput.value = JSON.stringify(selectedIds);
-            form.appendChild(idsInput);
+        document.getElementById('deleteAllSelectedRecord').addEventListener('click', function() {
+            const checkboxes = document.getElementsByClassName('checkbox_ids');
+            const selectedIds = [];
 
-            form.submit();
-        }
-    });
-</script>
-
-{{-- Read Excel File Data JS --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-
-{{-- Read Category Excel File Data --}}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    // 获取文件输入框和模态框内容区域的元素
-    const fileInput = document.querySelector('#hotelexcelModal input[type="file"]');
-    const modalBody = document.querySelector('#hotelexcelModal .modal-body');
-
-    // 为文件输入框添加事件监听，当用户选择了文件后触发
-    fileInput.addEventListener('change', function (event) {
-        // 获取用户选择的文件
-        const selectedFile = event.target.files[0];
-
-        if (selectedFile) {
-            // 创建一个文件阅读器对象
-            const fileReader = new FileReader();
-
-            // 当文件加载完成时，会执行这个回调函数
-            fileReader.onload = function (e) {
-                // 获取文件的内容（以二进制形式）
-                const data = e.target.result;
-
-                // 使用 XLSX 库将二进制内容解析成工作簿对象
-                const workbook = XLSX.read(data, { type: 'binary' });
-
-                // 假设你使用第一个工作表名字
-                const sheetName = workbook.SheetNames[0];
-
-                // 将工作表的数据解析成 JSON 格式
-                const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 });
-
-                // 创建一个 HTML 表格元素
-                const table = document.createElement('table');
-                table.classList.add('table', 'table-bordered');
-
-                // 循环遍历数据，创建表格行和单元格
-                for (let i = 0; i < sheetData.length; i++) {
-                    const row = document.createElement('tr');
-                    for (let j = 0; j < sheetData[i].length; j++) {
-                        const cell = document.createElement(i === 0 ? 'th' : 'td');
-                        cell.textContent = sheetData[i][j];
-                        row.appendChild(cell);
-                    }
-                    table.appendChild(row);
+            for (const checkbox of checkboxes) {
+                if (checkbox.checked) {
+                    selectedIds.push(parseInt(checkbox.value));
                 }
+            }
 
-                console.log(sheetData);
+            if (selectedIds.length === 0) {
+                alert('Please select at least one restaurant to delete.');
+            } else {
+                const form = document.getElementById('deleteMultipleForm');
+                const idsInput = document.createElement('input');
+                idsInput.type = 'hidden';
+                idsInput.name = 'ids';
+                idsInput.value = JSON.stringify(selectedIds);
+                form.appendChild(idsInput);
 
-                // 将表格添加到模态框内容区域中
-                modalBody.appendChild(table);
-            };
+                form.submit();
+            }
+        });
+    </script>
 
-            // 开始读取文件内容（以二进制字符串形式）
-            fileReader.readAsBinaryString(selectedFile);
-        }
+    {{-- Read Excel File Data JS --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+
+    {{-- Read Category Excel File Data --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        // 获取文件输入框和模态框内容区域的元素
+        const fileInput = document.querySelector('#hotelexcelModal input[type="file"]');
+        const modalBody = document.querySelector('#hotelexcelModal .modal-body');
+
+        // 为文件输入框添加事件监听，当用户选择了文件后触发
+        fileInput.addEventListener('change', function (event) {
+            // 获取用户选择的文件
+            const selectedFile = event.target.files[0];
+
+            if (selectedFile) {
+                // 创建一个文件阅读器对象
+                const fileReader = new FileReader();
+
+                // 当文件加载完成时，会执行这个回调函数
+                fileReader.onload = function (e) {
+                    // 获取文件的内容（以二进制形式）
+                    const data = e.target.result;
+
+                    // 使用 XLSX 库将二进制内容解析成工作簿对象
+                    const workbook = XLSX.read(data, { type: 'binary' });
+
+                    // 假设你使用第一个工作表名字
+                    const sheetName = workbook.SheetNames[0];
+
+                    // 将工作表的数据解析成 JSON 格式
+                    const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 });
+
+                    // 创建一个 HTML 表格元素
+                    const table = document.createElement('table');
+                    table.classList.add('table', 'table-bordered');
+
+                    // 循环遍历数据，创建表格行和单元格
+                    for (let i = 0; i < sheetData.length; i++) {
+                        const row = document.createElement('tr');
+                        for (let j = 0; j < sheetData[i].length; j++) {
+                            const cell = document.createElement(i === 0 ? 'th' : 'td');
+                            cell.textContent = sheetData[i][j];
+                            row.appendChild(cell);
+                        }
+                        table.appendChild(row);
+                    }
+
+                    console.log(sheetData);
+
+                    // 将表格添加到模态框内容区域中
+                    modalBody.appendChild(table);
+                };
+
+                // 开始读取文件内容（以二进制字符串形式）
+                fileReader.readAsBinaryString(selectedFile);
+            }
+        });
     });
-});
-</script>
+    </script>
 
-<!-- Include jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 @endsection

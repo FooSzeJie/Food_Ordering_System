@@ -118,6 +118,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     // Delete Product Function
     Route::get('admin/deleteProduct/{id}/delete', [ProductController::class, 'DeleteProduct'])->name('deleteProduct');
 
+    //MutlipleDelete Product Function
+    Route::post('/mutlipledeleteproduct/delete', [ProductController::class, 'deleteMultipleProduct'])->name('mutlipledeleteproduct');
+
     // ------------------------------------------Admin Variant Area --------------------------------------------------------------//
     //Admin Store Variant
     Route::post('/admin/Variant/create', [VariantController::class, 'storeVariant']);
