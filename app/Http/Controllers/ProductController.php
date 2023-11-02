@@ -15,8 +15,6 @@ class ProductController extends Controller
     {
 
         $products = Product::paginate(10);
-        // $productss = Product::paginate(10);
-        // $productsPaginate = DB::table('products')->orderBy('id')->paginate(10);
 
         return view("backend.product.admin-Product", compact('products'));
     }
