@@ -39,9 +39,7 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'categoryID' => 'required',
-            'addOns' => 'required|array', // Make sure it's an array
-            'addOns.*' => 'numeric', // Each value in the array should be a number
+            'categoryID' => 'required',// Each value in the array should be a number
         ]);
 
         $image = $request->file('image');
@@ -65,8 +63,8 @@ class ProductController extends Controller
         $product->image = $imageName;
         $product->price = $request->price;
         $product->description = $request->description; // Corrected line
-        $product->addon = $request->addon;
-        $product->variant = $request->variant;
+        // $product->addon = $request->addon;
+        // $product->variant = $request->variant;
         $product->categoryID = $request->categoryID; // Corrected line
         $product->description = $request->description;
         $product->categoryID = $request->categoryID;
