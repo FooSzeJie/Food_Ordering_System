@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VariantController;
+use App\Http\Controllers\AddOnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //Change Variant Status Function
     Route::get('/changevariant-status/{id}',[VariantController::class,'changevariantStatus']);
 
+    //Change Add On Status Function
+    Route::get('/changeaddon-status/{id}',[AddOnController::class,'changeaddonStatus']);
+
     // Category Page
     // Route::get('/admin/Category', [CategoryController::class,'index']);
 
@@ -139,6 +143,25 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
 
     //MutlipleDelete Variant Function
     Route::post('/mutlipledeletevariant/delete', [VariantController::class, 'deleteMultipleVariant'])->name('mutlipledeletevariant');
+
+    // ------------------------------------------Admin Add On Area --------------------------------------------------------------//
+    //Admin Store Add On
+    Route::post('/admin/AddOn/create', [AddOnController::class, 'storeAddOn']);
+
+    //Admin Show All Add On
+    Route::get('/admin/AddOn', [AddOnController::class, 'showAddOn']);
+
+    //Admin Edit Add On Function
+    Route::get('admin/editAddOn/{id}/edit', [AddOnController::class, 'EditAddOn'])->name('editAddOn');
+
+    //Admin Update Add On Function
+    Route::put('admin/updateAddOn/{id}', [AddOnController::class, 'UpdateAddOn'])->name('updateAddOn');
+
+    //Admin Delete Add On Function
+    Route::get('admin/deleteAddOn/{id}/delete', [AddOnController::class, 'DeleteAddOn'])->name('deleteAddOn');
+
+    //MutlipleDelete Add On Function
+    Route::post('/mutlipledeleteaddon/delete', [AddOnController::class, 'deleteMultipleAddOn'])->name('mutlipledeleteaddon');
 });
 
 //Logout Admin Function

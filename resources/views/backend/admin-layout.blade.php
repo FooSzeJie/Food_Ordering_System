@@ -176,7 +176,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"><i class="fas fa-cube"></i></i>&nbsp;Item</h6>
                         <a class="collapse-item" href="{{ url('/admin/Product') }}"><i class="fas fa-utensils"></i></i>&nbsp;Food</a>
-                        <a class="collapse-item" href=""><i class="fas fa-plus-circle"></i></i>&nbsp;Add On</a>
+                        <a class="collapse-item" href="{{ url('/admin/AddOn') }}"><i class="fas fa-plus-circle"></i></i>&nbsp;Add On</a>
                         <a class="collapse-item" href="{{ url('/admin/Variant')}}"><i class="fas fa-cubes"></i></i>&nbsp;Variant</a>
                     </div>
                 </div>
