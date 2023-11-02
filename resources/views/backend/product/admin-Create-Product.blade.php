@@ -25,7 +25,11 @@
 
                     <div class="mb-3">
                         <label for="productImage" class="form-label">Select the file Image: </label>
+<<<<<<< HEAD
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*" >
+=======
                         <input type="file" class="form-control" id="image" name="image" accept="image/*">
+>>>>>>> 68c54dfb6612a323205d23b9050c45fc195ad190
                     </div>
 
                     <div class="mb-3">
