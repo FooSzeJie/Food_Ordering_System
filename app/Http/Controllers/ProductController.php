@@ -44,17 +44,15 @@ class ProductController extends Controller
             'categoryID' => 'required'
         ]);
 
-        // Handle image upload
-        // $image = $request->file('image');
-        // $imageName = time() . '.' . $image->getClientOriginalExtension();
-        // $image->move(public_path('images'), $imageName);
-
-        // Handle image upload
         $image = $request->file('image');
         $imageName = "";
+
+        // Check Image whether null
         if ($image == null) {
             $image = null;
         } else {
+
+            // Handle image upload
             $image->move('images', $image->getClientOriginalName());
             $imageName = $image->getClientOriginalName();
         }
