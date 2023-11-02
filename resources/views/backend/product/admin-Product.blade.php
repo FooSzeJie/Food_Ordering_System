@@ -90,7 +90,6 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{-- <a href="{{ url('viewCategory/' . $category->id) . '/view' }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a> --}}
                                                     <a href="{{ url('admin/editProduct/' . $product->id) . '/edit' }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                                     <a onclick="return confirm('Are you sure to delete this data?')"
                                                         href="{{ url('admin/deleteProduct/' . $product->id) . '/delete' }}"

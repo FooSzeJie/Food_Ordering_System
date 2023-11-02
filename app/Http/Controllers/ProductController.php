@@ -15,8 +15,6 @@ class ProductController extends Controller
     {
 
         $products = Product::paginate(10);
-        // $productss = Product::paginate(10);
-        // $productsPaginate = DB::table('products')->orderBy('id')->paginate(10);
 
         return view("backend.product.admin-Product", compact('products'));
     }
@@ -46,30 +44,32 @@ class ProductController extends Controller
             'addOns.*' => 'numeric', // Each value in the array should be a number
         ]);
 
-        // Handle image upload
-        // $image = $request->file('image');
-        // $imageName = time() . '.' . $image->getClientOriginalExtension();
-        // $image->move(public_path('images'), $imageName);
-
-        // Handle image upload
         $image = $request->file('image');
 
         $imageName = "";
+
+        // Check Image whether null
         if ($image == null) {
+
             $image = null;
+
         } else {
+
+            // Handle image upload
             $image->move('images', $image->getClientOriginalName());
             $imageName = $image->getClientOriginalName();
         }
 
         $product = new Product();
         $product->name = $request->name;
-        $product->image = $imageName; // Corrected line
+        $product->image = $imageName;
         $product->price = $request->price;
         $product->description = $request->description; // Corrected line
         $product->addon = $request->addon;
         $product->variant = $request->variant;
         $product->categoryID = $request->categoryID; // Corrected line
+        $product->description = $request->description;
+        $product->categoryID = $request->categoryID;
         $product->save();
 
         return redirect('/admin/Product')->with('success', 'You have added a new Product successfully');
