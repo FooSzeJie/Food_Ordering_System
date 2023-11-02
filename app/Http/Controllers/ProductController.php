@@ -41,7 +41,9 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'categoryID' => 'required'
+            'categoryID' => 'required',
+            'addOns' => 'required|array', // Make sure it's an array
+            'addOns.*' => 'numeric', // Each value in the array should be a number
         ]);
 
         // Handle image upload
@@ -51,6 +53,7 @@ class ProductController extends Controller
 
         // Handle image upload
         $image = $request->file('image');
+
         $imageName = "";
         if ($image == null) {
             $image = null;
@@ -64,6 +67,8 @@ class ProductController extends Controller
         $product->image = $imageName; // Corrected line
         $product->price = $request->price;
         $product->description = $request->description; // Corrected line
+        $product->addon = $request->addon;
+        $product->variant = $request->variant;
         $product->categoryID = $request->categoryID; // Corrected line
         $product->save();
 
