@@ -36,7 +36,6 @@ class ProductController extends Controller
         // |image|mimes:jpeg,png,jpg,gif|max:2048
         $request->validate([
             'name' => 'required',
-            'image' => 'required',
             'price' => 'required',
             'description' => 'required',
             'categoryID' => 'required'
