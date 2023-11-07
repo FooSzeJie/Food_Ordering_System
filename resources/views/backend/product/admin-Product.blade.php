@@ -1,16 +1,6 @@
 @extends('backend.admin-layout')
 @section('backend-section')
 
-{{-- Paginate bootstrap example --}}
-<!-- Latest compiled and minified CSS -->
-{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> --}}
-
-<!-- Optional theme -->
-{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> --}}
-
-<!-- Latest compiled and minified JavaScript -->
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> --}}
-
     {{-- show all Products --}}
     <div class="container">
         <div class="row">
@@ -79,14 +69,14 @@
                                                 <td>{{ $product->addOns }}</td> --}}
                                                 <td>{{ $product->category->name ?? 'No Category' }}</td>
                                                 <td>
-                                                    @if ($product->status == 1)
-                                                        <a href="{{ url('changeproduct-status/' . $product->id) }}"
-                                                            class="btn btn-sm btn-success"
-                                                            onclick="return confirm('Are you sure you want to change this status to Inactive?')">Acitve</a>
-                                                    @else
+                                                    @if ($product->status == 0)
                                                         <a href="{{ url('changeproduct-status/' . $product->id) }}"
                                                             class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Are you sure you want to change this status to Acitve?')">Inactive</a>
+                                                            onclick="return confirm('Are you sure you want to change this status to Inactive?')">InAcitve</a>
+                                                    @else
+                                                        <a href="{{ url('changeproduct-status/' . $product->id) }}"
+                                                            class="btn btn-sm btn-success"
+                                                            onclick="return confirm('Are you sure you want to change this status to Acitve?')">Acitve</a>
                                                     @endif
                                                 </td>
                                                 <td>

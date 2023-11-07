@@ -23,6 +23,7 @@ class AddOnController extends Controller
 
         $addon = new AddOn();
         $addon->name = $request->name;
+        $addon->price = $request->price;
         $addon->save();
 
         return back()->with("success","The Add On Item was successfully added to the database");
@@ -48,6 +49,7 @@ class AddOnController extends Controller
         $addons = AddOn::find($id);
 
         $addons->name = $request->name;
+        $addons->price = $request->price;
         $addons->save();
 
         return back()->with('success','This Add On Item has been updated successfully.');
