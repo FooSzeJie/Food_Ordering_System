@@ -7,6 +7,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
+<<<<<<< HEAD
 @section('backend-section')
     <div class="container-fluid">
 
@@ -16,6 +17,12 @@
         </div>
 
         <div>
+=======
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Create Product</h1>
+    </div>
+>>>>>>> f16b3b55cb30f37cb5f2454275ca4b982ac7d747
             <form action="{{ route('storeProduct') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="table-responsive">
@@ -39,6 +46,19 @@
                         <label for="productDescription" class="form-label">Product Description: </label>
                         <input type="text" class="form-control" id="productDescription" name="description">
                     </div>
+
+                    @if ($categorys->count() > 0)
+                        <div class="mb-3">
+                            <label for="CategoryID" class="form-label">Category: </label>
+                            <select class="form-select form-select-font-weight-5" id="select-menu" name="categoryID">
+                                @foreach ($categorys as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @else
+                        <p>Haven't added any categories yet.</p>
+                    @endif
 
                     <div class="mb-3">
                         <label for="ProductStatus" class="form-label">Product Status: </label>
@@ -75,18 +95,6 @@
                         <p>Haven't added any variant yet.</p>
                     @endif
 
-                    @if ($categorys->count() > 0)
-                        <div class="mb-3">
-                            <label for="CategoryID" class="form-label">Category: </label>
-                            <select class="form-select form-select-font-weight-5" id="select-menu" name="categoryID">
-                                @foreach ($categorys as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @else
-                        <p>Haven't added any categories yet.</p>
-                    @endif
                 </div>
                 <button type="submit" class="btn btn-primary">Add Product</button>
             </form>
