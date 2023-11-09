@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="{{ asset('admin/css/ProductSelectBar.css') }}">
 @endsection
 
+@section('title')
+<title>Add Products</title>
+@endsection
+
 @section('backend-section')
     <div class="container-fluid">
 
