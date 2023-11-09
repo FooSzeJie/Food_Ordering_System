@@ -39,6 +39,17 @@
                                 @enderror
                             </span>
                         </div>
+
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" name="price" id="price" step="0.01"
+                                placeholder="Enter Add On Price">
+                            <span class="text-danger">
+                                @error('price')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -71,6 +82,11 @@
                             <div class="form-group">
                                 <label for="name">Add On Name</label>
                                 <input type="text" class="form-control" name="name" id="name" value="{{ $addon->name }}">
+                                <span class="text-danger">@error('name'){{ $message }}@enderror</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" name="price" id="price" step="0.01" value="{{ $addon->price }}">
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                             </div>
                         </div>
@@ -141,6 +157,7 @@
                                         <th><input type="checkbox" name="" id="select_all_ids" onclick="checkAll(this)"></th>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>Price</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -152,6 +169,7 @@
                                                 <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $addon->id }}"></td>
                                                 <td>{{ $addon->id }}</td>
                                                 <td>{{ $addon->name }}</td>
+                                                <td>RM&nbsp;{{ $addon->price }}</td>
                                                 <td>
                                                     @if ($addon->status == 0)
                                                         <a href="{{ url('changeaddon-status/' . $addon->id) }}"

@@ -33,41 +33,50 @@ class ProductController extends Controller
 
     public function storeProduct(Request $request)
     {
-
-        // |image|mimes:jpeg,png,jpg,gif|max:2048
         $request->validate([
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
+<<<<<<< HEAD
+            'categoryID' => 'required',
+            'addonID' => 'required',
+            'variantID' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+=======
             'categoryID' => 'required',// Each value in the array should be a number
+>>>>>>> f16b3b55cb30f37cb5f2454275ca4b982ac7d747
         ]);
 
         $image = $request->file('image');
 
         $imageName = "";
 
-        // Check Image whether null
-        if ($image == null) {
+        if ($image) {
+            if ($image->isValid()) {
+                $imageName = $image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
 
-            $image = null;
-
-        } else {
-
-            // Handle image upload
-            $image->move('images', $image->getClientOriginalName());
-            $imageName = $image->getClientOriginalName();
+            } else {
+                return back()->with('error', 'Image Have Some Problem');
+            }
         }
 
         $product = new Product();
         $product->name = $request->name;
         $product->image = $imageName;
         $product->price = $request->price;
+<<<<<<< HEAD
+=======
         $product->description = $request->description; // Corrected line
         // $product->addon = $request->addon;
         // $product->variant = $request->variant;
         $product->categoryID = $request->categoryID; // Corrected line
+>>>>>>> f16b3b55cb30f37cb5f2454275ca4b982ac7d747
         $product->description = $request->description;
         $product->categoryID = $request->categoryID;
+        $product->addOns = $request->addonID;
+        $product->variant = $request->variantID;
+        $product->status = $request->status;
         $product->save();
 
         return redirect('/admin/Product')->with('success', 'You have added a new Product successfully');
@@ -84,8 +93,10 @@ class ProductController extends Controller
 
         // Fetch categories for the dropdown
         $categories = Category::all();
+        $addons = AddOn::all();
+        $variants = Variant::all();
 
-        return view('backend.product.admin-edit-Product', compact('product', 'categories'));
+        return view('backend.product.admin-edit-Product', compact('product', 'categories','addons','variants'));
     }
 
     public function updateProduct(Request $request, $id)
@@ -100,14 +111,16 @@ class ProductController extends Controller
         // Validate the form data
         $request->validate([
             'name' => 'required',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required',
             'description' => 'required',
             'categoryID' => 'required',
+            'addonID' => 'required',
+            'variantID' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Initialize $imageName to null
-        $imageName = null;
+        // Initialize $imageName to the existing image name
+        $imageName = $product->image;
 
         // Handle image upload if a new image is provided
         if ($request->hasFile('image')) {
@@ -116,17 +129,15 @@ class ProductController extends Controller
             $image->move(public_path('images'), $imageName);
         }
 
-        // Only update the image attribute if a new image was provided
-        if ($imageName !== null) {
-            $product->image = $imageName;
-        }
-
-        // Update other product details
+        // Update product details
         $product->name = $request->input('name');
+        $product->image = $imageName; // Update the image attribute
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         $product->categoryID = $request->input('categoryID');
-
+        $product->addOns = $request->input('addonID');
+        $product->variant = $request->input('variantID');
+        $product->status = $request->input('status');
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');
