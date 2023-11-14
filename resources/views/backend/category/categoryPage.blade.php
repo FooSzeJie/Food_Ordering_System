@@ -1,4 +1,9 @@
 @extends('backend.admin-layout')
+
+@section('title')
+<title>Admin Category</title>
+@endsection
+
 @section('backend-section')
 
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}

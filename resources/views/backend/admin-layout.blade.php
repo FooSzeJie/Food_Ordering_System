@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Backend</title>
+    {{-- Define Title --}}
+    @yield('title')
 
     @yield('adminCss')
     <!-- Custom fonts for this template-->

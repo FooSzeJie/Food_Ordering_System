@@ -1,4 +1,9 @@
 @extends('backend.admin-layout')
+
+@section('title')
+<title>Admin Product</title>
+@endsection
+
 @section('backend-section')
 
     {{-- show all Products --}}

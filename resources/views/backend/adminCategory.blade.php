@@ -1,4 +1,7 @@
 @extends('backend.admin-layout')
+@section('title')
+<title>Admin Category</title>
+@endsection
 @section('backend-section')
     <div class="container-fluid">
 

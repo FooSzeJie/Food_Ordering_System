@@ -4,8 +4,17 @@
     <link rel="stylesheet" href="{{ asset('admin/css/ProductSelectBar.css') }}">
 @endsection
 
+<<<<<<< HEAD
+@section('title')
+<title>Add Product</title>
+@endsection
+
+@section('backend-section')
+<div class="container-fluid">
+=======
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+>>>>>>> cadb0d5a17af50a2fb0ec9a65874957ecc913784
 
 <style>
     /* Override the default select color */
