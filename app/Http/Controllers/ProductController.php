@@ -33,18 +33,16 @@ class ProductController extends Controller
 
     public function storeProduct(Request $request)
     {
+
+        // dd($request->input('addonID'));
+
         $request->validate([
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-<<<<<<< HEAD
             'categoryID' => 'required',
-            'addonID' => 'required',
+            'addonID' => 'required|array',
             'variantID' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-=======
-            'categoryID' => 'required',// Each value in the array should be a number
->>>>>>> f16b3b55cb30f37cb5f2454275ca4b982ac7d747
         ]);
 
         $image = $request->file('image');
@@ -65,19 +63,18 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->image = $imageName;
         $product->price = $request->price;
-<<<<<<< HEAD
-=======
         $product->description = $request->description; // Corrected line
-        // $product->addon = $request->addon;
-        // $product->variant = $request->variant;
         $product->categoryID = $request->categoryID; // Corrected line
->>>>>>> f16b3b55cb30f37cb5f2454275ca4b982ac7d747
-        $product->description = $request->description;
-        $product->categoryID = $request->categoryID;
-        $product->addOns = $request->addonID;
+        // $product->addOns = $request->addonID;
+        // $product->addons()->attach($request->input('addonID'));
         $product->variant = $request->variantID;
         $product->status = $request->status;
         $product->save();
+
+        // $product->addon()->attach($request->addonID);
+
+        // Attach selected Add Ons to the product
+        $product->addons()->attach($request->input('addonID'));
 
         return redirect('/admin/Product')->with('success', 'You have added a new Product successfully');
     }
@@ -116,7 +113,6 @@ class ProductController extends Controller
             'categoryID' => 'required',
             'addonID' => 'required',
             'variantID' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Initialize $imageName to the existing image name

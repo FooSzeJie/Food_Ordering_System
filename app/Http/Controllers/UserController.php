@@ -138,28 +138,55 @@ class UserController extends Controller
         return view('frontend.food',compact('products'));
     }
 
-    public function contact(){
-
-        if(Auth::check()){
-
-            return view('frontend.contact');
-
-        }else{
-
-            return redirect('/loginpage')->with('fail', "You Need To Login First!");
-
-        }
-
-
-    }
-
     public function userdashboard(){
 
         return view('frontend.user-dashboard');
     }
 
-    public function FoodDetail(){
+    // public function FoodDetail($id)
+    // {
+    //     // 获取产品信息
+    //     $fooddetails = Product::findOrFail($id);
 
-        return view('frontend.food-detail');
+    //     // 获取产品的变体和附加项
+    //     $variants = $fooddetails->variants;
+    //     $addons = $fooddetails->addons;
+
+    //     return view('frontend.food-detail', compact('fooddetails', 'variants', 'addons'));
+    // }
+
+    // public function FoodDetail($id)
+    // {
+    //     // Get product information with eager-loaded variants and addons
+    //     $fooddetails = Product::where('id',$id)->findOrFail($id);
+
+    //     $variants = $user->restaurants()->pluck('id')->toArray();
+
+    //     // Access variants and addons directly from the model
+    //     $variants = $fooddetails->variants;
+    //     $addons = $fooddetails->addons;
+
+    //     return view('frontend.food-detail', compact('fooddetails', 'variants', 'addons'));
+    // }
+
+    public function FoodDetail($productId, $variantId, $id)
+    {
+
+        // $fooddetails = Product::where('id',$id);
+
+        // Get product information with eager-loaded variants and addons
+        $fooddetails = Product::with(['variants', 'addons'])
+            ->where('id', $productId)
+            ->findOrFail($productId);
+
+        // Access variants and addons directly from the model based on variant ID
+        $variants = $fooddetails->variants()->where('id', $variantId)->first();
+        $addons = $fooddetails->addons;
+
+        // dd($variants);
+
+        return view('frontend.food-detail', compact('fooddetails', 'variants', 'addons'));
     }
+
+
 }

@@ -40,7 +40,8 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star-half-stroke"></i>
                 </div> --}}
-                <a href="{{ url('/food-detail') }}" class="menu_btn">Continue</a>
+                {{-- <a href="{{ url('/food-detail/' . $product->id) }}" class="menu_btn">Order Now</a> --}}
+                <a href="{{ url('/food-detail/' . $product->id . '/1/2') }}" class="menu_btn">Order Now</a>
             </div>
         </div>
         @endforeach

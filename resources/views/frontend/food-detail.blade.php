@@ -79,35 +79,49 @@
     </div>
     <div class="row" id="abc">
         <div class="col inner">
-            <tr>
-                <td><input type="radio" id="yourRadioId" name="yourRadioName"></td>
-                <td>Varian</td>
-            </tr>
+            @if(!empty($variants))
+                @foreach($variants as $variant)
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="variant" value="{{ $variant->id }}" id="variant{{ $variant->id }}">
+                    <label class="form-check-label" for="variant{{ $variant->id }}">
+                        {{ $variant->name }} - ${{ $variant->price }}
+                    </label>
+                </div>
+                @endforeach
+                <br>
+            @else
+                <p>No variants available.</p>
+            @endif
             <br>
-            <tr>
-                <td><input type="radio" id="yourRadioId" name="yourRadioName"></td>
-                <td>Variables</td>
-            </tr>
         </div>
         <div class="col inner">
             <tr>
                 <td>
                     <div class="row" style="ml-50px">
-                        <div class="col">
-                            <label for="quantity" style="font-size: 25px">Quantity</label>
-                        </div>
-                        <div class="col" style="mr-50px">
+                        @if(!empty($addons))
+                            @foreach($addons as $addon)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ $addon->id }}" id="addon{{ $addon->id }}">
+                                <label class="form-check-label" for="addon{{ $addon->id }}">
+                                    {{ $addon->name }} - RM{{ $addon->price }}
+                                </label>
+                            </div>
+                            @endforeach
+                        @else
+                            <p>No addons available.</p>
+                        @endif
+                        {{-- <div class="col" style="mr-50px">
                             <div class="input-group text-center" style="width:130px">
                                 <button class="input-group-text decrement-btn">-</button>
                                 <input type="text" id="quantity" name="quantity" class="form-control qty-input text-center p-2" value="1">
                                 <button class="input-group-text increment-btn">+</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </td>
             </tr>
             <br>
-            <tr>
+            {{-- <tr>
                 <td>
                     <div class="btn-group" role="group" aria-label="Quantity">
                         <button type="button" class="btn btn-secondary decrement-button">-</button>
@@ -115,7 +129,7 @@
                         <button type="button" class="btn btn-secondary increment-button">+</button>
                     </div>
                 </td>
-            </tr>
+            </tr> --}}
         </div>
     </div>
     <div class="row" id="abc">

@@ -61,8 +61,12 @@
                                                         id="" value="{{ $product->id }}"></td>
                                                 <td>{{ $product->id }}</td>
                                                 <td>{{ $product->name }}</td>
-                                                <td><img width="80" src="{{ asset('images/' . $product->image) }}"
-                                                        alt="Image" /></td>
+                                                <td>@if($product->image == null)
+                                                        Null
+                                                    @else
+                                                        <img width="80" src="{{ asset('images/' . $product->image) }}" alt="Image" />
+                                                    @endif
+                                                </td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->description }}</td>
                                                 {{-- <td>{{ $product->variant }}</td>
@@ -70,20 +74,13 @@
                                                 <td>{{ $product->category->name ?? 'No Category' }}</td>
                                                 <td>
                                                     @if ($product->status == 0)
-<<<<<<< HEAD
-=======
                                                         <a href="{{ url('changeproduct-status/' . $product->id) }}"
                                                             class="btn btn-sm btn-success"
                                                             onclick="return confirm('Are you sure you want to change this status to Inactive?')">Acitve</a>
                                                     @else
->>>>>>> f16b3b55cb30f37cb5f2454275ca4b982ac7d747
                                                         <a href="{{ url('changeproduct-status/' . $product->id) }}"
                                                             class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Are you sure you want to change this status to Inactive?')">InAcitve</a>
-                                                    @else
-                                                        <a href="{{ url('changeproduct-status/' . $product->id) }}"
-                                                            class="btn btn-sm btn-success"
-                                                            onclick="return confirm('Are you sure you want to change this status to Acitve?')">Acitve</a>
                                                     @endif
                                                 </td>
                                                 <td>

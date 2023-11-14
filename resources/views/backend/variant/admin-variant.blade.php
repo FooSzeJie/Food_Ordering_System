@@ -39,6 +39,18 @@
                                 @enderror
                             </span>
                         </div>
+
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" name="price" id="price" step="0.01"
+                                placeholder="Enter Add On Price">
+                            <span class="text-danger">
+                                @error('price')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -73,6 +85,12 @@
                                 <input type="text" class="form-control" name="name" id="name" value="{{ $variant->name }}">
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" name="price" id="price" step="0.01" value="{{ $variant->price }}">
+                            <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                         </div>
 
                         <div class="modal-footer">
@@ -141,6 +159,7 @@
                                         <th><input type="checkbox" name="" id="select_all_ids" onclick="checkAll(this)"></th>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>Price</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -151,6 +170,7 @@
                                             <tr>
                                                 <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $variant->id }}"></td>
                                                 <td>{{ $variant->id }}</td>
+                                                <td>{{ $variant->price }}</td>
                                                 <td>{{ $variant->name }}</td>
                                                 <td>
                                                     @if ($variant->status == 0)

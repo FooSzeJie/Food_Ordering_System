@@ -18,11 +18,13 @@ class VariantController extends Controller
         // Category::create($request->all());
 
         $request->validate([
-            'name' => 'required|string' // Update the field name to 'gender'
+            'name' => 'required|string',// Update the field name to 'gender'
+            'price' => 'required'
         ]);
 
         $variant = new Variant();
         $variant->name = $request->name;
+        $variant->price = $request->price;
         $variant->save();
 
         return back()->with("success","The Variant was successfully added to the database");
@@ -48,6 +50,7 @@ class VariantController extends Controller
         $variants = Variant::find($id);
 
         $variants->name = $request->name;
+        $variants->price = $request->price;
         $variants->save();
 
         return back()->with('success','This Variant has been updated successfully.');
