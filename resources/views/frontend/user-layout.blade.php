@@ -146,7 +146,7 @@
             <div class="sidebar-heading">Interface</div>
 
             <!-- Nav Item - Pages Collapse My Place Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyPlace"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-map-marker-alt"></i>
@@ -160,10 +160,10 @@
                         <a class="collapse-item" href=""><i class="fas fa-map-marker-alt"></i>&nbsp;Variables</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             <!-- Nav Item - Pages Collapse My Place Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyHasBooked"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-check-circle"></i>
@@ -179,42 +179,22 @@
                             Restaurant</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
-            <!-- Nav Item Table and Room-->
+            <!-- Nav Item Wishlist-->
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-table"></i>
-                    <span>Table</span>
+                <a class="nav-link" href="{{ url('/wishlist') }}">
+                    <i class="fas fa-heart"></i>
+                    <span>Wishlist</span>
                 </a>
             </li>
 
+            <!-- Nav Item MyOrder-->
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-bed"></i>
-                    <span>Room</span>
+                <a class="nav-link" href="{{ url('/wishlist') }}">
+                    <i class="fas fa-heart"></i>
+                    <span>My Order</span>
                 </a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-address-book"></i>
-                    <span>Contact</span></a>
-            </li>
-
-            <!-- Nav Item - User Deposit -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-user-circle"></i>
-                    <span>User Deposit</span></a>
-            </li>
-
-            <!-- Nav Item - REfund Deposit -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-money-check"></i>
-                    <span>Refund Deposit</span></a>
             </li>
 
             <!-- Nav Item - Tables -->

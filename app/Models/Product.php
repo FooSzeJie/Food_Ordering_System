@@ -26,4 +26,9 @@ class Product extends Model
         return $this->hasMany(Variant::class, 'product_id'); // Assuming 'product_id' is your actual foreign key
     }
 
+    public function wishlist()
+    {
+        return $this->belongsTo(Wishlist::class);
+    }
+
 }

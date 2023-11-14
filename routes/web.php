@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\AddOnController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
 
 /*
@@ -199,3 +200,15 @@ Route::get('/allcontact', [ContactController::class, 'allcontact'])->name('allco
 
 //MutlipleDelete User Contact Function
 Route::post('/mutlipledeleteContact/delete', [ContactController::class, 'mutlipledeletecontact'])->name('mutlipledeleteContact');
+
+//------------------------------------------------------Frontend User Wishlist Control Area------------------------------------------//
+// User Add to Wishlist Function
+Route::post('/wishlist/add', [WishlistController::class, 'AddToWishlist'])->name('user.AddToWishlist');
+// Show User Wishlist
+Route::get('/wishlist', [WishlistController::class, 'ShowWishlist'])->name('user.ShowWishlist');
+// Delete User Wishlist
+Route::get('/deletewishlist/{id}', [WishlistController::class, 'deletewishlist'])->name('user.deletewishlist');
+
+//---------------------------------------------User Backend User Wishlist Control Area-----------------------------------------------//
+// Show User Wishlist Page
+// Route::get('/wishlist', [WishlistController::class, 'ShowWishlist'])->name('user.ShowWishlist');

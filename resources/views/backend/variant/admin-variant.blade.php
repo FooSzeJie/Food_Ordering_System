@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="name">Variant Name</label>
                             <input type="text" class="form-control" name="name" id="name"
-                                placeholder="Enter Category Name">
+                                placeholder="Enter Variant Name">
                             <span class="text-danger">
                                 @error('name')
                                     {{ $message }}
@@ -85,12 +85,13 @@
                                 <input type="text" class="form-control" name="name" id="name" value="{{ $variant->name }}">
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="number" class="form-control" name="price" id="price" step="0.01" value="{{ $variant->price }}">
-                            <span class="text-danger">@error('name'){{ $message }}@enderror</span>
+
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" name="price" id="price" step="0.01" value="{{ $variant->price }}">
+                                <span class="text-danger">@error('name'){{ $message }}@enderror</span>
+                            </div>
                         </div>
 
                         <div class="modal-footer">
@@ -176,11 +177,11 @@
                                                     @if ($variant->status == 0)
                                                         <a href="{{ url('changevariant-status/' . $variant->id) }}"
                                                             class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Are you sure you want to change this status to close?')">Close</a>
+                                                            onclick="return confirm('Are you sure you want to change this status to close?')">InActive</a>
                                                     @else
                                                         <a href="{{ url('changevariant-status/' . $variant->id) }}"
                                                             class="btn btn-sm btn-success"
-                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Open</a>
+                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Active</a>
                                                     @endif
                                                 </td>
                                                 <td>
