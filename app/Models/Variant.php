@@ -11,8 +11,8 @@ class Variant extends Model
 
     protected $fillable = ['name', 'price'];
 
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsToMany(Product::class, 'product_variant', 'variant_id', 'product_id');
     }
 }

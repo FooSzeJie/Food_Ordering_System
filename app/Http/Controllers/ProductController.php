@@ -67,7 +67,7 @@ class ProductController extends Controller
         $product->categoryID = $request->categoryID; // Corrected line
         // $product->addOns = $request->addonID;
         // $product->addons()->attach($request->input('addonID'));
-        $product->variant = $request->variantID;
+        // $product->variant = $request->variantID;
         $product->status = $request->status;
         $product->save();
 
@@ -75,6 +75,9 @@ class ProductController extends Controller
 
         // Attach selected Add Ons to the product
         $product->addons()->attach($request->input('addonID'));
+
+        // Attach selected Variants to the product
+        $product->variants()->attach($request->input('variantID'));
 
         return redirect('/admin/Product')->with('success', 'You have added a new Product successfully');
     }

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Variant;
+use App\Models\AddOn;
 use App\Models\Product;
 
 class UserController extends Controller
@@ -143,32 +145,6 @@ class UserController extends Controller
         return view('frontend.user-dashboard');
     }
 
-    // public function FoodDetail($id)
-    // {
-    //     // 获取产品信息
-    //     $fooddetails = Product::findOrFail($id);
-
-    //     // 获取产品的变体和附加项
-    //     $variants = $fooddetails->variants;
-    //     $addons = $fooddetails->addons;
-
-    //     return view('frontend.food-detail', compact('fooddetails', 'variants', 'addons'));
-    // }
-
-    // public function FoodDetail($id)
-    // {
-    //     // Get product information with eager-loaded variants and addons
-    //     $fooddetails = Product::where('id',$id)->findOrFail($id);
-
-    //     $variants = $user->restaurants()->pluck('id')->toArray();
-
-    //     // Access variants and addons directly from the model
-    //     $variants = $fooddetails->variants;
-    //     $addons = $fooddetails->addons;
-
-    //     return view('frontend.food-detail', compact('fooddetails', 'variants', 'addons'));
-    // }
-
     public function FoodDetail($productId, $variantId, $id)
     {
 
@@ -176,11 +152,12 @@ class UserController extends Controller
 
         // Get product information with eager-loaded variants and addons
         $fooddetails = Product::with(['variants', 'addons'])
-            ->where('id', $productId)
+            ->where('products.id', $productId)
             ->findOrFail($productId);
 
         // Access variants and addons directly from the model based on variant ID
-        $variants = $fooddetails->variants()->where('id', $variantId)->first();
+        // $variants = $fooddetails->variants()->where('variants.id', $variantId)->first();
+        $variants = $fooddetails->variants;
         $addons = $fooddetails->addons;
 
         // dd($variants);
@@ -188,5 +165,21 @@ class UserController extends Controller
         return view('frontend.food-detail', compact('fooddetails', 'variants', 'addons'));
     }
 
+    // public function FoodDetail($id)
+    // {
+    //     $fooddetails = Product::where('id',$id);
+
+    //     $variant = $fooddetails->variants()->where('id', $variantId)->first();
+
+    //     dd($variant);
+
+    //     $variants = Variant::whereIn('id', $variant);
+
+    //     // 获取产品信息和关联的变体和插件
+    //     // $product = Product::with(['variants', 'addons'])->findOrFail($productId);
+
+    //     // 将产品、变体和插件传递给视图
+    //     return view('frontend.product-details', compact('product'));
+    // }
 
 }

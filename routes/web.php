@@ -188,6 +188,8 @@ Route::get('/food', [UserController::class, 'food'])->name('food');
 // Route::get('/food-detail/{id}', [UserController::class, 'FoodDetail'])->name('food-detail');
 Route::get('/food-detail/{productId}/{variantId}/{id}', [UserController::class, 'FoodDetail'])->name('food-detail');
 
+// Route::get('/food-detail/{id}', [UserController::class, 'FoodDetail'])->name('food-detail');
+
 //------------------------------------------------------Frontend Contact Control Area-------------------------------------------------//
 // Contact Page
 Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
@@ -209,6 +211,11 @@ Route::get('/wishlist', [WishlistController::class, 'ShowWishlist'])->name('user
 // Delete User Wishlist
 Route::get('/deletewishlist/{id}', [WishlistController::class, 'deletewishlist'])->name('user.deletewishlist');
 
-//---------------------------------------------User Backend User Wishlist Control Area-----------------------------------------------//
-// Show User Wishlist Page
-// Route::get('/wishlist', [WishlistController::class, 'ShowWishlist'])->name('user.ShowWishlist');
+//---------------------------------------------Cart Control Area-----------------------------------------------//
+// Show Cart Page
+// Route::get('/MyCart', [CartController::class, 'MyCart'])->name('user.MyCart');
+// Add To Cart Page
+Route::post('/AddToCart', [CartController::class, 'AddToCart'])->name('user.AddToCart');
+// Display Cart Page
+Route::get('/MyCart', [CartController::class, 'displayCart'])->name('cart.display');
+

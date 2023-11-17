@@ -23,7 +23,7 @@ class Product extends Model
 
     public function variants()
     {
-        return $this->hasMany(Variant::class, 'product_id'); // Assuming 'product_id' is your actual foreign key
+        return $this->belongsToMany(Variant::class, 'product_variant', 'product_id', 'variant_id');
     }
 
     public function wishlist()

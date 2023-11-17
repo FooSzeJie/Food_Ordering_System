@@ -92,7 +92,7 @@
                 @if ($variants->count() > 0)
                     <div class="mb-3">
                         <label for="variantID" class="form-label">Variant: </label>
-                        <select class="form-select form-select-font-weight-5" id="select-variant" name="variantID">
+                        <select class="form-control selectpicker" data-style="btn-primary" id="select-variant" name="variantID[]" title="Select Variant" multiple>
                             @foreach ($variants as $variant)
                                 <option value="{{ $variant->id }}">{{ $variant->name }}</option>
                             @endforeach

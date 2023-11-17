@@ -25,7 +25,7 @@
 
         <div class="menu_card">
             <div class="menu_image">
-                <img src="{{ asset ('food_image/buger.jpg') }}">
+                <img src="{{ asset('images/' . $product->image) }}">
             </div>
 
             {{-- <div class="small_card">

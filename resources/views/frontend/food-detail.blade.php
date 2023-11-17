@@ -62,83 +62,182 @@
     } */
 </style>
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .product-detail {
+        display: flex;
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: rgb(0, 255, 234);
+    }
+
+    .product-image {
+        max-width: 50%;
+        height: auto;
+        border-radius: 8px;
+        margin-right: 20px; /* Add some spacing between image and product info */
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* background-color: rgb(0, 255, 234); */
+    }
+
+    .product-info {
+        flex-grow: 1; /* Allow the product info to grow and take remaining space */
+    }
+
+    h1, h2, h3 {
+        color: #333;
+    }
+
+    p {
+        color: #666;
+    }
+
+    .price {
+        color: #e44d26;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #e44d26;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #333;
+    } */
+</style>
+
 <br><br><br><br><br><br>
 
 <div class="container">
-    <div class="row" id="abc">
-        <div class="col inner">
-            <tr>
-                <td>Variables</td>
-            </tr>
-        </div>
-        <div class="col inner">
-            <tr>
-                <td>Add On</td>
-            </tr>
-        </div>
-    </div>
-    <div class="row" id="abc">
-        <div class="col inner">
-            @if(!empty($variants))
-                @foreach($variants as $variant)
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="variant" value="{{ $variant->id }}" id="variant{{ $variant->id }}">
-                    <label class="form-check-label" for="variant{{ $variant->id }}">
-                        {{ $variant->name }} - ${{ $variant->price }}
-                    </label>
+
+    <form action="{{ url('/AddToCart') }}" method="post">
+        @csrf
+
+        <input type="text" name="product_image" value="{{ $fooddetails->image }}">
+        <input type="text" name="product_name" value="{{ $fooddetails->name }}">
+        <input type="text" name="product_description" value="{{ $fooddetails->description }}">
+        <!-- Add this input field to your form -->
+        <input type="text" name="total_price" id="total_price" value="">
+
+        <div class="product-detail">
+            <img name="product_image" value="{{ $fooddetails->image}}" class="product-image" src="{{ asset('images/' . $fooddetails->image) }}" alt="Product Image">
+
+            <div class="product-info">
+                <h1>Product Name - {{ $fooddetails->name}}</h1>
+                <p>Product Description - {{ $fooddetails->description}}</p>
+                <p class="price">RM - {{ $fooddetails->price}}</p>
+
+                <div class="row mt-2">
+                    <div class="col-md-3">
+                        <label for="Quantity">Quantity</label>
+                        <div class="input-group text-center mb-3" style="width:130px">
+                            <button class="input-group-text decrement-btn">-</button>
+                            <input type="text" name="quantity" class="form-control qty-input text-center" value="1">
+                            <button class="input-group-text increment-btn">+</button>
+                        </div>
+                    </div>
                 </div>
-                @endforeach
+
+                {{-- <div>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div> --}}
+            </div>
+        </div>
+        {{-- @endforeach --}}
+
+        <div class="row" id="abc">
+            <div class="col inner">
+                <tr>
+                    <td>Variables</td>
+                </tr>
+            </div>
+            <div class="col inner">
+                <tr>
+                    <td>Add On</td>
+                </tr>
+            </div>
+        </div>
+        <div class="row" id="abc">
+            <div class="col inner">
+                @if(!empty($variants))
+                    @foreach($variants as $variant)
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="variant" value="{{ $variant->id }}" data-price="{{ $variant->price }}">
+                        <label class="form-check-label" for="variant{{ $variant->id }}">
+                            {{ $variant->name }} - RM{{ $variant->price }}
+                        </label>
+                    </div>
+                    @endforeach
+                    <br>
+                @else
+                    <p>No variants available.</p>
+                @endif
                 <br>
-            @else
-                <p>No variants available.</p>
-            @endif
-            <br>
+            </div>
+            <div class="col inner">
+                <tr>
+                    <td>
+                        <div class="row" style="ml-50px">
+                            @if(!empty($addons))
+                                @foreach($addons as $addon)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="addon" value="{{ $addon->id }}" id="addon{{ $addon->id }}" data-price="{{ $addon->price }}">
+                                    <label class="form-check-label" for="addon{{ $addon->id }}">
+                                        {{ $addon->name }} - RM{{ $addon->price }}
+                                    </label>
+                                </div>
+                                @endforeach
+                            @else
+                                <p>No addons available.</p>
+                            @endif
+                            {{-- <div class="col" style="mr-50px">
+                                <div class="input-group text-center" style="width:130px">
+                                    <button class="input-group-text decrement-btn">-</button>
+                                    <input type="text" id="quantity" name="quantity" class="form-control qty-input text-center p-2" value="1">
+                                    <button class="input-group-text increment-btn">+</button>
+                                </div>
+                            </div> --}}
+                        </div>
+                    </td>
+                </tr>
+                <br>
+                {{-- <tr>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Quantity">
+                            <button type="button" class="btn btn-secondary decrement-button">-</button>
+                            <span id="quantity" class="btn btn-info">0</span>
+                            <button type="button" class="btn btn-secondary increment-button">+</button>
+                        </div>
+                    </td>
+                </tr> --}}
+            </div>
         </div>
-        <div class="col inner">
-            <tr>
-                <td>
-                    <div class="row" style="ml-50px">
-                        @if(!empty($addons))
-                            @foreach($addons as $addon)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{ $addon->id }}" id="addon{{ $addon->id }}">
-                                <label class="form-check-label" for="addon{{ $addon->id }}">
-                                    {{ $addon->name }} - RM{{ $addon->price }}
-                                </label>
-                            </div>
-                            @endforeach
-                        @else
-                            <p>No addons available.</p>
-                        @endif
-                        {{-- <div class="col" style="mr-50px">
-                            <div class="input-group text-center" style="width:130px">
-                                <button class="input-group-text decrement-btn">-</button>
-                                <input type="text" id="quantity" name="quantity" class="form-control qty-input text-center p-2" value="1">
-                                <button class="input-group-text increment-btn">+</button>
-                            </div>
-                        </div> --}}
-                    </div>
-                </td>
-            </tr>
-            <br>
-            {{-- <tr>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Quantity">
-                        <button type="button" class="btn btn-secondary decrement-button">-</button>
-                        <span id="quantity" class="btn btn-info">0</span>
-                        <button type="button" class="btn btn-secondary increment-button">+</button>
-                    </div>
-                </td>
-            </tr> --}}
+        <div class="row" id="abc">
+            <div class="col" id="totalSection" name="total_price" value=""><h3>Total:</h3></div>
+            <div class="col inner1"></div>
+            <div class="col-6 inner">
+                <button type="submit" class="btn btn-primary">Add To Cart</button>
+            </div>
         </div>
-    </div>
-    <div class="row" id="abc">
-        <div class="col"></div>
-        <div class="col inner1"></div>
-        <div class="col-6 inner">
-            <button class="btn btn-primary">Add To Cart</button>
-        </div>
-    </div>
+    </form>
 </div>
 
 {{-- <script>
@@ -160,7 +259,9 @@
 </script> --}}
 
 {{-- JQuery --}}
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 {{-- Incremnet and Decrement Ajax --}}
 <script>
     $(document).ready(function() {
@@ -196,6 +297,69 @@
             }
         });
 
+    });
+</script>
+
+{{-- Count JS --}}
+<script>
+    $(document).ready(function () {
+        // Function to update the total based on selected options
+        function updateTotal() {
+            // Get the quantity value
+            var quantity = parseInt($(".qty-input").val());
+
+            // Get the product price
+            var productPrice = parseFloat("{{ $fooddetails->price }}") || 0;
+
+            // Get the selected variant price
+            var variantPrice = parseFloat($("input[name='variant']:checked").data('price')) || 0;
+
+            // Get the selected addons prices
+            var addonsPrices = 0;
+            $("input[name='addon']:checked").each(function () {
+                addonsPrices += parseFloat($(this).data('price')) || 0;
+            });
+
+            // Debugging output
+            console.log("Quantity: " + quantity);
+            console.log("Product Price: " + productPrice);
+            console.log("Variant Price: " + variantPrice);
+            console.log("Addons Prices: " + addonsPrices);
+
+            // Calculate the total
+            var total = (quantity * productPrice) + variantPrice + addonsPrices;
+
+            // Update the total section
+            // $("#totalSection").html("<h3>Total: RM " + total.toFixed(2) + "</h3>");
+
+            // 更新显示
+            $("#totalSection h3").html("Total: RM " + total.toFixed(2));
+
+            // 将总价格放在value属性中
+            $("#totalSection").attr("value", "Total: RM " + total.toFixed(2));
+
+            // Put total_price on text
+            $("#total_price").val(total.toFixed(2));
+
+        }
+
+        // Attach onchange event to the quantity input
+        $(".qty-input").on("change", function () {
+            updateTotal();
+        });
+
+        // Attach click events to variant and addon inputs
+        // $("input[name='variant'], input[name='addon']").on("click", function () {
+        //     updateTotal();
+        // });
+        $("input[name='variant'], input[name='addon']").on("click", function () {
+            updateTotal();
+        });
+
+        // Attach click events to increment and decrement buttons
+        $(".increment-btn, .decrement-btn").on("click", function () {
+            updateTotal();
+        });
     });
 </script>
 

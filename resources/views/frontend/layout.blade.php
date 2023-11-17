@@ -71,6 +71,7 @@
                         </div> --}}
                         <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
                         <a href="{{ url('/contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ url('/MyCart') }}" class="nav-item nav-link"><i class="fas fa-shopping-cart">My Cart</i></a>
                     </div>
                     @auth
                     @php

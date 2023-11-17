@@ -192,7 +192,7 @@
             <!-- Nav Item MyOrder-->
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/wishlist') }}">
-                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-shopping-cart"></i>
                     <span>My Order</span>
                 </a>
             </li>

@@ -38,7 +38,9 @@ class WishlistController extends Controller
             $wishlist->save();
 
             return redirect()->back()->with('success', 'Product added to wishlist');
+
         } else {
+
             return redirect('/loginpage')->with('error', 'You need to login first!');
         }
     }
