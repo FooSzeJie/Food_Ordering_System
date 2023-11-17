@@ -3,6 +3,7 @@
 {{-- Toastr CSS --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+{{-- Cart CSS --}}
 <style>
     * {
         margin: 0;
@@ -195,10 +196,43 @@
         cursor: pointer;
         vertical-align: top
     }
+
+</style>
+
+{{-- Pill CSS --}}
+<style>
+    /* Custom CSS for tabs */
+    .custom-tabs {
+        display: flex;
+        list-style: none; /* Remove list bullet points */
+        padding: 0;
+    }
+
+    .custom-tab {
+        cursor: pointer;
+        padding: 10px 20px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+    }
+
+    .custom-tab.active {
+        background-color: #007BFF;
+        color: #fff;
+    }
+
+    .custom-tab-content {
+        display: none;
+        padding: 20px;
+        border: 1px solid #ccc;
+    }
+
+    .custom-tab-content.active {
+        display: block;
+    }
 </style>
 
 {{-- Cart --}}
-<div class="cart_section">
+{{-- <div class="cart_section">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
@@ -229,7 +263,6 @@
                                     </div>
                                     <div class="cart_item_total cart_info_col">
                                         <div class="cart_item_title">Action</div>
-                                        {{-- <div class="cart_item_text">{{ $cartItem->total_price }}</div> --}}
                                         <center><a onclick="return confirm('Are you sure to delete this Product {{ $cartItem->product_name }}?')"
                                                     href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></center>
                                     </div>
@@ -251,6 +284,130 @@
                 </div>
             </div>
         </div>
+    </div>
+</div> --}}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        {{-- <ul class="nav nav-tabs custom-tabs">
+            <li class="custom-tab active" data-tab="booking">Booking</li>
+            <li class="custom-tab" data-tab="payment">Payment</li>
+        </ul> --}}
+
+        <form action="" method="POST">
+            <div class="cart_section">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="cart_container">
+                                <div class="cart_title">My Shopping Cart<small></small></div>
+                                <div class="cart_items">
+                                    
+                                    <ul class="nav nav-tabs custom-tabs">
+                                        <li class="custom-tab active" data-tab="booking">Booking</li>
+                                        <li class="custom-tab" data-tab="payment">Payment</li>
+                                    </ul>
+
+                                    {{-- Cart --}}
+                                    <div class="custom-tab-content active" data-tab="booking">
+                                        <ul class="cart_list">
+                                            @foreach($cartItems as $cartItem)
+                                            <li class="cart_item clearfix">
+                                                <div class="cart_item_image"><img src="{{ asset('images/' . $cartItem->image) }}" alt=""></div>
+                                                <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                                    <div class="cart_item_name cart_info_col">
+                                                        <div class="cart_item_title">Name</div>
+                                                        <div class="cart_item_text">{{ $cartItem->product_name }}</div>
+                                                    </div>
+                                                    <div class="cart_item_color cart_info_col">
+                                                        <div class="cart_item_title">Description</div>
+                                                        <div class="cart_item_text">{{ $cartItem->product_description }}</div>
+                                                    </div>
+                                                    <div class="cart_item_quantity cart_info_col">
+                                                        <div class="cart_item_title">Quantity</div>
+                                                        <div class="cart_item_text">{{ $cartItem->product_quantity }}</div>
+                                                    </div>
+                                                    <div class="cart_item_price cart_info_col">
+                                                        <div class="cart_item_title">Total Price</div>
+                                                        <div class="cart_item_text">{{ $cartItem->total_price }}</div>
+                                                    </div>
+                                                    <div class="cart_item_total cart_info_col">
+                                                        <div class="cart_item_title">Action</div>
+                                                        {{-- <div class="cart_item_text">{{ $cartItem->total_price }}</div> --}}
+                                                        <center><a onclick="return confirm('Are you sure to delete this Product {{ $cartItem->product_name }}?')"
+                                                                    href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></center>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                        <div class="order_total">
+                                            <div class="order_total_content text-md-right">
+                                                <div class="order_total_title">Order Total:</div>
+                                                <div class="order_total_amount">Rm{{ $totalAmount }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="cart_buttons">
+                                            <a href="{{ url('/food') }}"><button type="button" class="button cart_button_clear">Continue Order</button></a>
+                                            <a href=""><button type="button" class="button cart_button_checkout" id="payment">Continue</button></a>
+                                        </div>
+                                    </div>
+
+                                    {{-- Select Take Away or Take In --}}
+                                    <div class="container-payment custom-tab-content " data-tab="payment">
+
+                                        <div class="row justify-content-center">
+
+                                            <Center><h4>Select Take Away or Take In</h4></Center><br>
+
+                                            <input type="text" name="selected_option" value="take_in">
+                                            <input type="text" name="selected_option" value="take_out">
+
+                                            <div class="col-md-3">
+                                                <input type="hidden" name="selected_option" value="take_in">
+                                                <img src="{{ asset('home/img/menu-1.jpg') }}" style="margin-left: 60px; cursor: pointer;" onclick="selectOption('take_in');" alt="">
+                                            </div>
+
+                                            <div class="col-md-1" style="border-right: 1px solid #000;"></div>
+
+                                            <div class="col-md-4">
+                                                <input type="hidden" name="selected_option" value="take_out">
+                                                <img src="{{ asset('home/img/menu-2.jpg') }}" style="margin-left: 150px; cursor: pointer;" onclick="selectOption('take_out');" alt="">
+                                            </div>
+
+                                            <div class="order_total">
+                                                <div class="order_total_content text-md-right">
+                                                    <div class="order_total_title">Order Total:</div>
+                                                    <div class="order_total_amount">Rm{{ $totalAmount }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="cart_buttons">
+                                                <a href="{{ url('/food') }}"><button type="button" class="button cart_button_clear">Continue Order</button></a>
+                                                <button type="submit" class="button cart_button_checkout">Payment</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {{-- <div class="order_total">
+                                    <div class="order_total_content text-md-right">
+                                        <div class="order_total_title">Order Total:</div>
+                                        <div class="order_total_amount">Rm{{ $totalAmount }}</div>
+                                    </div>
+                                </div> --}}
+                                {{-- <div class="cart_buttons">
+                                    <a href="{{ url('/food') }}"><button type="button" class="button cart_button_clear">Continue Order</button></a>
+                                    <a href=""><button type="button" class="button cart_button_checkout">Payment</button></a>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
     </div>
 </div>
 
@@ -284,6 +441,39 @@
         @endforeach
     @endif
 
+</script>
+
+<!-- Include jQuery from the CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+{{-- Pill JS --}}
+<script>
+    // JavaScript to handle tab switching
+    $(document).ready(function() {
+        $('.custom-tab').click(function() {
+            console.log('aaa');
+            var tab = $(this).data('tab');
+            $('.custom-tab').removeClass('active');
+            $('.custom-tab[data-tab="' + tab + '"]').toggleClass('active');
+            $('.custom-tab-content').removeClass('active');
+            $('.custom-tab-content[data-tab="' + tab + '"]').toggleClass('active');
+        });
+        $('#payment').click(function(e){
+            e.preventDefault();
+            $('.custom-tab').removeClass('active');
+            $('.custom-tab[data-tab="payment"]').toggleClass('active');
+            $('.custom-tab-content').removeClass('active');
+            $('.custom-tab-content[data-tab="payment"]').toggleClass('active');
+        })
+    });
+</script>
+
+{{-- Select Take Away or Take In --}}
+<script>
+    function selectOption(option) {
+        // Update the hidden input value
+        $("input[name='selected_option']").val(option);
+    }
 </script>
 
 @endsection
