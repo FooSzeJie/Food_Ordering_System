@@ -196,6 +196,25 @@
         cursor: pointer;
         vertical-align: top
     }
+    .fixed-column {
+        position: relative;
+    }
+
+    #fixedtakein {
+        /* position: fixed; */
+        width: 250px;
+        height: 250px;
+
+    }
+
+    #fixedtakeaway {
+        /* position: fixed; */
+        margin-top: 50px;
+        position: center;
+        width: 200px;
+        height: 200px;
+
+    }
 
 </style>
 
@@ -304,7 +323,7 @@
                             <div class="cart_container">
                                 <div class="cart_title">My Shopping Cart<small></small></div>
                                 <div class="cart_items">
-                                    
+
                                     <ul class="nav nav-tabs custom-tabs">
                                         <li class="custom-tab active" data-tab="booking">Booking</li>
                                         <li class="custom-tab" data-tab="payment">Payment</li>
@@ -363,18 +382,18 @@
                                             <Center><h4>Select Take Away or Take In</h4></Center><br>
 
                                             <input type="text" name="selected_option" value="take_in">
-                                            <input type="text" name="selected_option" value="take_out">
+                                            {{-- <input type="text" name="selected_option" value="take_away"> --}}
 
                                             <div class="col-md-3">
-                                                <input type="hidden" name="selected_option" value="take_in">
-                                                <img src="{{ asset('home/img/menu-1.jpg') }}" style="margin-left: 60px; cursor: pointer;" onclick="selectOption('take_in');" alt="">
+                                                <input type="hidden" name="selected_option" value="take_away">
+                                                <img id="fixedtakeaway" src="{{ asset('home/img/takeaway.jpg') }}" style="margin-left: 60px;" class="clickable-image" onclick="selectOption('take_away');" alt="">
                                             </div>
 
                                             <div class="col-md-1" style="border-right: 1px solid #000;"></div>
 
-                                            <div class="col-md-4">
-                                                <input type="hidden" name="selected_option" value="take_out">
-                                                <img src="{{ asset('home/img/menu-2.jpg') }}" style="margin-left: 150px; cursor: pointer;" onclick="selectOption('take_out');" alt="">
+                                            <div class="col-md-4 fixed-column">
+                                                <input type="hidden" name="selected_option" value="take_in">
+                                                <img id="fixedtakein" src="{{ asset('home/img/takein.png') }}" class="clickable-image" onclick="selectOption('take_in');" alt="">
                                             </div>
 
                                             <div class="order_total">
@@ -471,7 +490,7 @@
 {{-- Select Take Away or Take In --}}
 <script>
     function selectOption(option) {
-        // Update the hidden input value
+        // Update the value of the hidden input based on the clicked option
         $("input[name='selected_option']").val(option);
     }
 </script>
