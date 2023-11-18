@@ -171,8 +171,8 @@
                                             <tr>
                                                 <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $variant->id }}"></td>
                                                 <td>{{ $variant->id }}</td>
-                                                <td>{{ $variant->price }}</td>
                                                 <td>{{ $variant->name }}</td>
+                                                <td>{{ $variant->price }}</td>
                                                 <td>
                                                     @if ($variant->status == 0)
                                                         <a href="{{ url('changevariant-status/' . $variant->id) }}"

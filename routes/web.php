@@ -10,6 +10,7 @@ use App\Http\Controllers\AddOnController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,7 @@ Route::get('/users/dashboard/{id}',[UserController::class,'userdashboard']);
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 //Home Page
-Route::get('/', [UserController::class, 'home']);
+Route::get('/', [UserController::class, 'home'])->name('home');
 
 //------------------------------------------------------Admin Control Area------------------------------------------------------//
 //Display Admin Login Page
@@ -218,4 +219,12 @@ Route::get('/deletewishlist/{id}', [WishlistController::class, 'deletewishlist']
 Route::post('/AddToCart', [CartController::class, 'AddToCart'])->name('user.AddToCart');
 // Display Cart Page
 Route::get('/MyCart', [CartController::class, 'displayCart'])->name('cart.display');
+
+//---------------------------------------------Cart Control Area-----------------------------------------------//
+// Order Page
+Route::get('/order', [OrderController::class, 'myOrder'])->name('myOrder');
+// Payment Function
+Route::post('stripe/checkout', [OrderController::class, 'stripeCheckout'])->name('stripe.checkout');
+// Payment Success
+Route::get('stripe/checkout/success',[OrderController::class,'stripeCheckoutSuccess'])->name('stripe.checkout.success');
 

@@ -315,7 +315,9 @@
             <li class="custom-tab" data-tab="payment">Payment</li>
         </ul> --}}
 
-        <form action="" method="POST">
+        <form action="{{ route('stripe.checkout') }}" method="POST">
+            @csrf
+
             <div class="cart_section">
                 <div class="container-fluid">
                     <div class="row">
@@ -333,6 +335,16 @@
                                     <div class="custom-tab-content active" data-tab="booking">
                                         <ul class="cart_list">
                                             @foreach($cartItems as $cartItem)
+
+                                            <input type="text" name="user_id" value="{{ auth()->id() }}">
+                                            <input type="text" name="user_name" value="{{ auth()->user()->name }}">
+                                            <input type="text" name="product_name" value="{{ $cartItem->product_name }}">
+                                            <input type="text" name="product_image" value="{{ $cartItem->image }}">
+                                            <input type="text" name="product_description" value="{{ $cartItem->product_description }}">
+                                            <input type="number" name="product_quantity" value="{{ $cartItem->product_quantity }}">
+                                            <input type="text" name="total_price" value="{{ $cartItem->total_price }}">
+                                            <input type="number" step="0.01" name="totalAmount" value="{{ $totalAmount }}">
+
                                             <li class="cart_item clearfix">
                                                 <div class="cart_item_image"><img src="{{ asset('images/' . $cartItem->image) }}" alt=""></div>
                                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
