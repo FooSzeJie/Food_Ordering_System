@@ -338,6 +338,10 @@
 
                                             <input type="text" name="user_id" value="{{ auth()->id() }}">
                                             <input type="text" name="user_name" value="{{ auth()->user()->name }}">
+                                            <input type="text" name="user_email" value="{{ auth()->user()->email }}">
+                                            @if ($cartItem->product)
+                                            <input type="text" name="product_id" value="{{ $cartItem->product->id }}">
+                                            @endif
                                             <input type="text" name="product_name" value="{{ $cartItem->product_name }}">
                                             <input type="text" name="product_image" value="{{ $cartItem->image }}">
                                             <input type="text" name="product_description" value="{{ $cartItem->product_description }}">

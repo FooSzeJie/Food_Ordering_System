@@ -23,138 +23,145 @@
 					<p class="invoice bold">INVOICE</p>
 					<p class="invoice_no">
 						<span class="bold">Invoice</span>
-						<span>#3488</span>
+						<span>: {{ $orders->tracking_no }}</span>
 					</p>
 					<p class="date">
 						<span class="bold">Date</span>
-						<span>08/Jan/2022</span>
+						<span>:{{ $orders->created_at->format('d-m-Y') }}</span>
 					</p>
 				</div>
 			</div>
-            @foreach($myorders as $myorder)
                 <div class="bill_total_wrap">
+
                     <div class="bill_sec">
                         <p>Bill To</p>
-                        <p class="bold name">{{ $myorder->user_name }}</p>
-                        {{-- <span>
-                        123 walls street, Townhall<br/>
-                        +111 222345667
-                        </span> --}}
+                        <p class="bold name">Name: {{ $orders->user_name }}</p>
                     </div>
-                    <div class="total_wrap">
+                    {{-- <div class="total_wrap">
                         <p>Total Amount</p>
-                        <p class="bold price">{{ $myorder->totalAmount }}</p>
-                    </div>
+                        @foreach($orders->orderItems as $orderItem)
+                        <p class="bold price">{{ $orderItem->totalAmount }}</p>
+                        @endforeach
+                    </div> --}}
+			       	{{-- <p class="bold">
+                        @foreach($orders->orderItems as $orderItem)
+			            <span>SUB TOTAL</span>
+			            <span>RM{{ $orderItem->totalAmount }}</span>
+                        @endforeach
+			        </p> --}}
+
                 </div>
-            @endforeach
 		</div>
-        @foreach($myorders as $myorder)
+
 		<div class="body">
 			<div class="main_table">
 				<div class="table_header">
 					<div class="row">
 						<div class="col col_no">NO.</div>
 						<div class="col col_des">Food Name</div>
-                        <div class="col col_des">Food Description</div>
+                        <div class="col col_des">Food Image</div>
 						<div class="col col_price">Price</div>
 						<div class="col col_qty">Quantity</div>
 						{{-- <div class="col col_total">TOTAL</div> --}}
 					</div>
 				</div>
-				<div class="table_body">
-					<div class="row">
-						<div class="col col_no">
-							<p>{{ $myorder->id }}</p>
+				@foreach($orders->orderItems as $orderItem)
+					<div class="table_body">
+						<div class="row">
+							<div class="col col_no">
+								<p>{{ $orderItem->id }}</p>
+							</div>
+							<div class="col col_des">
+								<p class="bold">{{ $orderItem->product_name }}</p>
+							</div>
+							<div class="col col_price">
+								{{-- <p>{{ $orderItem->product_image }}</p> --}}
+                                <img width="80" src="{{ asset('images/' . $orderItem->product_image) }}" style="mr-20px" alt="Image" />
+							</div>
+							<div class="col col_price">
+								<p>{{ $orderItem->total_price }}</p>
+							</div>
+							<div class="col col_qty">
+								<p>{{ $orderItem->product_quantity }}</p>
+							</div>
+							{{-- <div class="col col_total">
+								<p>$700.00</p>
+							</div> --}}
 						</div>
-						<div class="col col_des">
-							<p class="bold">{{ $myorder->product_name }}</p>
+						{{-- <div class="row">
+							<div class="col col_no">
+								<p>02</p>
+							</div>
+							<div class="col col_des">
+								<p class="bold">Web Development</p>
+								<p>Lorem ipsum dolor sit.</p>
+							</div>
+							<div class="col col_price">
+								<p>$350</p>
+							</div>
+							<div class="col col_qty">
+								<p>2</p>
+							</div>
+							<div class="col col_total">
+								<p>$700.00</p>
+							</div>
 						</div>
-                        <div class="col col_price">
-							<p>{{ $myorder->product_description }}</p>
+						<div class="row">
+							<div class="col col_no">
+								<p>03</p>
+							</div>
+							<div class="col col_des">
+								<p class="bold">GitHub</p>
+								<p>Lorem ipsum dolor sit.</p>
+							</div>
+							<div class="col col_price">
+								<p>$120</p>
+							</div>
+							<div class="col col_qty">
+								<p>1</p>
+							</div>
+							<div class="col col_total">
+								<p>$700.00</p>
+							</div>
 						</div>
-						<div class="col col_price">
-							<p>{{ $myorder->product_price }}</p>
+						<div class="row">
+							<div class="col col_no">
+								<p>04</p>
+							</div>
+							<div class="col col_des">
+								<p class="bold">Backend Design</p>
+								<p>Lorem ipsum dolor sit.</p>
+							</div>
+							<div class="col col_price">
+								<p>$350</p>
+							</div>
+							<div class="col col_qty">
+								<p>2</p>
+							</div>
+							<div class="col col_total">
+								<p>$700.00</p>
+							</div>
 						</div>
-						<div class="col col_qty">
-							<p>{{ $myorder->product_quantity }}</p>
-						</div>
-						{{-- <div class="col col_total">
-							<p>$700.00</p>
+						<div class="row">
+							<div class="col col_no">
+								<p>05</p>
+							</div>
+							<div class="col col_des">
+								<p class="bold">Backend Development</p>
+								<p>Lorem ipsum dolor sit.</p>
+							</div>
+							<div class="col col_price">
+								<p>$150</p>
+							</div>
+							<div class="col col_qty">
+								<p>1</p>
+							</div>
+							<div class="col col_total">
+								<p>$700.00</p>
+							</div>
 						</div> --}}
 					</div>
-					{{-- <div class="row">
-						<div class="col col_no">
-							<p>02</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">Web Development</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$350</p>
-						</div>
-						<div class="col col_qty">
-							<p>2</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col col_no">
-							<p>03</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">GitHub</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$120</p>
-						</div>
-						<div class="col col_qty">
-							<p>1</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col col_no">
-							<p>04</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">Backend Design</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$350</p>
-						</div>
-						<div class="col col_qty">
-							<p>2</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col col_no">
-							<p>05</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">Backend Development</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$150</p>
-						</div>
-						<div class="col col_qty">
-							<p>1</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div> --}}
-				</div>
+				@endforeach
 			</div>
 			<div class="paymethod_grandtotal_wrap">
 				<div class="paymethod_sec">
@@ -165,23 +172,24 @@
 			        {{-- <p class="bold">
 			            <span>SUB TOTAL</span>
 			            <span>RM{{ $myorder->totalAmount }}</span>
-			        </p>
-			        <p>
-			            <span>Tax Vat 18%</span>
-			            <span>$200</span>
-			        </p>
-			        <p>
-			            <span>Discount 10%</span>
-			            <span>-$700</span>
 			        </p> --}}
+			        <p>
+			            <span>Tax</span>
+			            <span>-</span>
+			        </p>
+			        <p>
+			            <span>Discount</span>
+			            <span>-</span>
+			        </p>
+					@foreach($orders->orderItems as $orderItem)
 			       	<p class="bold">
 			            <span>SUB TOTAL</span>
-			            <span>RM{{ $myorder->totalAmount }}</span>
+			            <span>RM{{ $orderItem->totalAmount }}</span>
 			        </p>
+					@endforeach
 				</div>
 			</div>
 		</div>
-        @endforeach
         {{-- Footer --}}
 		<div class="footer">
 			<p>Thank you and Best Wishes</p>

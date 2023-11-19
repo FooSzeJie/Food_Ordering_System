@@ -223,6 +223,8 @@ Route::get('/MyCart', [CartController::class, 'displayCart'])->name('cart.displa
 //---------------------------------------------Cart Control Area-----------------------------------------------//
 // Order Page
 Route::get('/order', [OrderController::class, 'myOrder'])->name('myOrder');
+// Order With Id Page
+Route::get('/orders/{orderId}', [OrderController::class, 'show']);
 // Payment Function
 Route::post('stripe/checkout', [OrderController::class, 'stripeCheckout'])->name('stripe.checkout');
 // Payment Success

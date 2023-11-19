@@ -131,6 +131,7 @@
     <form action="{{ url('/AddToCart') }}" method="post">
         @csrf
 
+        <input type="text" name="product_id" value="{{ $fooddetails->id }}">
         <input type="text" name="product_image" value="{{ $fooddetails->image }}">
         <input type="text" name="product_name" value="{{ $fooddetails->name }}">
         <input type="text" name="product_description" value="{{ $fooddetails->description }}">

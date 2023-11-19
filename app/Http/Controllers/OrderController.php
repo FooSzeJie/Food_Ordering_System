@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MyOrder;
 use App\Models\Order;
+use App\Models\Order_item;
 use App\Models\Cart;
 use Auth;
 use Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -18,9 +19,28 @@ class OrderController extends Controller
         // Get the authenticated user's ID
         $userId = Auth::id();
 
-        $myorders = Order::where('user_id', $userId)->get();
+        // $myorders = Order::where('user_id', $userId)->get();
 
-        return view('frontend.user-myorder',compact('myorders'));
+        $orders = Order::where('user_id',$userId)->orderBy('created_at','desc')->paginate(10);
+
+        return view('frontend.user-myorder1',compact('orders'));
+    }
+
+    public function show($orderId){
+
+        // Get the authenticated user's ID
+        $userId = Auth::id();
+
+        $orders = Order::where('user_id',$userId)->where('id',$orderId)->first();
+
+        if($orders){
+
+            return view('frontend.user-myorder',compact('orders'));
+
+        }else{
+
+            return redirect()->back()->with('fail','No Order Found');
+        }
     }
 
     public function stripeCheckout(Request $request)
@@ -50,25 +70,36 @@ class OrderController extends Controller
             'allow_promotion_codes' => true,
         ]);
 
+        // Add To Order
+        $order = new Order();
+        $order->user_id = $request->user_id;
+        $order->user_name = $request->user_name;
+        $order->tracking_no = 'funda-'.Str::random(10);
+        $order->email = $request->user_email;
+        $order->order_type = $request->selected_option;
+        $order->save();
+
+        // Capture the ID of the newly created order
+        $order_id = $order->id;
+
         // Save order details to the orders table for each item in the cart
         $cartItems = Cart::where('user_id', $request->user_id)->get();
 
+        // Add To Order_Item
         foreach ($cartItems as $cartItem) {
-            $order = new Order();
-            $order->user_id = $request->user_id;
-            $order->user_name = $request->user_name;
-            $order->product_name = $cartItem->product_name;
-            $order->product_image = $cartItem->product_image;
-            $order->product_description = $cartItem->product_description;
-            $order->product_quantity = $cartItem->product_quantity;
-            $order->product_price = $cartItem->total_price;
-            $order->totalAmount = $request->totalAmount;
-            $order->order_type = $request->selected_option;
-            $order->save();
+            $orderItems = new Order_item();
+            $orderItems->order_id = $order_id;
+            $orderItems->product_id = $cartItem->product_id;
+            $orderItems->product_name = $cartItem->product_name;
+            $orderItems->product_image = $cartItem->image;
+            $orderItems->product_quantity = $cartItem->product_quantity;
+            $orderItems->total_price = $cartItem->total_price;
+            $orderItems->totalAmount = $request->totalAmount;
+            $orderItems->save();
         }
 
         // Clear the user's cart after completing the order
-        Cart::where('user_id', $request->user_id)->delete();
+        // Cart::where('user_id', $request->user_id)->delete();
 
         return redirect($response['url']);
     }
