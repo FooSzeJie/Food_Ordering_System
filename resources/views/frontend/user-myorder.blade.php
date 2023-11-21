@@ -26,9 +26,13 @@
 						<span>: {{ $orders->tracking_no }}</span>
 					</p>
 					<p class="date">
-						<span class="bold">Date</span>
-						<span>:{{ $orders->created_at->format('d-m-Y') }}</span>
+						<span class="bold">Date :</span>
+						<span>{{ $orders->created_at->format('d-m-Y') }}</span>
 					</p>
+                    <p class="date">
+                        <span class="bold">Time :</span>
+                        <span>{{ $orders->created_at->format('h:i:s A') }}</span>
+                    </p>
 				</div>
 			</div>
                 <div class="bill_total_wrap">
@@ -79,7 +83,7 @@
                                 <img width="80" src="{{ asset('images/' . $orderItem->product_image) }}" style="mr-20px" alt="Image" />
 							</div>
 							<div class="col col_price">
-								<p>{{ $orderItem->total_price }}</p>
+								<p id="totalPrice">{{ $orderItem->total_price }}</p>
 							</div>
 							<div class="col col_qty">
 								<p>{{ $orderItem->product_quantity }}</p>
@@ -169,10 +173,10 @@
 					<p>Visa, master Card and We accept Cheque</p>
 				</div>
 				<div class="grandtotal_sec">
-			        {{-- <p class="bold">
+			        <p class="bold">
 			            <span>SUB TOTAL</span>
-			            <span>RM{{ $myorder->totalAmount }}</span>
-			        </p> --}}
+			            <span>RM{{ $totalSum }}</span>
+			        </p>
 			        <p>
 			            <span>Tax</span>
 			            <span>-</span>
@@ -181,12 +185,12 @@
 			            <span>Discount</span>
 			            <span>-</span>
 			        </p>
-					@foreach($orders->orderItems as $orderItem)
+					{{-- @foreach($orders->orderItems as $orderItem) --}}
 			       	<p class="bold">
-			            <span>SUB TOTAL</span>
-			            <span>RM{{ $orderItem->totalAmount }}</span>
+			            <span>Final SUB TOTAL</span>
+			            <span id="totalAmount">RM{{ $totalSum }}</span>
 			        </p>
-					@endforeach
+					{{-- @endforeach --}}
 				</div>
 			</div>
 		</div>
@@ -200,6 +204,20 @@
 		</div>
 	</div>
 </div>
+
+<!-- 引入 jQuery（如果使用） -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+{{-- <script>
+    // 使用 JavaScript 计算总和并更新显示
+    $(document).ready(function() {
+        // 获取原始的总和值
+        var totalSum = parseFloat($('#totalPrice').text());
+
+        // 更新显示在<span>中
+        $('#totalAmount').text('RM' + totalSum.toFixed(2));
+    });
+</script> --}}
 
 {{-- Toastr JS --}}
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

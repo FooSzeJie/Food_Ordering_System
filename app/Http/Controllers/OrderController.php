@@ -16,14 +16,20 @@ class OrderController extends Controller
 {
     public function myOrder(){
 
-        // Get the authenticated user's ID
-        $userId = Auth::id();
+        if(Auth::check()){
 
-        // $myorders = Order::where('user_id', $userId)->get();
+            // Get the authenticated user's ID
+            $userId = Auth::id();
 
-        $orders = Order::where('user_id',$userId)->orderBy('created_at','desc')->paginate(10);
+            $orders = Order::where('user_id',$userId)->orderBy('created_at','desc')->paginate(10);
 
-        return view('frontend.user-myorder1',compact('orders'));
+            return view('frontend.user-allorder',compact('orders'));
+
+        }else{
+
+            return redirect('/loginpage')->with('fail', "You Need To Login First!");
+
+        }
     }
 
     public function show($orderId){
@@ -33,9 +39,15 @@ class OrderController extends Controller
 
         $orders = Order::where('user_id',$userId)->where('id',$orderId)->first();
 
+        // 在控制器或模型中获取订单ID对应的产品列表
+        $orderItems = Order_item::where('order_id', $orderId)->get();
+
+        // 计算产品价格总和
+        $totalSum = $orderItems->sum('total_price');
+
         if($orders){
 
-            return view('frontend.user-myorder',compact('orders'));
+            return view('frontend.user-myorder',compact('orders','totalSum'));
 
         }else{
 
@@ -46,29 +58,30 @@ class OrderController extends Controller
     public function stripeCheckout(Request $request)
     {
         // Use the correct Stripe API key
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $redirectUrl = route('stripe.checkout.success').'?session_id={CHECKOUT_SESSION_ID}';
+        // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $response = \Stripe\Checkout\Session::create([
-            'success_url' => $redirectUrl,
-            'customer_email' => 'demo@gmail.com',
-            'payment_method_types' => ['link','card'],
-            'line_items' => [
-                [
-                    'price_data' => [
-                        'product_data' => [
-                            'name' => $request->product_name,
-                        ],
-                        'unit_amount' => 100 * $request->totalAmount,
-                        'currency' => 'USD',
-                    ],
-                    'quantity' => 1
-                ],
-            ],
-            'mode' => 'payment',
-            'allow_promotion_codes' => true,
-        ]);
+        // $redirectUrl = route('stripe.checkout.success').'?session_id={CHECKOUT_SESSION_ID}';
+
+        // $response = \Stripe\Checkout\Session::create([
+        //     'success_url' => $redirectUrl,
+        //     'customer_email' => 'demo@gmail.com',
+        //     'payment_method_types' => ['link','card'],
+        //     'line_items' => [
+        //         [
+        //             'price_data' => [
+        //                 'product_data' => [
+        //                     'name' => $request->product_name,
+        //                 ],
+        //                 'unit_amount' => 100 * $request->totalAmount,
+        //                 'currency' => 'USD',
+        //             ],
+        //             'quantity' => 1
+        //         ],
+        //     ],
+        //     'mode' => 'payment',
+        //     'allow_promotion_codes' => true,
+        // ]);
 
         // Add To Order
         $order = new Order();
@@ -98,10 +111,12 @@ class OrderController extends Controller
             $orderItems->save();
         }
 
+        return back()->with('success','You Order Has Successfully!');
+
         // Clear the user's cart after completing the order
         // Cart::where('user_id', $request->user_id)->delete();
 
-        return redirect($response['url']);
+        // return redirect($response['url']);
     }
 
     public function stripeCheckoutSuccess(Request $request)
