@@ -32,13 +32,25 @@
                         <div class="form-group">
                             <label for="name">Variant Name</label>
                             <input type="text" class="form-control" name="name" id="name"
-                                placeholder="Enter Category Name">
+                                placeholder="Enter Variant Name">
                             <span class="text-danger">
                                 @error('name')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
+
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" name="price" id="price" step="0.01"
+                                placeholder="Enter Add On Price">
+                            <span class="text-danger">
+                                @error('price')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -71,6 +83,13 @@
                             <div class="form-group">
                                 <label for="name">Variant Name</label>
                                 <input type="text" class="form-control" name="name" id="name" value="{{ $variant->name }}">
+                                <span class="text-danger">@error('name'){{ $message }}@enderror</span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" name="price" id="price" step="0.01" value="{{ $variant->price }}">
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                             </div>
                         </div>
@@ -141,6 +160,7 @@
                                         <th><input type="checkbox" name="" id="select_all_ids" onclick="checkAll(this)"></th>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>Price</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -152,15 +172,16 @@
                                                 <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $variant->id }}"></td>
                                                 <td>{{ $variant->id }}</td>
                                                 <td>{{ $variant->name }}</td>
+                                                <td>{{ $variant->price }}</td>
                                                 <td>
                                                     @if ($variant->status == 0)
                                                         <a href="{{ url('changevariant-status/' . $variant->id) }}"
                                                             class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Are you sure you want to change this status to close?')">Close</a>
+                                                            onclick="return confirm('Are you sure you want to change this status to close?')">InActive</a>
                                                     @else
                                                         <a href="{{ url('changevariant-status/' . $variant->id) }}"
                                                             class="btn btn-sm btn-success"
-                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Open</a>
+                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Active</a>
                                                     @endif
                                                 </td>
                                                 <td>

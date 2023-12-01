@@ -9,21 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        "name",
-        "description",
-        "price",
-        "variant",
-        "addOns",
-        "image",
-        "status",
-        "categoryID",
-    ];
-
-    public function variants()
-    {
-        return $this->hasMany(Variant::class);
-    }
+    protected $fillable = ['name', 'description', 'price', 'variant', 'addOns', 'image', 'status', 'categoryID'];
 
     public function category()
     {
@@ -32,7 +18,17 @@ class Product extends Model
 
     public function addons()
     {
-        return $this->belongsToMany(AddOn::class, 'id','name');
+        return $this->belongsToMany(AddOn::class, 'product_addon', 'product_id', 'addon_id');
+    }
+
+    public function variants()
+    {
+        return $this->belongsToMany(Variant::class, 'product_variant', 'product_id', 'variant_id');
+    }
+
+    public function wishlist()
+    {
+        return $this->belongsTo(Wishlist::class);
     }
 
 }

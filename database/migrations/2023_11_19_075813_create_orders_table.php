@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('variants', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->double('price', 8,2)->default(0);
-            $table->integer('status')->default(0);
+            $table->integer('user_id');
+            $table->string('user_name');
+            $table->string('tracking_no');
+            $table->string('email');
+            $table->string('order_type')->nullable()->default('no_select_order_type');
+            $table->string('payment_status')->default('complete');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variants');
+        Schema::dropIfExists('orders');
     }
 };

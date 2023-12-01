@@ -187,6 +187,12 @@
                 </a> --}}
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/allcontact') }}">
+                    <i class="fas fa-folder"></i>
+                    <span>User Contact</span></a>
+            </li>
+
             <!-- Nav Item - Pages Collapse My Place Menu -->
             {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyHasBooked"
@@ -309,12 +315,13 @@
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="" id="alertsDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="{{ url('allcontact') }}" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter"></span>
+                                <span class="badge badge-danger badge-counter">{{App\Models\Contact::count()}}</span>
                             </a>
+
                             <!-- Dropdown - Alerts -->
                             {{-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
@@ -362,11 +369,11 @@
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="" id="messagesDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="{{ url('allcontact') }}" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter"></span>
+                                <span class="badge badge-danger badge-counter">{{App\Models\Contact::count()}}</span>
                             </a>
                         </li>
 
@@ -495,6 +502,11 @@
             </div>
         </div>
     </div>
+
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
+
 
     {{-- JS User Backend UI --}}
     <!-- Bootstrap core JavaScript-->

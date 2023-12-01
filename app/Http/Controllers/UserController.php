@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Variant;
+use App\Models\AddOn;
 use App\Models\Product;
 
 class UserController extends Controller
@@ -138,28 +140,46 @@ class UserController extends Controller
         return view('frontend.food',compact('products'));
     }
 
-    public function contact(){
-
-        if(Auth::check()){
-
-            return view('frontend.contact');
-
-        }else{
-
-            return redirect('/loginpage')->with('fail', "You Need To Login First!");
-
-        }
-
-
-    }
-
     public function userdashboard(){
 
         return view('frontend.user-dashboard');
     }
 
-    public function FoodDetail(){
+    public function FoodDetail($productId, $variantId, $id)
+    {
 
-        return view('frontend.food-detail');
+        // $fooddetails = Product::where('id',$id);
+
+        // Get product information with eager-loaded variants and addons
+        $fooddetails = Product::with(['variants', 'addons'])
+            ->where('products.id', $productId)
+            ->findOrFail($productId);
+
+        // Access variants and addons directly from the model based on variant ID
+        // $variants = $fooddetails->variants()->where('variants.id', $variantId)->first();
+        $variants = $fooddetails->variants;
+        $addons = $fooddetails->addons;
+
+        // dd($variants);
+
+        return view('frontend.food-detail', compact('fooddetails', 'variants', 'addons'));
     }
+
+    // public function FoodDetail($id)
+    // {
+    //     $fooddetails = Product::where('id',$id);
+
+    //     $variant = $fooddetails->variants()->where('id', $variantId)->first();
+
+    //     dd($variant);
+
+    //     $variants = Variant::whereIn('id', $variant);
+
+    //     // 获取产品信息和关联的变体和插件
+    //     // $product = Product::with(['variants', 'addons'])->findOrFail($productId);
+
+    //     // 将产品、变体和插件传递给视图
+    //     return view('frontend.product-details', compact('product'));
+    // }
+
 }

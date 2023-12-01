@@ -7,6 +7,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\AddOnController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +45,7 @@ Route::get('/users/dashboard/{id}',[UserController::class,'userdashboard']);
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 //Home Page
-Route::get('/', [UserController::class, 'home']);
+Route::get('/', [UserController::class, 'home'])->name('home');
 
 //------------------------------------------------------Admin Control Area------------------------------------------------------//
 //Display Admin Login Page
@@ -182,8 +186,47 @@ Route::get('/service', [UserController::class, 'service'])->name('service');
 // Menu Page
 Route::get('/food', [UserController::class, 'food'])->name('food');
 // Menu Page Food Detail
-Route::get('/food-detail', [UserController::class, 'FoodDetail'])->name('food-detail');
+// Route::get('/food-detail/{id}', [UserController::class, 'FoodDetail'])->name('food-detail');
+Route::get('/food-detail/{productId}/{variantId}/{id}', [UserController::class, 'FoodDetail'])->name('food-detail');
+
+// Route::get('/food-detail/{id}', [UserController::class, 'FoodDetail'])->name('food-detail');
 
 //------------------------------------------------------Frontend Contact Control Area-------------------------------------------------//
 // Contact Page
-Route::get('/contact', [UserController::class, 'contact'])->name('contact');
+Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
+
+// Contact Us Function with Email
+Route::post('/contactUs', [ContactController::class, 'contactUs'])->name('contactUs');
+
+// Show All User Contact
+Route::get('/allcontact', [ContactController::class, 'allcontact'])->name('allcontact');
+
+//MutlipleDelete User Contact Function
+Route::post('/mutlipledeleteContact/delete', [ContactController::class, 'mutlipledeletecontact'])->name('mutlipledeleteContact');
+
+//------------------------------------------------------Frontend User Wishlist Control Area------------------------------------------//
+// User Add to Wishlist Function
+Route::post('/wishlist/add', [WishlistController::class, 'AddToWishlist'])->name('user.AddToWishlist');
+// Show User Wishlist
+Route::get('/wishlist', [WishlistController::class, 'ShowWishlist'])->name('user.ShowWishlist');
+// Delete User Wishlist
+Route::get('/deletewishlist/{id}', [WishlistController::class, 'deletewishlist'])->name('user.deletewishlist');
+
+//---------------------------------------------Cart Control Area-----------------------------------------------//
+// Show Cart Page
+// Route::get('/MyCart', [CartController::class, 'MyCart'])->name('user.MyCart');
+// Add To Cart Page
+Route::post('/AddToCart', [CartController::class, 'AddToCart'])->name('user.AddToCart');
+// Display Cart Page
+Route::get('/MyCart', [CartController::class, 'displayCart'])->name('cart.display');
+
+//---------------------------------------------Cart Control Area-----------------------------------------------//
+// Order Page
+Route::get('/order', [OrderController::class, 'myOrder'])->name('myOrder');
+// Order With Id Page
+Route::get('/orders/{orderId}', [OrderController::class, 'show']);
+// Payment Function
+Route::post('stripe/checkout', [OrderController::class, 'stripeCheckout'])->name('stripe.checkout');
+// Payment Success
+Route::get('stripe/checkout/success',[OrderController::class,'stripeCheckoutSuccess'])->name('stripe.checkout.success');
+

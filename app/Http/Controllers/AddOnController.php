@@ -18,7 +18,8 @@ class AddOnController extends Controller
         // Category::create($request->all());
 
         $request->validate([
-            'name' => 'required|string' // Update the field name to 'gender'
+            'name' => 'required|string', // Update the field name to 'gender'
+            'price' => 'required'
         ]);
 
         $addon = new AddOn();

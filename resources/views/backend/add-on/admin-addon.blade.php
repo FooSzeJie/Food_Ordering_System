@@ -174,11 +174,11 @@
                                                     @if ($addon->status == 0)
                                                         <a href="{{ url('changeaddon-status/' . $addon->id) }}"
                                                             class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Are you sure you want to change this status to close?')">Close</a>
+                                                            onclick="return confirm('Are you sure you want to change this status to close?')">InActive</a>
                                                     @else
                                                         <a href="{{ url('changeaddon-status/' . $addon->id) }}"
                                                             class="btn btn-sm btn-success"
-                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Open</a>
+                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Active</a>
                                                     @endif
                                                 </td>
                                                 <td>

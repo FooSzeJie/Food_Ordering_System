@@ -86,12 +86,12 @@
                                                 <td>
                                                     @if ($category->status == 0)
                                                         <a href="{{ url('changecategory-status/' . $category->id) }}"
-                                                            class="btn btn-sm btn-success"
-                                                            onclick="return confirm('Are you sure you want to change this status to close?')">Open</a>
+                                                            class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Are you sure you want to change this status to close?')">InActive</a>
                                                     @else
                                                         <a href="{{ url('changecategory-status/' . $category->id) }}"
-                                                            class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Close</a>
+                                                            class="btn btn-sm btn-success"
+                                                            onclick="return confirm('Are you sure you want to change this status to open?')">Active</a>
                                                     @endif
                                                 </td>
                                                 <td>
