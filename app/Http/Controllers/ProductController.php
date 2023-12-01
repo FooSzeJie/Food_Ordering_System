@@ -37,14 +37,10 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-<<<<<<< HEAD
             'categoryID' => 'required',
             'addonID' => 'required',
             'variantID' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-=======
-            'categoryID' => 'required',// Each value in the array should be a number
->>>>>>> f16b3b55cb30f37cb5f2454275ca4b982ac7d747
         ]);
 
         $image = $request->file('image');
@@ -65,13 +61,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->image = $imageName;
         $product->price = $request->price;
-<<<<<<< HEAD
-=======
-        $product->description = $request->description; // Corrected line
-        // $product->addon = $request->addon;
-        // $product->variant = $request->variant;
         $product->categoryID = $request->categoryID; // Corrected line
->>>>>>> f16b3b55cb30f37cb5f2454275ca4b982ac7d747
         $product->description = $request->description;
         $product->categoryID = $request->categoryID;
         $product->addOns = $request->addonID;
