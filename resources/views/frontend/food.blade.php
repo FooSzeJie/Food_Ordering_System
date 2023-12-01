@@ -25,7 +25,11 @@
 
         <div class="menu_card">
             <div class="menu_image">
-                <img src="{{ asset('images/' . $product->image) }}">
+                @if($product->image == null)
+                    <center>No Image</center>
+                @else
+                    <img src="{{ asset('images/' . $product->image) }}">
+                @endif
             </div>
 
             {{-- <div class="small_card">
