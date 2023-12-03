@@ -195,9 +195,6 @@ class ProductController extends Controller
 
         $import = new ImportProduct();
 
-        //$import->skipRows(1); Skip the first row and start from the second row
-
-
         Excel::import($import, $selectedFile);
 
         return redirect('/admin/Product')->with('success', 'Import completed successfully.');
