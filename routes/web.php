@@ -129,6 +129,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //MutlipleDelete Product Function
     Route::post('/mutlipledeleteproduct/delete', [ProductController::class, 'deleteMultipleProduct'])->name('mutlipledeleteproduct');
 
+    // Import Product Function
+    Route::post('/admin/importProduct',[ProductController::class,'import'])->name('import');
+
     // ------------------------------------------Admin Variant Area --------------------------------------------------------------//
     //Admin Store Variant
     Route::post('/admin/Variant/create', [VariantController::class, 'storeVariant']);

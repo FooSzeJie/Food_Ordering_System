@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\AddOn;
 use App\Models\Variant;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ImportProduct;
 use DB;
 
 class ProductController extends Controller
@@ -183,5 +185,21 @@ class ProductController extends Controller
 
             return back()->with('error', 'Invalid input. No Products were deleted.');
         }
+    }
+
+    public function import(Request $request){
+
+        // Excel::import(new ImportProduct, $request->file('file')->store('files'));
+
+        $selectedFile = $request->file('file')->store('files');
+
+        $import = new ImportProduct();
+
+        //$import->skipRows(1); Skip the first row and start from the second row
+
+
+        Excel::import($import, $selectedFile);
+
+        return redirect('/admin/Product')->with('success', 'Import completed successfully.');
     }
 }
