@@ -74,7 +74,7 @@
                                 <a href=""><button type="button" class="btn btn-primary m-1">Export
                                         Variant</button></a>
                                 {{-- Variant Excel Template --}}
-                                <a href="{{ asset('excel/variantTemplate.xlsx') }}" class="btn btn-primary m-1">Variant Excel
+                                <a href="{{ asset('excel/variantTemplate.xlsx') }}" class="btn btn-dark m-1">Variant Excel
                                         Template</a>
 
                                 <thead class="table-dark">
