@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportVariant;
 use Illuminate\Http\Request;
 use App\Models\Variant;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VariantController extends Controller
 {
@@ -96,5 +98,18 @@ class VariantController extends Controller
 
             return back()->with('error', 'Invalid input. No Variants were deleted.');
         }
+    }
+
+    public function import(Request $request){
+
+        // Excel::import(new ImportProduct, $request->file('file')->store('files'));
+
+        $selectedFile = $request->file('file')->store('files');
+
+        $import = new ImportVariant();
+
+        Excel::import($import, $selectedFile);
+
+        return redirect('/admin/Variant')->with('success', 'Import completed successfully.');
     }
 }

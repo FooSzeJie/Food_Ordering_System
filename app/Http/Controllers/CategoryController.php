@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportCategory;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -104,6 +106,19 @@ class CategoryController extends Controller
 
             return back()->with('error', 'Invalid input. No Categorys were deleted.');
         }
+    }
+
+    public function import(Request $request){
+
+        // Excel::import(new ImportProduct, $request->file('file')->store('files'));
+
+        $selectedFile = $request->file('file')->store('files');
+
+        $import = new ImportCategory();
+
+        Excel::import($import, $selectedFile);
+
+        return redirect('/admin/Category')->with('success', 'Import completed successfully.');
     }
 
 }

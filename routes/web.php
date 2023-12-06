@@ -82,6 +82,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //MutlipleDelete Category Function
     Route::post('/mutlipledeletecategory/delete', [CategoryController::class, 'AdmindeleteMultipleCategory'])->name('mutlipledeletecategory');
 
+    // Import Category Function
+    Route::post('/admin/importCategory', [CategoryController::class, 'import']);
+
     //-------------------------------------------------Admin Change Status Area------------------------------------------------------//
     //Change Category Status Function
     Route::get('/changecategory-status/{id}',[CategoryController::class,'changecategoryStatus']);
@@ -151,6 +154,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //MutlipleDelete Variant Function
     Route::post('/mutlipledeletevariant/delete', [VariantController::class, 'deleteMultipleVariant'])->name('mutlipledeletevariant');
 
+    // Import Variant Function
+    Route::post('/admin/importVariant', [VariantController::class, 'import']);
+
     // ------------------------------------------Admin Add On Area --------------------------------------------------------------//
     //Admin Store Add On
     Route::post('/admin/AddOn/create', [AddOnController::class, 'storeAddOn']);
@@ -169,6 +175,9 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
 
     //MutlipleDelete Add On Function
     Route::post('/mutlipledeleteaddon/delete', [AddOnController::class, 'deleteMultipleAddOn'])->name('mutlipledeleteaddon');
+
+    // Import Add On Function
+    Route::post('/admin/importAddOn', [AddOnController::class, 'import']);
 });
 
 //Logout Admin Function

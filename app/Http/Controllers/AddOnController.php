@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportAddOn;
 use Illuminate\Http\Request;
 use App\Models\AddOn;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AddOnController extends Controller
 {
@@ -96,5 +98,18 @@ class AddOnController extends Controller
 
             return back()->with('error', 'Invalid input. No AddOns were deleted.');
         }
+    }
+
+    public function import(Request $request){
+
+        // Excel::import(new ImportProduct, $request->file('file')->store('files'));
+
+        $selectedFile = $request->file('file')->store('files');
+
+        $import = new ImportAddOn();
+
+        Excel::import($import, $selectedFile);
+
+        return redirect('/admin/AddOn')->with('success', 'Import completed successfully.');
     }
 }

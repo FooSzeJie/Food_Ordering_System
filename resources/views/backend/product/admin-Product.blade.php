@@ -157,7 +157,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     {{-- Preview Function --}}
-    <script type="text/javascript" src="{{ asset('admin/js/product/importData.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/product/readProductExcel.js') }}"></script>
 
     <!-- Include SheetJS from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
