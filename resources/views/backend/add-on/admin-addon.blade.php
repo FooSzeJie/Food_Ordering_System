@@ -14,92 +14,10 @@
 
     {{-- Add On Area --}}
     {{-- add new Add On --}}
-    <div class="modal fade" id="addonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add On Modal</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form action="{{ url('/admin/AddOn/create') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="name">Add On Name</label>
-                            <input type="text" class="form-control" name="name" id="name"
-                                placeholder="Enter Add On Name">
-                            <span class="text-danger">
-                                @error('name')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="number" class="form-control" name="price" id="price" step="0.01"
-                                placeholder="Enter Add On Price">
-                            <span class="text-danger">
-                                @error('price')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add New Add On</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    @include('backend.component.add-on.addAddOnModal')
 
     {{-- edit new Variant --}}
-    @foreach ($addons as $addon)
-        <!-- Modal content for each Variant -->
-        <div class="modal fade" id="addoneditModal{{ $addon->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <!-- Modal header and form -->
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Add On Modal</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <form action="{{ url('/admin/updateAddOn/' . $addon->id) }}" method="POST" enctype="multipart/form-data">
-                        @method('PUT')
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="name">Add On Name</label>
-                                <input type="text" class="form-control" name="name" id="name" value="{{ $addon->name }}">
-                                <span class="text-danger">@error('name'){{ $message }}@enderror</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="number" class="form-control" name="price" id="price" step="0.01" value="{{ $addon->price }}">
-                                <span class="text-danger">@error('name'){{ $message }}@enderror</span>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Update Add On</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endforeach
+    @include('backend.component.add-on.editAddOnModal')
 
     {{-- show all Variant --}}
     <div class="container">
@@ -109,7 +27,7 @@
         <div class="row">
             <div class="col-12">
 
-                <h3>Variant</h3>
+                <h3>Add On</h3>
 
                 {{-- Search Resort Function --}}
                 {{-- <form action="{{ route('HotelSearch') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
