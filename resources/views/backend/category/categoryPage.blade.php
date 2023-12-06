@@ -62,11 +62,12 @@
                                 <button type="button" class="btn btn-primary m-1" data-toggle="modal"
                                     data-target="#importCategoryModal">Import Category</button>
                                 {{-- Export Resort --}}
-                                <a href="{{ asset('excel/categoryTemplate.xlsx') }}" class="btn btn-primary m-1">Export
-                                        Category</a>
+                                <button type="button" class="btn btn-primary m-1" data-toggle="modal"
+                                    data-target="#importCategoryModal">Export
+                                        Category</button>
                                 {{-- Hotel Excel Template --}}
-                                <a href=""><button type="button" class="btn btn-dark m-1">Category Excel
-                                        Template</button></a>
+                                <a href="{{ asset('excel/categoryTemplate.xlsx') }}" class="btn btn-dark m-1">Category Excel
+                                        Template</a>
 
                                 <thead class="table-dark">
                                     <tr>
