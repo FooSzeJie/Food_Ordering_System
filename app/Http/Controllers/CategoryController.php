@@ -120,5 +120,4 @@ class CategoryController extends Controller
 
         return redirect('/admin/Category')->with('success', 'Import completed successfully.');
     }
-
 }

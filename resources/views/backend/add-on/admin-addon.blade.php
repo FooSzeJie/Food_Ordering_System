@@ -129,7 +129,7 @@
                         </div>
                     </form>
                     <!-- Pagination links -->
-                    {{-- {{ $variants->links() }} --}}
+                    {{ $addons->links() }}
                 </div>
             </div>
         </div>

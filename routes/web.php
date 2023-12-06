@@ -82,8 +82,8 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
     //MutlipleDelete Category Function
     Route::post('/mutlipledeletecategory/delete', [CategoryController::class, 'AdmindeleteMultipleCategory'])->name('mutlipledeletecategory');
 
-    // Import Category Function
-    Route::post('/admin/importCategory', [CategoryController::class, 'import']);
+    // Import Product Function
+    Route::post('/admin/importCategory',[CategoryController::class,'import'])->name('importCategory');
 
     //-------------------------------------------------Admin Change Status Area------------------------------------------------------//
     //Change Category Status Function

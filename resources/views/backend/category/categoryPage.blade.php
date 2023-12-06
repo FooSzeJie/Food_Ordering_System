@@ -1,7 +1,7 @@
 @extends('backend.admin-layout')
 
 @section('title')
-<title>Admin Category</title>
+    <title>Admin Category</title>
 @endsection
 
 @section('backend-section')
@@ -13,6 +13,9 @@
 
     {{-- Edit Category Modal --}}
     @include('backend.component.category.editCategoryModal')
+
+    {{-- Import Category Modal --}}
+    @include('backend.component.category.importCategoryModal')
 
     {{-- show all Category --}}
     <div class="container">
@@ -57,7 +60,7 @@
                                     data-target="#categoryModal">Add Category</button>
                                 <!-- Import Hotel Model -->
                                 <button type="button" class="btn btn-primary m-1" data-toggle="modal"
-                                    data-target="#hotelexcelModal">Import Category</button>
+                                    data-target="#importCategoryModal">Import Category</button>
                                 {{-- Export Resort --}}
                                 <a href=""><button type="button" class="btn btn-primary m-1">Export
                                         Category</button></a>
@@ -75,6 +78,7 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                
                                 <tbody>
                                     @if ($categories !== 0 && count($categories) > 0)
                                         @foreach ($categories as $category)
@@ -124,13 +128,13 @@
     {{-- New Delete Selected All Table --}}
     <script src="{{ asset('admin/js/category/deleteSelectedCategory.js') }}"></script>
 
-    {{-- Read Excel File Data JS --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-
-    {{-- Read Category Excel File Data --}}
-    <script src="{{ asset('admin/js/category/readExcel.js') }}"></script>
-
     <!-- Include jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {{-- Read Excel File Data JS --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+
+    {{-- Read Category Excel File Data --}}
+    <script src="{{ asset('admin\js\category\readCategoryExcel.js') }}"></script>
 
 @endsection
