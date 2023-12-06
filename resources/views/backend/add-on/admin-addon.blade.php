@@ -75,7 +75,7 @@
                                 <a href=""><button type="button" class="btn btn-primary m-1">Export Add
                                         On</button></a>
                                 {{-- Variant Excel Template --}}
-                                <a href="{{ asset('excel/addOnsTemplate.xlsx') }}" class="btn btn-primary m-1">Add On Excel
+                                <a href="{{ asset('excel/addOnsTemplate.xlsx') }}" class="btn btn-dark m-1">Add On Excel
                                         Template</a>
 
                                 <thead class="table-dark">
