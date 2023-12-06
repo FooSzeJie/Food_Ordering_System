@@ -40,8 +40,8 @@
                                 {{-- <a href="{{ url('export-hotel') }}"><button type="button" class="btn btn-primary m-1">Export Hotel</button></a> --}}
 
                                 {{-- Products Excel Template --}}
-                                <a href=""><button type="button" class="btn btn-dark m-1">Product Excel
-                                        Template</button></a>
+                                <a href="{{ asset('excel/productTemplate.xlsx') }}" class="btn btn-primary m-1">Product Excel
+                                        Template</a>
 
                                 <thead class="table-dark">
                                     <tr>
