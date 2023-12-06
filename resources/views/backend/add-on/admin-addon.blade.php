@@ -19,6 +19,9 @@
     {{-- edit new Variant --}}
     @include('backend.component.add-on.editAddOnModal')
 
+    {{-- Import Variant --}}
+    @include('backend.component.add-on.importAddOnModal')
+
     {{-- show all Variant --}}
     <div class="container">
 
@@ -60,19 +63,25 @@
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered">
                                 {{-- Button to delete all selected items --}}
-                                <button type="submit" class="btn btn-danger m-1" id="deleteAllSelectedRecord">Delete All Selected Add On</button>
+                                <button type="submit" class="btn btn-danger m-1" id="deleteAllSelectedRecord">Delete All
+                                    Selected Add On</button>
                                 {{-- Add Variant --}}
-                                <button type="button" class="btn btn-info m-1" data-toggle="modal" data-target="#addonModal">Add On Modal</button>
+                                <button type="button" class="btn btn-info m-1" data-toggle="modal"
+                                    data-target="#addonModal">Add On Modal</button>
                                 <!-- Import Variant Model -->
-                                <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#addonexcelModal">Import Add On</button>
+                                <button type="button" class="btn btn-primary m-1" data-toggle="modal"
+                                    data-target="#importAddOnModal">Import Add On</button>
                                 {{-- Export Variant --}}
-                                <a href=""><button type="button" class="btn btn-primary m-1">Export Add On</button></a>
+                                <a href=""><button type="button" class="btn btn-primary m-1">Export Add
+                                        On</button></a>
                                 {{-- Variant Excel Template --}}
-                                <a href=""><button type="button" class="btn btn-dark m-1">Add On Excel Template</button></a>
+                                <a href=""><button type="button" class="btn btn-dark m-1">Add On Excel
+                                        Template</button></a>
 
                                 <thead class="table-dark">
                                     <tr>
-                                        <th><input type="checkbox" name="" id="select_all_ids" onclick="checkAll(this)"></th>
+                                        <th><input type="checkbox" name="" id="select_all_ids"
+                                                onclick="checkAll(this)"></th>
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Price</th>
@@ -81,10 +90,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($addons !== 0 && count($addons) > 0)
-                                        @foreach($addons as $addon)
+                                    @if ($addons !== 0 && count($addons) > 0)
+                                        @foreach ($addons as $addon)
                                             <tr>
-                                                <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $addon->id }}"></td>
+                                                <td><input type="checkbox" name="ids" class="checkbox_ids"
+                                                        id="" value="{{ $addon->id }}"></td>
                                                 <td>{{ $addon->id }}</td>
                                                 <td>{{ $addon->name }}</td>
                                                 <td>RM&nbsp;{{ $addon->price }}</td>
@@ -100,8 +110,12 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addoneditModal{{ $addon->id }}"><i class="fa fa-edit"></i></a>
-                                                    <a onclick="return confirm('Are you sure to delete this data?')" href="{{ url('admin/deleteAddOn/'.$addon->id).'/delete' }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                    <a href="" class="btn btn-primary btn-sm" data-toggle="modal"
+                                                        data-target="#addoneditModal{{ $addon->id }}"><i
+                                                            class="fa fa-edit"></i></a>
+                                                    <a onclick="return confirm('Are you sure to delete this data?')"
+                                                        href="{{ url('admin/deleteAddOn/' . $addon->id) . '/delete' }}"
+                                                        class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -156,68 +170,13 @@
         });
     </script>
 
-    {{-- Read Excel File Data JS --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-
-    {{-- Read Category Excel File Data --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        // 获取文件输入框和模态框内容区域的元素
-        const fileInput = document.querySelector('#hotelexcelModal input[type="file"]');
-        const modalBody = document.querySelector('#hotelexcelModal .modal-body');
-
-        // 为文件输入框添加事件监听，当用户选择了文件后触发
-        fileInput.addEventListener('change', function (event) {
-            // 获取用户选择的文件
-            const selectedFile = event.target.files[0];
-
-            if (selectedFile) {
-                // 创建一个文件阅读器对象
-                const fileReader = new FileReader();
-
-                // 当文件加载完成时，会执行这个回调函数
-                fileReader.onload = function (e) {
-                    // 获取文件的内容（以二进制形式）
-                    const data = e.target.result;
-
-                    // 使用 XLSX 库将二进制内容解析成工作簿对象
-                    const workbook = XLSX.read(data, { type: 'binary' });
-
-                    // 假设你使用第一个工作表名字
-                    const sheetName = workbook.SheetNames[0];
-
-                    // 将工作表的数据解析成 JSON 格式
-                    const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 });
-
-                    // 创建一个 HTML 表格元素
-                    const table = document.createElement('table');
-                    table.classList.add('table', 'table-bordered');
-
-                    // 循环遍历数据，创建表格行和单元格
-                    for (let i = 0; i < sheetData.length; i++) {
-                        const row = document.createElement('tr');
-                        for (let j = 0; j < sheetData[i].length; j++) {
-                            const cell = document.createElement(i === 0 ? 'th' : 'td');
-                            cell.textContent = sheetData[i][j];
-                            row.appendChild(cell);
-                        }
-                        table.appendChild(row);
-                    }
-
-                    console.log(sheetData);
-
-                    // 将表格添加到模态框内容区域中
-                    modalBody.appendChild(table);
-                };
-
-                // 开始读取文件内容（以二进制字符串形式）
-                fileReader.readAsBinaryString(selectedFile);
-            }
-        });
-    });
-    </script>
-
     <!-- Include jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {{-- Preview Function --}}
+    <script type="text/javascript" src="{{ asset('admin/js/add-on/readAddOnExcel.js') }}"></script>
+
+    <!-- Include SheetJS from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 
 @endsection
