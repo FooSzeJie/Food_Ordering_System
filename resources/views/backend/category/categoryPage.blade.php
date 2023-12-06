@@ -78,7 +78,7 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                
+
                                 <tbody>
                                     @if ($categories !== 0 && count($categories) > 0)
                                         @foreach ($categories as $category)

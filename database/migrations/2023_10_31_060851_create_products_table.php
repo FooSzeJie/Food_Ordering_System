@@ -21,7 +21,7 @@ return new class extends Migration
             $table->json('variant')->nullable();
             $table->json('addOns')->nullable();
             $table->string('image')->nullable();
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(1);
             $table->integer('categoryID');
             $table->timestamps();
         });
