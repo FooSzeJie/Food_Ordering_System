@@ -1,4 +1,8 @@
 @extends('frontend.layout')
+@section('frontend-section')
+
+{{-- Toastr CSS --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 {{-- Card UI --}}
 <style>
@@ -66,9 +70,15 @@
         float: left
     }
 
-    .cart_item_image img {
+    /* .cart_item_image img {
         max-width: 100%
+    } */
+
+    .cart_item_image img {
+        width: 100px;
+        height: 100px;
     }
+
 
     .cart_item_info {
         width: calc(100% - 133px);
@@ -533,4 +543,5 @@
         $("input[name='selected_option']").val(option);
     }
 </script>
+
 @endsection

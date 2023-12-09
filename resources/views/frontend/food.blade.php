@@ -14,6 +14,42 @@
     #wishlist:hover{
         color: red;
     }
+    .menu_image img {
+        width: 200px;
+        height: 200px;
+    }
+    /* .small_card button {
+        background-color: transparent;
+    } */
+    .small_card button {
+        background-color: transparent;
+        border: none; /* Remove border if present */
+    }
+
+    .small_card button i {
+        color: red; /* Set the desired color for the heart icon */
+        font-size: 24px; /* Adjust the font size as needed */
+    }
+    .menu_image {
+        position: relative;
+        width: 200px; /* Set your desired width */
+        height: 200px; /* Set your desired height */
+    }
+
+    .menu_image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Make sure the image covers the entire container */
+    }
+
+    .no-image-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px; /* Set your desired font size */
+        color: #555; /* Set your desired text color */
+    }
 </style>
 
 <!--Menu-->
@@ -26,7 +62,7 @@
         <div class="menu_card">
             <div class="menu_image">
                 @if($product->image == null)
-                    <center>No Image</center>
+                    <div class="no-image-overlay">No Image</div>
                 @else
                     <img src="{{ asset('images/' . $product->image) }}">
                 @endif
