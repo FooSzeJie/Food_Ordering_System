@@ -350,19 +350,35 @@
 </div>
 <!-- /.container-fluid -->
 
-{{-- Chart Js --}}
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Page level plugins -->
-<script src="{{ asset('admindashboard/vendor/chart.js/Chart.min.js') }}"></script>
+    {{-- Monthly Total Price Chart --}}
+    {{-- <script type="text/javascript">
+        // Assuming you have a variable named _monthlyTotalData containing the monthly total data
+        var _monthlyTotalData = {!! json_encode($monthlyTotalData) !!};
 
-<!-- Page level custom scripts -->
-<!-- Page level custom scripts -->
-<script src="{{ asset ('charts/demo/user/restaurantchart-area-demo.js') }}"></script>
-<script src="{{ asset ('charts/demo/user/resortchart-area-demo.js') }}"></script>
-<script src="{{ asset ('charts/demo/user/hotelchart-area-demo.js') }}"></script>
-<script src="{{ asset ('charts/demo/user/chart-pie-demo.js') }}"></script>
-<script src="{{ asset ('charts/demo/chart-bar-demo.js') }}"></script>
+        console.log(_monthlyTotalData);
+    </script> --}}
+
+    {{-- All Item Pie Chart --}}
+    {{-- <script type="text/javascript">
+        var _labels = {!! json_encode($labels) !!};
+        var _data = {!! json_encode($data) !!};
+        console.log(_labels);
+        console.log(_data);
+    </script> --}}
+
+    {{-- Chart Js --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script> --}}
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('userdashboard/vendor/chart.js/Chart.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('userdashboard/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('userdashboard/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('userdashboard/js/demo/chart-bar-demo.js') }}"></script>
 
 @endsection
 

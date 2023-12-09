@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use Auth;
+use Stripe;
 use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller

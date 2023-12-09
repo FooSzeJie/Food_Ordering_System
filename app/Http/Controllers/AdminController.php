@@ -4,8 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\AddOn;
+use App\Models\Order;
+use App\Models\Variant;
+use App\Models\Product;
+use App\Models\Order_item;
 use Session;
 use Hash;
+use DB;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -54,7 +61,73 @@ class AdminController extends Controller
 
     public function adminDashboard(){
 
-        return view('backend.admin-dashboard');
+        // Month follow now
+        $currentMonth = Carbon::now()->month;
+
+        // ------------------------------------------------Count All products--------------------------------------------------//
+        // Count products
+        $products = Product::count();
+
+        // -----------------------------------------Count orders for the current month-----------------------------------------//
+        // Count orders for the current month
+        $ordersCount = Order::whereMonth('created_at', $currentMonth)->count();
+
+        // Get monthly total prices for orders
+        $monthlyPrices = Order_item::select(
+            DB::raw('SUM(total_price) as total_price_sum'),
+            DB::raw('MONTH(created_at) as month')
+        )
+            ->whereMonth('created_at', $currentMonth)
+            ->groupBy('month')
+            ->first(); // Use first() to get a single result
+
+        // Extract the total price sum for the current month
+        $totalPrice = ($monthlyPrices) ? $monthlyPrices->total_price_sum : 0;
+
+
+        // Count Price
+        // $monthlyPrices = Order_item::select(
+        //     DB::raw('SUM(total_price) as total_price_sum'),
+        //     DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as formatted_date')
+        // )
+        // ->whereMonth('created_at', $currentMonth)
+        // ->groupBy('formatted_date')
+        // ->get();
+
+        // ----------------------------------------------------Area Chart-----------------------------------------------------//
+        // Get monthly total prices for each day of the current month
+        $monthlyTotalPrices = Order_item::select(
+            DB::raw('SUM(total_price) as total_price_sum'),
+            DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as formatted_date')
+        )
+        // ->whereMonth('created_at', $currentMonth)
+        ->groupBy('formatted_date')
+        ->get();
+
+        $monthlyTotalData = [];
+
+        foreach ($monthlyTotalPrices as $monthlyTotal) {
+            $formattedDate = $monthlyTotal->formatted_date;
+            $totalPriceSum = $monthlyTotal->total_price_sum;
+            $monthlyTotalData[] = [
+                'formatted_date' => $formattedDate,
+                'totalPriceSum' => $totalPriceSum,
+            ];
+        }
+
+        // ----------------------------------------------------Pie Chart-----------------------------------------------------//
+
+        // Count all variants, addons, and products
+        $Allvariant = Variant::count();
+        $Alladdon = AddOn::count();
+        $Allproduct = Product::count();
+
+        $labels = ['Allvariant', 'Alladdon', 'Allproduct'];
+        $data = [$Allvariant, $Alladdon, $Allproduct];
+
+        return view('backend.admin-dashboard', compact('Allproduct', 'Allvariant', 'Alladdon', 'products', 'ordersCount', 'totalPriceSum',
+        'monthlyTotalData','labels','data','totalPrice'));
     }
+
 
 }
