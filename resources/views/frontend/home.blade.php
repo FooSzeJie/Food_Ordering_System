@@ -70,7 +70,6 @@
     </div>
     <!-- Service End -->
 
-
     <!-- About Start -->
     {{-- <div class="container-xxl py-5">
         <div class="container">
@@ -126,7 +125,6 @@
     </div> --}}
     <!-- About End -->
 
-
     <!-- Menu Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -165,6 +163,7 @@
                         </a>
                     </li>
                 </ul>
+
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
@@ -274,6 +273,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div id="tab-2" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-6">
@@ -382,6 +382,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-6">
@@ -496,7 +497,6 @@
     </div>
     <!-- Menu End -->
 
-
     <!-- Reservation Start -->
     <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
         <div class="row g-0">
@@ -589,7 +589,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center rounded overflow-hidden">
                         <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset ('home/img/derick.jpg') }}" alt="">
+                            <img class="img-fluid" style="width: 250px; height: 270px;" src="{{ asset ('home/img/derick.jpg') }}" alt="">
                         </div>
                         <h5 class="mb-0">Derick Tan Zhe Yang</h5>
                         <small>Chef 1</small>
@@ -605,7 +605,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item text-center rounded overflow-hidden">
                         <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset ('home/img/sj.jpg') }}" alt="">
+                            <img class="img-fluid" style="width: 250px; height: 270px;" src="{{ asset ('home/img/sj.jpg') }}" alt="">
                         </div>
                         <h5 class="mb-0">Foo Sze Jie</h5>
                         <small>Chef 2</small>
@@ -621,7 +621,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item text-center rounded overflow-hidden">
                         <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset ('home/img/team-3.jpg') }}" alt="">
+                            <img class="img-fluid" style="width: 250px; height: 270px;" src="{{ asset ('home/img/team-3.jpg') }}" alt="">
                         </div>
                         <h5 class="mb-0">Derick Tan Zhe Yang</h5>
                         <small>Chef 3</small>
@@ -637,7 +637,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                     <div class="team-item text-center rounded overflow-hidden">
                         <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset ('home/img/jp.jpg') }}" alt="">
+                            <img class="img-fluid" style="width: 250px; height: 270px;" src="{{ asset ('home/img/jp.jpg') }}" alt="">
                         </div>
                         <h5 class="mb-0">Loh Jin Pin</h5>
                         <small>Chef 4</small>
@@ -715,5 +715,32 @@
         </div>
     </div>
     <!-- Testimonial End -->
+
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var breakfastTab = document.getElementById('tab-1-tab');
+            var breakfastTabContent = document.getElementById('tab-1');
+
+            breakfastTab.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                console.log('Breakfast tab clicked');
+
+                // Use AJAX or fetch to get the content from the server
+                // Here's a basic example assuming you have a route to fetch breakfast products
+                fetch('/get-breakfast-products')
+                    .then(response => {
+                        console.log('Response:', response);
+                        return response.text();
+                    })
+                    .then(data => {
+                        console.log('Data:', data);
+                        // Update the tab content with the fetched data
+                        breakfastTabContent.innerHTML = data;
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    </script> --}}
 
 @endsection

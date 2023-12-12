@@ -109,15 +109,10 @@ class UserController extends Controller
 
     public function home(){
 
-        // if(Auth::check()){
+        $products = Product::all();
 
-            return view('frontend.home')->with('success',"Welcome to SUC Food Ordering System");
+        return view('frontend.home',compact('products'))->with('success',"Welcome to SUC Food Ordering System");
 
-        // }else{
-
-        //     return redirect('/loginpage')->with('fail', "You need to Login frist!");
-
-        // }
     }
 
 
@@ -125,6 +120,7 @@ class UserController extends Controller
 
         $request->session()->flush();
         Auth::logout();
+
         return redirect('/loginpage')->with('fail', "You are Logout Successfully!");
     }
 
@@ -211,7 +207,6 @@ class UserController extends Controller
             return redirect('/loginpage')->with('error', 'You need to log in first!');
         }
     }
-
 
     public function FoodDetail($productId, $variantId, $id)
     {
