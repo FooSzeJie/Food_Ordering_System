@@ -15,4 +15,9 @@ class Variant extends Model
     {
         return $this->belongsToMany(Product::class, 'product_variant', 'variant_id', 'product_id');
     }
+
+    public function carts()
+    {
+        return $this->belongsTo(Cart::class, 'variants', 'id');
+    }
 }

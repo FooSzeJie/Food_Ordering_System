@@ -15,4 +15,9 @@ class AddOn extends Model
     {
         return $this->belongsToMany(Product::class, 'product_addon', 'addon_id', 'product_id');
     }
+
+    public function carts()
+    {
+        return $this->belongsTo(Cart::class, 'addons', 'id');
+    }
 }

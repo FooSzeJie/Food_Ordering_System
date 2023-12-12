@@ -59,60 +59,76 @@ class OrderController extends Controller
     {
         // Use the correct Stripe API key
         if (Auth::check()) {
-            // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+            try{
 
-            $redirectUrl = route('stripe.checkout.success').'?session_id={CHECKOUT_SESSION_ID}';
+                // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+                \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
-            $response = \Stripe\Checkout\Session::create([
-                'success_url' => $redirectUrl,
-                'customer_email' => 'demo@gmail.com',
-                'payment_method_types' => ['link','card'],
-                'line_items' => [
-                    [
-                        'price_data' => [
-                            'product_data' => [
-                                'name' => $request->product_name,
+                $redirectUrl = route('stripe.checkout.success').'?session_id={CHECKOUT_SESSION_ID}';
+
+                $response = \Stripe\Checkout\Session::create([
+                    'success_url' => $redirectUrl,
+                    'customer_email' => 'demo@gmail.com',
+                    'payment_method_types' => ['link','card'],
+                    'line_items' => [
+                        [
+                            'price_data' => [
+                                'product_data' => [
+                                    'name' => $request->product_name,
+                                ],
+                                'unit_amount' => 100 * $request->totalAmount,
+                                'currency' => 'USD',
                             ],
-                            'unit_amount' => 100 * $request->totalAmount,
-                            'currency' => 'USD',
+                            'quantity' => 1
                         ],
-                        'quantity' => 1
                     ],
-                ],
-                'mode' => 'payment',
-                'allow_promotion_codes' => true,
-            ]);
+                    'mode' => 'payment',
+                    'allow_promotion_codes' => true,
+                ]);
 
-            // Add To Order
-            $order = new Order();
-            $order->user_id = $request->user_id;
-            $order->user_name = $request->user_name;
-            $order->tracking_no = 'funda-'.Str::random(10);
-            $order->email = $request->user_email;
-            $order->order_type = $request->selected_option;
-            $order->save();
+                // Add To Order
+                $order = new Order();
+                $order->user_id = $request->user_id;
+                $order->user_name = $request->user_name;
+                $order->tracking_no = 'funda-'.Str::random(10);
+                $order->email = $request->user_email;
+                $order->order_type = $request->selected_option;
+                $order->save();
 
-            // Capture the ID of the newly created order
-            $order_id = $order->id;
+                // Capture the ID of the newly created order
+                $order_id = $order->id;
 
-            // Save order details to the orders table for each item in the cart
-            $cartItems = Cart::where('user_id', $request->user_id)->get();
+                // Save order details to the orders table for each item in the cart
+                $cartItems = Cart::where('user_id', $request->user_id)->get();
 
-            // Add To Order_Item
-            foreach ($cartItems as $cartItem) {
-                $orderItems = new Order_item();
-                $orderItems->order_id = $order_id;
-                $orderItems->product_id = $cartItem->product_id;
-                $orderItems->product_name = $cartItem->product_name;
-                $orderItems->product_image = $cartItem->image ?? 'default_image.jpg';
-                $orderItems->product_quantity = $cartItem->product_quantity;
-                $orderItems->total_price = $cartItem->total_price;
-                $orderItems->totalAmount = $request->totalAmount;
-                $orderItems->save();
+                // Add To Order_Item
+                foreach ($cartItems as $cartItem) {
+                    $orderItems = new Order_item();
+                    $orderItems->order_id = $order_id;
+                    $orderItems->product_id = $cartItem->product_id;
+                    $orderItems->product_name = $cartItem->product_name;
+                    $orderItems->product_image = $cartItem->image ?? 'default_image.jpg';
+                    $orderItems->product_quantity = $cartItem->product_quantity;
+                    $orderItems->total_price = $cartItem->total_price;
+                    $orderItems->totalAmount = $request->totalAmount;
+
+                    // Add variants and addons
+                    // $orderItems->variants = $cartItem->variants; // Assuming variants is a JSON array
+                    // $orderItems->addons = $cartItem->addons; // Assuming addons is a JSON array
+
+                    $orderItems->variants = json_encode($cartItem->variants);
+                    $orderItems->addons = json_encode($cartItem->addons);
+
+
+                    $orderItems->save();
+                }
+
+                return back()->with('success','You Order Has Successfully!');
+
+            }catch (Exception $e) {
+
+                return back()->with('fail', 'Failed to Contact. Please try again.');
             }
-
-            return back()->with('success','You Order Has Successfully!');
 
         } else {
 

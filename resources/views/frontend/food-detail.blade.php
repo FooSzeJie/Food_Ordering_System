@@ -23,8 +23,8 @@
         }
 
         /* .row {
-                border: 1px solid;
-            } */
+                    border: 1px solid;
+                } */
 
         #abc {
             border: 1px solid;
@@ -151,18 +151,18 @@
         }
 
         /* .btn {
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #e44d26;
-                color: #fff;
-                text-decoration: none;
-                border-radius: 4px;
-                transition: background-color 0.3s ease;
-            }
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #e44d26;
+                    color: #fff;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    transition: background-color 0.3s ease;
+                }
 
-            .btn:hover {
-                background-color: #333;
-            } */
+                .btn:hover {
+                    background-color: #333;
+                } */
     </style>
 
     <br><br><br><br><br><br>
@@ -176,8 +176,13 @@
             <input type="text" name="product_image" value="{{ $fooddetails->image }}">
             <input type="text" name="product_name" value="{{ $fooddetails->name }}">
             <input type="text" name="product_description" value="{{ $fooddetails->description }}">
+
             <!-- Add this input field to your form -->
             <input type="text" name="total_price" id="total_price" value="">
+
+            <!-- Addon and variant fields -->
+            <input type="text" name="selected_variant" id="selected_variant" value="">
+            <input type="text" name="selected_addons" id="selected_addons" value="">
 
             <div class="product-detail">
                 {{-- <img name="product_image" value="{{ $fooddetails->image}}" class="product-image" src="{{ asset('images/' . $fooddetails->image) }}" alt="Product Image"> --}}
@@ -233,7 +238,7 @@
                         @foreach ($variants as $variant)
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="variant" value="{{ $variant->id }}"
-                                    data-price="{{ $variant->price }}">
+                                    data-price="{{ $variant->price }}" data-name="{{ $variant->name }}">
                                 <label class="form-check-label" for="variant{{ $variant->id }}">
                                     {{ $variant->name }} - RM{{ $variant->price }}
                                 </label>
@@ -245,6 +250,7 @@
                     @endif
                     <br>
                 </div>
+
                 <div class="col inner">
                     <tr>
                         <td>
@@ -252,9 +258,9 @@
                                 @if (!empty($addons))
                                     @foreach ($addons as $addon)
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="addon"
+                                            <input class="form-check-input" type="checkbox" name="addons[]"
                                                 value="{{ $addon->id }}" id="addon{{ $addon->id }}"
-                                                data-price="{{ $addon->price }}">
+                                                data-price="{{ $addon->price }}" data-name="{{ $addon->name }}">
                                             <label class="form-check-label" for="addon{{ $addon->id }}">
                                                 {{ $addon->name }} - RM{{ $addon->price }}
                                             </label>
@@ -291,6 +297,9 @@
                 </div>
                 <div class="col inner1"></div>
                 <div class="col-6 inner">
+                    {{-- <div class="col inner">
+                        <button type="submit" onclick="addToCart()" class="btn btn-primary">Add To Cart</button>
+                    </div> --}}
                     <button type="submit" class="btn btn-primary">Add To Cart</button>
                 </div>
             </div>
@@ -318,6 +327,84 @@
     {{-- JQuery --}}
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Add event listeners to variants and addons
+            document.querySelectorAll('input[name="variant"]').forEach(function (variant) {
+                variant.addEventListener('change', updateSelectedVariant);
+            });
+
+            document.querySelectorAll('input[name="addons[]"]').forEach(function (addon) {
+                addon.addEventListener('change', updateSelectedAddons);
+            });
+
+            // Functions to update selected_variant and selected_addons
+            function updateSelectedVariant() {
+                const selectedVariant = document.querySelector('input[name="variant"]:checked');
+                document.querySelector('#selected_variant').value = selectedVariant ? selectedVariant.value : '';
+            }
+
+            function updateSelectedAddons() {
+                const selectedAddons = Array.from(document.querySelectorAll('input[name="addons[]"]:checked')).map(addon => addon.value);
+                document.querySelector('#selected_addons').value = JSON.stringify(selectedAddons);
+            }
+        });
+    </script> --}}
+
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Add event listeners to variants and addons
+            document.querySelectorAll('input[name="variant"]').forEach(function (variant) {
+                variant.addEventListener('change', updateSelectedVariant);
+            });
+
+            document.querySelectorAll('input[name="addons[]"]').forEach(function (addon) {
+                addon.addEventListener('change', updateSelectedAddons);
+            });
+
+            // Functions to update selected_variant and selected_addons
+            function updateSelectedVariant() {
+                const selectedVariant = document.querySelector('input[name="variant"]:checked');
+                document.querySelector('#selected_variant').value = selectedVariant ? selectedVariant.dataset.name : '';
+            }
+
+            function updateSelectedAddons() {
+                const selectedAddons = Array.from(document.querySelectorAll('input[name="addons[]"]:checked')).map(addon => addon.dataset.name);
+                document.querySelector('#selected_addons').value = JSON.stringify(selectedAddons);
+            }
+        });
+    </script> --}}
+
+    {{-- Get Variant and AddOn Name --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Add event listeners to variants and addons
+            document.querySelectorAll('input[name="variant"]').forEach(function(variant) {
+                variant.addEventListener('change', updateSelectedVariant);
+            });
+
+            document.querySelectorAll('input[name="addons[]"]').forEach(function(addon) {
+                addon.addEventListener('change', updateSelectedAddons);
+            });
+
+            // Functions to update selected_variant and selected_addons
+            function updateSelectedVariant() {
+                const selectedVariant = document.querySelector('input[name="variant"]:checked');
+                document.querySelector('#selected_variant').value = selectedVariant ? selectedVariant.dataset.name :
+                    '';
+            }
+
+            function updateSelectedAddons() {
+                const selectedAddons = Array.from(document.querySelectorAll('input[name="addons[]"]:checked')).map(
+                    addon => addon.dataset.name);
+                document.querySelector('#selected_addons').value = JSON.stringify(selectedAddons);
+            }
+        });
+    </script>
 
     {{-- Incremnet and Decrement Ajax --}}
     <script>
@@ -362,6 +449,7 @@
         $(document).ready(function() {
             // Function to update the total based on selected options
             function updateTotal() {
+
                 // Get the quantity value
                 var quantity = parseInt($(".qty-input").val());
 
@@ -373,9 +461,13 @@
 
                 // Get the selected addons prices
                 var addonsPrices = 0;
-                $("input[name='addon']:checked").each(function() {
+                $("input[name='addons[]']:checked").each(function() {
                     addonsPrices += parseFloat($(this).data('price')) || 0;
                 });
+                // var addonsPrices = 0;
+                // $("input[name='addons[]']:checked").each(function() {
+                //     addonsPrices += parseFloat($(this).data('price')) || 0;
+                // });
 
                 // Debugging output
                 console.log("Quantity: " + quantity);
@@ -409,7 +501,7 @@
             // $("input[name='variant'], input[name='addon']").on("click", function () {
             //     updateTotal();
             // });
-            $("input[name='variant'], input[name='addon']").on("click", function() {
+            $("input[name='variant'], input[name='addons[]']").on("click", function() {
                 updateTotal();
             });
 

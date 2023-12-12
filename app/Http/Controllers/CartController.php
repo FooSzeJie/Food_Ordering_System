@@ -36,8 +36,7 @@ class CartController extends Controller
             // Get the authenticated user's ID
             $userId = Auth::id();
 
-            try{
-
+            try {
                 // Create a new Cart instance
                 $cart = new Cart();
                 $cart->user_id = $userId;
@@ -47,16 +46,18 @@ class CartController extends Controller
                 $cart->product_description = $request->input('product_description');
                 $cart->product_quantity = $request->input('quantity');
                 $cart->total_price = $request->input('total_price');
+
+                // Save selected variants and addons as arrays
+                $cart->variants = $request->input('selected_variant');
+                $cart->addons = json_decode($request->input('selected_addons'), true) ?? [];
+
                 $cart->save();
 
-                // dd();
+                return redirect()->route('food')->with('success', 'Item added to cart successfully!! Order more?');
 
-                return redirect()->route('food')->with('success', 'Item added to cart successfully!!  Order more?');
-
-            }catch(e){
+            } catch (Exception $e) {
 
                 return back()->with('fail', 'Failed to Contact. Please try again.');
-
             }
         } else {
 
@@ -67,6 +68,7 @@ class CartController extends Controller
     public function displayCart()
     {
         if (Auth::check()) {
+
             // Get the authenticated user's ID
             $userId = Auth::id();
 
@@ -80,7 +82,6 @@ class CartController extends Controller
             return view('frontend.cart')->with(['cartItems' => $cartItems, 'totalAmount' => $totalAmount]);
 
         } else {
-
             // Redirect if the user is not authenticated
             return redirect('/loginpage')->with('error', 'You need to log in first!');
         }

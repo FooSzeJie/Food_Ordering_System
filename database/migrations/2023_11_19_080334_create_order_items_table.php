@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('product_image');
             $table->integer('product_quantity');
+            $table->json('variants')->nullable();
+            $table->json('addons')->nullable();
             $table->decimal('total_price', 8, 2);
             $table->decimal('totalAmount', 8, 2);
             $table->timestamps();

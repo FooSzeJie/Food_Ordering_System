@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
             $table->string('product_name');
+            $table->string('product_image')->nullable();
             $table->string('product_description');
             $table->double('product_price', 8,2)->default(0);
             $table->timestamps();

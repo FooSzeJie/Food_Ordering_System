@@ -13,9 +13,11 @@ class WishlistController extends Controller
     public function AddToWishlist(Request $request)
     {
         if (Auth::check()) {
+
             $user = Auth::user();
             $product_id = $request->product_id;
             $product_name = $request->product_name;
+            $product_image = $request->product_image;
             $product_description = $request->product_description;
             $product_price = $request->product_price;
 
@@ -33,6 +35,7 @@ class WishlistController extends Controller
             $wishlist->user_id = $user->id;
             $wishlist->product_id = $product_id;
             $wishlist->product_name = $product_name;
+            $wishlist->product_image = $product_image;
             $wishlist->product_description = $product_description;
             $wishlist->product_price = $product_price;
             $wishlist->save();

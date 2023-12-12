@@ -4,6 +4,12 @@
 {{-- Paginate CSS --}}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+<style>
+    #button-view{
+        background: rgb(250, 133, 0);
+    }
+</style>
+
 <div class="py-3 py-md-5">
     <div class="container">
         <div class="row">
@@ -34,7 +40,7 @@
                                         <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                         <td>{{ $item->order_type }}</td>
                                         <td>{{ $item->payment_status }}</td>
-                                        <td><a href="{{ url('orders/'.$item->id) }}" class="btn btn-primary btn-sm">View</a></td>
+                                        <td><a href="{{ url('orders/'.$item->id) }}" class="btn btn-primary btn-sm" id="button-view">View</a></td>
                                     </tr>
                                     @endforeach
                                 @else{

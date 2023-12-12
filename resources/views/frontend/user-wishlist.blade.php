@@ -16,7 +16,7 @@
 
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="{{ asset ('food_image/buger.jpg') }}">
+                    <img src="{{ asset('images/' . $wishlistItem->product_image) }}">
                 </div>
 
                 <div class="menu_info">

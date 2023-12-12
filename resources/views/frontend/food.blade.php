@@ -81,6 +81,7 @@
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="hidden" name="product_name" value="{{ $product->name }}">
+                    <input type="hidden" name="product_image" value="{{ $product->image }}">
                     <input type="hidden" name="product_description" value="{{ $product->description }}">
                     <input type="hidden" name="product_price" value="{{ $product->price }}">
 

@@ -86,7 +86,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">User</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ App\Models\User::count() }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><h2>{{ App\Models\User::count() }}</h2></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-umbrella-beach fa-2x text-warning"></i>

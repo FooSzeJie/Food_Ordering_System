@@ -26,9 +26,20 @@ class Product extends Model
         return $this->belongsToMany(Variant::class, 'product_variant', 'product_id', 'variant_id');
     }
 
+    // Product model
+// public function variants()
+// {
+//     return $this->belongsToMany(Variant::class, 'product_variant');
+// }
+
+// public function addons()
+// {
+//     return $this->belongsToMany(Addon::class, 'product_addon');
+// }
+
+
     public function wishlist()
     {
         return $this->belongsTo(Wishlist::class);
     }
-
 }

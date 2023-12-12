@@ -33,9 +33,18 @@
                         <span class="bold">Time :</span>
                         <span>{{ $orders->created_at->format('h:i:s A') }}</span>
                     </p>
+                    <p class="date">
+                        <span class="bold">Order Number:</span>
+                        <span>{{ $orders->id }}</span>
+                    </p>
 				</div>
 			</div>
                 <div class="bill_total_wrap">
+
+                    {{-- <div class="bill_sec">
+                        <p>Order Number : {{ $orders->id }}</p>
+                        <p class="bold name">Name: {{ $orders->user_name }}</p>
+                    </div> --}}
 
                     <div class="bill_sec">
                         <p>Bill To</p>
@@ -64,6 +73,8 @@
 						<div class="col col_no">NO.</div>
 						<div class="col col_des">Food Name</div>
                         <div class="col col_des">Food Image</div>
+                        <div class="col col_price">Variant</div>
+                        <div class="col col_price">Addons</div>
 						<div class="col col_price">Price</div>
 						<div class="col col_qty">Quantity</div>
 						{{-- <div class="col col_total">TOTAL</div> --}}
@@ -79,8 +90,19 @@
 								<p class="bold">{{ $orderItem->product_name }}</p>
 							</div>
 							<div class="col col_price">
-								{{-- <p>{{ $orderItem->product_image }}</p> --}}
-                                <img width="80" src="{{ asset('images/' . $orderItem->product_image) }}" style="mr-20px" alt="Image" />
+                                @if ($orderItem->product_image == null)
+                                    <h5>No Image</h5>
+                                @else
+                                    <img width="80"
+                                        src="{{ asset('images/' . $orderItem->product_image) }}"
+                                        alt="Image" />
+                                @endif
+                            </div>
+                            <div class="col col_price">
+								<p id="totalPrice">{{ $orderItem->variants }}</p>
+							</div>
+                            <div class="col col_price">
+								<p id="totalPrice">{{ $orderItem->addons }}</p>
 							</div>
 							<div class="col col_price">
 								<p id="totalPrice">{{ $orderItem->total_price }}</p>
