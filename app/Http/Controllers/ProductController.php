@@ -90,11 +90,75 @@ class ProductController extends Controller
 
         // Fetch categories for the dropdown
         $categories = Category::all();
-        $addons = AddOn::all();
-        $variants = Variant::all();
 
-        return view('backend.product.admin-edit-Product', compact('product', 'categories','addons','variants'));
+        // Retrieve the product, addons, and variants
+        $addons = Addon::all(); // Replace this with your actual Addon model
+        $variants = Variant::all(); // Replace this with your actual Variant model
+
+        // Retrieve existing addons and variants for the product
+        $existingAddons = $product->addons->pluck('id')->toArray();
+        $existingVariants = $product->variants->pluck('id')->toArray();
+
+        return view('backend.product.admin-edit-Product', compact('product', 'categories', 'addons', 'variants', 'existingAddons', 'existingVariants'));
     }
+
+    // public function updateProduct(Request $request, $id)
+    // {
+    //     // Find the product by ID
+    //     $product = Product::find($id);
+
+    //     if (!$product) {
+    //         return redirect()->route('product.index')->with('error', 'Product not found');
+    //     }
+
+    //     // Validate the form data
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'price' => 'required',
+    //         'description' => 'required',
+    //         'categoryID' => 'required',
+    //         'addonID' => 'required',
+    //         'variantID' => 'required',
+    //     ]);
+
+    //     // Initialize $imageName to the existing image name
+    //     $imageName = $product->image;
+
+    //     // Handle image upload if a new image is provided
+    //     if ($request->hasFile('image')) {
+    //         $image = $request->file('image');
+    //         $imageName = time() . '.' . $image->getClientOriginalExtension();
+    //         $image->move(public_path('images'), $imageName);
+    //     }
+
+    //     // Update product details
+    //     $product->name = $request->input('name');
+    //     $product->image = $imageName; // Update the image attribute
+    //     $product->price = $request->input('price');
+    //     $product->description = $request->input('description');
+    //     $product->categoryID = $request->input('categoryID');
+    //     // $product->addOns = $request->input('addonID');
+    //     // $product->variant = $request->input('variantID');
+    //     $product->status = $request->input('status');
+
+    //     // Retrieve existing addons and variants for the product
+    //     $existingAddons = $product->addons()->pluck('id')->toArray();
+    //     $existingVariants = $product->variants()->pluck('id')->toArray();
+
+    //     // Sync addons and variants using the selected values from the form
+    //     $product->addons()->sync($request->input('addonID'));
+    //     $product->variants()->sync($request->input('variantID'));
+
+    //     // Attach selected Add Ons to the product
+    //     // $product->addons()->attach($request->input('addonID'));
+
+    //     // Attach selected Variants to the product
+    //     // $product->variants()->attach($request->input('variantID'));
+
+    //     $product->save();
+
+    //     return redirect()->route('product.index')->with('success', 'Product updated successfully');
+    // }
 
     public function updateProduct(Request $request, $id)
     {
@@ -120,6 +184,15 @@ class ProductController extends Controller
 
         // Handle image upload if a new image is provided
         if ($request->hasFile('image')) {
+            // Delete the existing image
+            if ($product->image) {
+                $existingImagePath = public_path('images') . '/' . $product->image;
+                if (file_exists($existingImagePath)) {
+                    unlink($existingImagePath);
+                }
+            }
+
+            // Upload the new image
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $imageName);
@@ -127,19 +200,19 @@ class ProductController extends Controller
 
         // Update product details
         $product->name = $request->input('name');
-        $product->image = $imageName; // Update the image attribute
+        $product->image = $imageName;
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         $product->categoryID = $request->input('categoryID');
-        // $product->addOns = $request->input('addonID');
-        // $product->variant = $request->input('variantID');
         $product->status = $request->input('status');
 
-        // Attach selected Add Ons to the product
-        $product->addons()->attach($request->input('addonID'));
+        // Retrieve existing addons and variants for the product
+        $existingAddons = $product->addons->pluck('id')->toArray();
+        $existingVariants = $product->variants->pluck('id')->toArray();
 
-        // Attach selected Variants to the product
-        $product->variants()->attach($request->input('variantID'));
+        // Sync addons and variants using the selected values from the form
+        $product->addons()->sync($request->input('addonID'));
+        $product->variants()->sync($request->input('variantID'));
 
         $product->save();
 

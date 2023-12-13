@@ -129,7 +129,7 @@ class OrderController extends Controller
 
                     $orderItems->save();
 
-                    // $cartItem->delete();
+                    $cartItem->delete();
 
                 }
 
@@ -154,24 +154,6 @@ class OrderController extends Controller
                         'addons' => $cartItem->addons,
                     ];
                 }
-
-                // $data = [
-                //     'customer_name' => $request->user_name,
-                //     'customer_email' => $request->user_email,
-                //     'order_id' => $order_id,
-                //     'order_type' => $request->selected_option,
-                //     'product_name' => $cartItems->product_name,
-                //     'product_quantity' => $cartItems->product_quantity,
-                //     'total_price' => $cartItems->total_price,
-                //     'addons' => $cartItems->variants,
-                //     'variants' => $cartItems->addons,
-                //     'tracking_no' => 'funda-'.Str::random(10)
-                // ];
-
-                // Mail::send('backend.email.orderemail', $data, function($message) use ($data) {
-                //     $message->to('ahpin7762@gmail.com')
-                //     ->subject($data['subject']);
-                // });
 
                 Mail::send('backend.email.orderemail', ['data' => $data], function($message) use ($data) {
                     $message->to('ahpin7762@gmail.com')
