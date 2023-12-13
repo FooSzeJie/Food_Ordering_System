@@ -131,9 +131,16 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         $product->categoryID = $request->input('categoryID');
-        $product->addOns = $request->input('addonID');
-        $product->variant = $request->input('variantID');
+        // $product->addOns = $request->input('addonID');
+        // $product->variant = $request->input('variantID');
         $product->status = $request->input('status');
+
+        // Attach selected Add Ons to the product
+        $product->addons()->attach($request->input('addonID'));
+
+        // Attach selected Variants to the product
+        $product->variants()->attach($request->input('variantID'));
+
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');

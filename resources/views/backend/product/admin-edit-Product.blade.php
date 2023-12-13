@@ -9,6 +9,10 @@
 @endsection
 
 @section('backend-section')
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
     <div class="container-fluid">
 
     <!-- Page Heading -->
@@ -92,7 +96,7 @@
                     </select>
                 </div>
 
-                @if ($addons->count() > 0)
+                {{-- @if ($addons->count() > 0)
                     <div class="mb-3">
                         <label for="CategoryID" class="form-label">Add On: </label>
                         <select class="form-select form-select-font-weight-5" id="select-menu" name="addonID">
@@ -103,12 +107,38 @@
                     </div>
                 @else
                     <p>Haven't added any add on yet.</p>
+                @endif --}}
+
+                @if ($addons->count() > 0)
+                    <div class="mb-3">
+                        <label for="addonID" class="form-label">Add On: </label>
+                        <select class="form-control selectpicker" data-style="btn-primary" id="select-addon" name="addonID[]" title="Select Add Ons" multiple>
+                            @foreach ($addons as $addon)
+                                <option value="{{ $addon->id }}">{{ $addon->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @else
+                    <p>Haven't added any add on yet.</p>
                 @endif
 
-                @if ($variants->count() > 0)
+                {{-- @if ($variants->count() > 0)
                     <div class="mb-3">
                         <label for "CategoryID" class="form-label">Variant: </label>
                         <select class="form-select form-select-font-weight-5" id="select-menu" name="variantID">
+                            @foreach ($variants as $variant)
+                                <option value="{{ $variant->id }}">{{ $variant->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @else
+                    <p>Haven't added any variant yet.</p>
+                @endif --}}
+
+                @if ($variants->count() > 0)
+                    <div class="mb-3">
+                        <label for="variantID" class="form-label">Variant: </label>
+                        <select class="form-control selectpicker" data-style="btn-primary" id="select-variant" name="variantID[]" title="Select Variant" multiple>
                             @foreach ($variants as $variant)
                                 <option value="{{ $variant->id }}">{{ $variant->name }}</option>
                             @endforeach
@@ -135,5 +165,8 @@
             </div>
         </form>
     </div>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
 @endsection

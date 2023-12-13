@@ -98,7 +98,7 @@
                                                 <td>{{ $variant->name }}</td>
                                                 <td>{{ $variant->price }}</td>
                                                 <td>
-                                                    @if ($variant->status == 1)
+                                                    @if ($variant->status == 0)
                                                         <a href="{{ url('changevariant-status/' . $variant->id) }}"
                                                             class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Are you sure you want to change this status to open?')">InActive</a>

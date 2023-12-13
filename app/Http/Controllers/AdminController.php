@@ -125,7 +125,7 @@ class AdminController extends Controller
         $labels = ['Allvariant', 'Alladdon', 'Allproduct'];
         $data = [$Allvariant, $Alladdon, $Allproduct];
 
-        return view('backend.admin-dashboard', compact('Allproduct', 'Allvariant', 'Alladdon', 'products', 'ordersCount', 'totalPriceSum',
+        return view('backend.admin-dashboard', compact('Allproduct', 'Allvariant', 'Alladdon', 'products', 'ordersCount',
         'monthlyTotalData','labels','data','totalPrice'));
     }
 

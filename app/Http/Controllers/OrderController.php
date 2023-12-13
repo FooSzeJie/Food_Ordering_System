@@ -59,7 +59,15 @@ class OrderController extends Controller
     {
         // Use the correct Stripe API key
         if (Auth::check()) {
+
             try{
+
+                // Check if the user's cart is not empty
+                $cartItems = Cart::where('user_id', $request->user_id)->get();
+
+                if ($cartItems->isEmpty()) {
+                    return back()->with('error', 'Your cart is empty. Add items to your cart before proceeding to checkout.');
+                }
 
                 // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
                 \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
@@ -119,9 +127,56 @@ class OrderController extends Controller
                     $orderItems->variants = json_encode($cartItem->variants);
                     $orderItems->addons = json_encode($cartItem->addons);
 
-
                     $orderItems->save();
+
+                    // $cartItem->delete();
+
                 }
+
+                // Build the data for email
+                $data = [
+                    'subject' => "Your Order Detail",
+                    'customer_name' => $request->user_name,
+                    'customer_email' => $request->user_email,
+                    'order_id' => $order_id,
+                    'order_type' => $request->selected_option,
+                    'products' => [], // Initialize an array to store product details
+                    'tracking_no' => 'funda-'.Str::random(10)
+                ];
+
+                // Populate product details in the data array
+                foreach ($cartItems as $cartItem) {
+                    $data['products'][] = [
+                        'product_name' => $cartItem->product_name,
+                        'product_quantity' => $cartItem->product_quantity,
+                        'total_price' => $cartItem->total_price,
+                        'variants' => $cartItem->variants,
+                        'addons' => $cartItem->addons,
+                    ];
+                }
+
+                // $data = [
+                //     'customer_name' => $request->user_name,
+                //     'customer_email' => $request->user_email,
+                //     'order_id' => $order_id,
+                //     'order_type' => $request->selected_option,
+                //     'product_name' => $cartItems->product_name,
+                //     'product_quantity' => $cartItems->product_quantity,
+                //     'total_price' => $cartItems->total_price,
+                //     'addons' => $cartItems->variants,
+                //     'variants' => $cartItems->addons,
+                //     'tracking_no' => 'funda-'.Str::random(10)
+                // ];
+
+                // Mail::send('backend.email.orderemail', $data, function($message) use ($data) {
+                //     $message->to('ahpin7762@gmail.com')
+                //     ->subject($data['subject']);
+                // });
+
+                Mail::send('backend.email.orderemail', ['data' => $data], function($message) use ($data) {
+                    $message->to('ahpin7762@gmail.com')
+                        ->subject($data['subject']);
+                });
 
                 return back()->with('success','You Order Has Successfully!');
 
@@ -149,6 +204,54 @@ class OrderController extends Controller
         $response = $stripe->checkout->sessions->retrieve($request->session_id);
 
         return redirect()->route('home')->with('success','Payment successful.');
+    }
+
+    public function allorder(){
+
+        $orders = Order::paginate(10);
+
+        return view('backend.order.userorder',compact('orders'));
+    }
+
+    public function vieworder($id)
+    {
+        // Find the order
+        $userorder = Order::find($id);
+
+        // Check if the order exists
+        if (!$userorder) {
+            abort(404); // or handle the case when the order is not found
+        }
+
+        // Retrieve the associated items using the defined relationship
+        $orderItems = $userorder->items;
+
+        // Check if items are retrieved
+        if ($orderItems->isEmpty()) {
+            // Handle the case when no items are found, e.g., return an error message
+            return view('backend.order.userorderdetail', compact('userorder'))->withErrors('No items found for this order.');
+        }
+
+        // Calculate the total price
+        $totalSum = $orderItems->sum('total_price');
+
+        return view('backend.order.userorderdetail', compact('userorder', 'orderItems', 'totalSum'));
+    }
+
+    public function mutlipledeleteorder(Request $request){
+
+        $ids = json_decode($request->input('ids'));
+
+        if (is_array($ids) && count($ids) > 0) {
+
+            Order::whereIn('id', $ids)->delete();
+
+            return back()->with('success', 'Selected User Orders have been deleted successfully!');
+
+        } else {
+
+            return back()->with('error', 'Invalid input. No User Contact were deleted.');
+        }
     }
 
 }

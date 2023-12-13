@@ -190,7 +190,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/allcontact') }}">
                     <i class="fas fa-folder"></i>
-                    <span>User Contact</span></a>
+                    <span>User Contacts</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/allorder') }}">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>User Orders</span></a>
             </li>
 
             <!-- Nav Item - Pages Collapse My Place Menu -->

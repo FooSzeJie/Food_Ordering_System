@@ -178,6 +178,22 @@ Route::middleware(['alreadyLoggedIn', 'isLoggedIn'])->group(function () {
 
     // Import Add On Function
     Route::post('/admin/importAddOn', [AddOnController::class, 'import']);
+
+    // Show All User Contact
+    Route::get('/allcontact', [ContactController::class, 'allcontact'])->name('allcontact');
+
+    // Show All User Order
+    Route::get('/allorder', [OrderController::class, 'allorder'])->name('allorder');
+
+    // Show All User Order Detail
+    Route::get('/vieworder/{id}', [OrderController::class, 'vieworder'])->name('vieworder');
+
+    //MutlipleDelete User Contact Function
+    Route::post('/mutlipledeleteorder/delete', [OrderController::class, 'mutlipledeleteorder'])->name('mutlipledeleteorder');
+
+    //MutlipleDelete User Contact Function
+    Route::post('/mutlipledeleteContact/delete', [ContactController::class, 'mutlipledeletecontact'])->name('mutlipledeleteContact');
+
 });
 
 //Logout Admin Function
@@ -209,12 +225,6 @@ Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
 // Contact Us Function with Email
 Route::post('/contactUs', [ContactController::class, 'contactUs'])->name('contactUs');
-
-// Show All User Contact
-Route::get('/allcontact', [ContactController::class, 'allcontact'])->name('allcontact');
-
-//MutlipleDelete User Contact Function
-Route::post('/mutlipledeleteContact/delete', [ContactController::class, 'mutlipledeletecontact'])->name('mutlipledeleteContact');
 
 //------------------------------------------------------Frontend User Wishlist Control Area------------------------------------------//
 // User Add to Wishlist Function

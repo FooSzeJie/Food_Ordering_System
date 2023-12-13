@@ -89,7 +89,7 @@
                                                 <td>{{ $category->id }}</td>
                                                 <td>{{ $category->name }}</td>
                                                 <td>
-                                                    @if ($category->status == 1)
+                                                    @if ($category->status == 0)
                                                         <a href="{{ url('changecategory-status/' . $category->id) }}"
                                                             class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Are you sure you want to change this status to open?')">InActive</a>
