@@ -6,6 +6,7 @@
 {{-- Toastr CSS --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+{{-- Cart UI CSS --}}
 <style>
     #wishlist{
         color: rgb(255, 183, 0);

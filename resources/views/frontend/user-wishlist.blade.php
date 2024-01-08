@@ -3,6 +3,53 @@
 
 <link rel="stylesheet" href="{{ asset ('food_card/food_card_style.css') }}">
 
+{{-- Cart UI CSS --}}
+<style>
+    #wishlist{
+        color: rgb(255, 183, 0);
+    }
+
+    #wishlist:hover{
+        color: red;
+    }
+    .menu_image img {
+        width: 200px;
+        height: 200px;
+    }
+    /* .small_card button {
+        background-color: transparent;
+    } */
+    .small_card button {
+        background-color: transparent;
+        border: none; /* Remove border if present */
+    }
+
+    .small_card button i {
+        color: red; /* Set the desired color for the heart icon */
+        font-size: 24px; /* Adjust the font size as needed */
+    }
+    .menu_image {
+        position: relative;
+        width: 200px; /* Set your desired width */
+        height: 200px; /* Set your desired height */
+    }
+
+    .menu_image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Make sure the image covers the entire container */
+    }
+
+    .no-image-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px; /* Set your desired font size */
+        color: #555; /* Set your desired text color */
+    }
+</style>
+
 {{-- Toastr CSS --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
@@ -16,7 +63,11 @@
 
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="{{ asset('images/' . $wishlistItem->product_image) }}">
+                    @if($wishlistItem->product_image == null)
+                        <div class="no-image-overlay">No Image</div>
+                    @else
+                        <img src="{{ asset('images/' . $wishlistItem->product_image) }}">
+                    @endif
                 </div>
 
                 <div class="menu_info">
