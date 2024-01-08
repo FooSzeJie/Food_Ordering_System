@@ -156,7 +156,7 @@ class OrderController extends Controller
                 }
 
                 Mail::send('backend.email.orderemail', ['data' => $data], function($message) use ($data) {
-                    $message->to('ahpin7762@gmail.com')
+                    $message->to('ziyangc82@gmail.com')
                         ->subject($data['subject']);
                 });
 
@@ -172,6 +172,9 @@ class OrderController extends Controller
             // Redirect if the user is not authenticated
             return redirect('/loginpage')->with('error', 'You need to log in first!');
         }
+
+        // jeremypoh0205@gmail.com
+        // dchooiern@gmail.com
 
         // Clear the user's cart after completing the order
         // Cart::where('user_id', $request->user_id)->delete();

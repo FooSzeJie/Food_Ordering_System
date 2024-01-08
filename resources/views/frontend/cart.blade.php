@@ -327,30 +327,30 @@
                                         <div class="custom-tab-content active" data-tab="booking">
                                             <ul class="cart_list">
                                                 @foreach ($cartItems as $cartItem)
-                                                    <input type="text" name="user_id" value="{{ auth()->id() }}">
-                                                    <input type="text" name="user_name"
+                                                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                                    <input type="hidden" name="user_name"
                                                         value="{{ auth()->user()->name }}">
-                                                    <input type="text" name="user_email"
+                                                    <input type="hidden" name="user_email"
                                                         value="{{ auth()->user()->email }}">
 
                                                     @if ($cartItem->product)
-                                                        <input type="text" name="product_id"
+                                                        <input type="hidden" name="product_id"
                                                             value="{{ $cartItem->product->id }}">
                                                     @endif
 
-                                                    <input type="text" name="product_name"
+                                                    <input type="hidden" name="product_name"
                                                         value="{{ $cartItem->product_name }}">
 
-                                                    <input type="text" name="product_image"
+                                                    <input type="hidden" name="product_image"
                                                         value="{{ $cartItem->image }}">
 
-                                                    <input type="text" name="product_description"
+                                                    <input type="hidden" name="product_description"
                                                         value="{{ $cartItem->product_description }}">
 
-                                                    <input type="number" name="product_quantity"
+                                                    <input type="hidden" name="product_quantity"
                                                         value="{{ $cartItem->product_quantity }}">
 
-                                                    <input type="text" name="total_price"
+                                                    <input type="hidden" name="total_price"
                                                         value="{{ $cartItem->total_price }}">
 
                                                     {{-- <input type="text" name="variants"
@@ -369,17 +369,17 @@
                                                     @else
                                                         No addons @endif"> --}}
 
-                                                    <input type="text" name="variants"
+                                                    <input type="hidden" name="variants"
                                                         value="@if (is_array($cartItem->variants)) {{ implode(', ', $cartItem->variants) }}
                @elseif ($cartItem->variants === null)No Variants
                @else{{ $cartItem->variants }} @endif">
 
-                                                    <input type="text" name="addons"
+                                                    <input type="hidden" name="addons"
                                                         value="@if (is_array($cartItem->addons) && count($cartItem->addons) > 0) {{ implode(', ', $cartItem->addons) }}
                @else No addons @endif">
 
 
-                                                    <input type="number" step="0.01" name="totalAmount"
+                                                    <input type="hidden" step="0.01" name="totalAmount"
                                                         value="{{ $totalAmount }}">
 
                                                     <li class="cart_item clearfix">
@@ -472,7 +472,9 @@
                                                     <h4>Select Take Away or Take In</h4>
                                                 </Center><br>
 
-                                                <input type="text" name="selected_option" value="take_in">
+                                                {{-- <p name="selected_option" value="take_in"></p> --}}
+
+                                                <input type="text" name="selected_option" value="take_in" readonly>
                                                 {{-- <input type="text" name="selected_option" value="take_away"> --}}
 
                                                 <div class="col-md-3">
@@ -497,6 +499,58 @@
                                                         <div class="order_total_amount">Rm{{ $totalAmount }}</div>
                                                     </div>
                                                 </div>
+
+                                                <br><br><br>
+
+                                                {{-- <div class="row"> --}}
+                                                    <div class="col-sm-1"></div>
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <div class="panel panel-default credit-card-box">
+                                                            <div class="panel-heading">
+                                                                <div class="row">
+                                                                    <h3>Card Payment</h3>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="panel-body">
+                                                                <br>
+                                                                <div class='form-row row'>
+                                                                    <div class='col-xs-12 col-md-6 form-group required'>
+                                                                        <label class='control-label'>Name on Card</label>
+                                                                        <input class='form-control' size='4' type='text'>
+                                                                    </div>
+                                                                    <div class='col-xs-12 col-md-6 form-group required'>
+                                                                        <label class='control-label'>Card Number</label>
+                                                                        <input autocomplete='off' class='form-control card-number' size='20' type='text'>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Place #card-element here -->
+                                                                {{-- <div id="card-element"></div> --}}
+
+                                                                <div class='form-row row'>
+                                                                    <div class='col-xs-12 col-md-4 form-group cvc required'>
+                                                                        <label class='control-label'>CVC</label>
+                                                                        <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                                                            type='text'>
+                                                                    </div>
+                                                                    <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                                                        <label class='control-label'>Expiration Month</label>
+                                                                        <input class='form-control card-expiry-month' placeholder='MM' size='2'
+                                                                            type='text'>
+                                                                    </div>
+                                                                    <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                                                        <label class='control-label'>Expiration Year</label>
+                                                                        <input class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                                                            type='text'>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {{-- </div> --}}
+
                                                 <div class="cart_buttons">
                                                     <a href="{{ url('/food') }}"><button type="button"
                                                             class="button cart_button_clear">Continue Order</button></a>
@@ -504,7 +558,6 @@
                                                         class="button cart_button_checkout">Payment</button>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     {{-- <div class="order_total">
@@ -523,7 +576,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 

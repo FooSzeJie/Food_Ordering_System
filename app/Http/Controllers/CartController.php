@@ -53,7 +53,7 @@ class CartController extends Controller
 
                 $cart->save();
 
-                return redirect()->route('food')->with('success', 'Item added to cart successfully!! Order more?');
+                return redirect()->route('cart.display')->with('success', 'Item added to cart successfully!! Order more?');
 
             } catch (Exception $e) {
 

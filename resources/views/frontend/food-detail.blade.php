@@ -172,17 +172,17 @@
         <form action="{{ url('/AddToCart') }}" method="post">
             @csrf
 
-            <input type="text" name="product_id" value="{{ $fooddetails->id }}">
-            <input type="text" name="product_image" value="{{ $fooddetails->image }}">
-            <input type="text" name="product_name" value="{{ $fooddetails->name }}">
-            <input type="text" name="product_description" value="{{ $fooddetails->description }}">
+            <input type="hidden" name="product_id" value="{{ $fooddetails->id }}">
+            <input type="hidden" name="product_image" value="{{ $fooddetails->image }}">
+            <input type="hidden" name="product_name" value="{{ $fooddetails->name }}">
+            <input type="hidden" name="product_description" value="{{ $fooddetails->description }}">
 
             <!-- Add this input field to your form -->
-            <input type="text" name="total_price" id="total_price" value="">
+            <input type="hidden" name="total_price" id="total_price" value="">
 
             <!-- Addon and variant fields -->
-            <input type="text" name="selected_variant" id="selected_variant" value="">
-            <input type="text" name="selected_addons" id="selected_addons" value="">
+            <input type="hidden" name="selected_variant" id="selected_variant" value="">
+            <input type="hidden" name="selected_addons" id="selected_addons" value="">
 
             <div class="product-detail">
                 {{-- <img name="product_image" value="{{ $fooddetails->image}}" class="product-image" src="{{ asset('images/' . $fooddetails->image) }}" alt="Product Image"> --}}
